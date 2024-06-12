@@ -30,7 +30,7 @@ public class UserController {
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//user.getUserRoles()
-		return "redirect:/user";
+		//user.getUserRoles();
+		return "redirect:/index";
 	}
 }
