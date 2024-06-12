@@ -1,7 +1,5 @@
 package com.unla.grupo3.entities;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,7 +20,7 @@ public class Stock {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int idStock;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_producto", nullable=false)
