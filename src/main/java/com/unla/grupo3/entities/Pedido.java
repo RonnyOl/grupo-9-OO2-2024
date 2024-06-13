@@ -29,9 +29,7 @@ public class Pedido {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_producto", nullable=false)
-	private Producto producto;
+
 	
 	@Column(name="total",nullable=false)
 	private int total;

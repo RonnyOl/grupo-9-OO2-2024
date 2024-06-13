@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,8 +34,8 @@ public class OrdenDeCompra {
 	@Column(name="fecha_emision", unique=true, nullable=false)
 	private LocalDate fechaEmision;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name ="id_producto", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name = "stock_Id", nullable = true)
 	private Producto producto;
 	
 	
@@ -43,7 +44,7 @@ public class OrdenDeCompra {
 		this.total = total;
 		this.cantidadAComprar = cantidadAComprar;
 		this.fechaEmision = fechaEmision;
-		this.producto = producto;
+	
 	}
 	
 

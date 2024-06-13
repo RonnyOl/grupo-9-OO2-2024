@@ -21,10 +21,7 @@ public class Stock {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idStock;
-	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_producto", nullable=false)
-	private Producto producto;
+
 	
 	@Column(name="punto_minimo_de_stock",nullable=false)
 	private int puntoMinimoDeStock;
@@ -37,7 +34,7 @@ public class Stock {
 
 	public Stock(Producto producto, int puntoMinimoDeStock, int cantidadActual, boolean reabastecer) {
 		super();
-		this.producto = producto;
+	
 		this.puntoMinimoDeStock = puntoMinimoDeStock;
 		this.cantidadActual = cantidadActual;
 		this.reabastecer = reabastecer;
