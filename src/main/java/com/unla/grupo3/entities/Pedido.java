@@ -14,13 +14,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table (name="pedido")
+@Table (name="pedido",uniqueConstraints=@UniqueConstraint(columnNames= {"producto_id","user_id"}))
 public class Pedido {
 
 	@Id
@@ -31,7 +32,7 @@ public class Pedido {
 	private LocalDateTime createdAt;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "user_id", nullable = true)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 	@Column(name="total",nullable=false)
@@ -40,10 +41,9 @@ public class Pedido {
 	@Column(name="cantidad",nullable=false)
 	private int cantidad;
 
-	
 	 @OneToOne
 	 @JoinColumn(name="producto_id", nullable=false)
-	    private Producto producto;
+	 private Producto producto;
 
 
 	public Pedido(LocalDateTime createdAt, User user, int total, int cantidad, Producto producto) {

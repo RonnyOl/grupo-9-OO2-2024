@@ -2,7 +2,6 @@ package com.unla.grupo3.entities;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +19,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table (name="lote")
+@Table (name="lote",uniqueConstraints=@UniqueConstraint(columnNames= {"id_orden_de_compra"}))
 public class Lote {
 
 	@Id
@@ -32,11 +32,9 @@ public class Lote {
 	@Column (name="aceptado",nullable=false)
 	private boolean aceptado;
 	
-	
-	
 	 @OneToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name="id_orden_de_compra", nullable=false)
-	    private OrdenDeCompra ordenDeCompra;
+	 private OrdenDeCompra ordenDeCompra;
 
 	public Lote(LocalDate fechaRecepcion, boolean aceptado, OrdenDeCompra ordenDeCompra) {
 		super();

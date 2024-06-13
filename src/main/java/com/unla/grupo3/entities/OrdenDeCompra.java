@@ -10,13 +10,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-
+@Table (name="orden_de_compra",uniqueConstraints=@UniqueConstraint(columnNames= {"stock_id","user_id","proveedor_id"}))
 public class OrdenDeCompra {
 
 	@Id
@@ -34,17 +36,17 @@ public class OrdenDeCompra {
 	private LocalDate fechaEmision;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "stock_Id", nullable = true)
+	@JoinColumn(name = "stock_id", nullable = false)
 	private Stock stock;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "user_Id", nullable = true)
+	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 	
 	
  	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "proveedor_Id", nullable = true)
+	@JoinColumn(name = "proveedor_id", nullable = false)
 	private Proveedor proveedor;
 
 

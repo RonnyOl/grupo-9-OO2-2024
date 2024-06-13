@@ -4,14 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity 
 @Getter @Setter @NoArgsConstructor
-@Table (name="producto")
 public class Producto {
 
 	@Id
@@ -29,21 +27,14 @@ public class Producto {
 	
 	@Column(name="nombre",nullable=false)
 	private String nombre;
-	
-	
-	@Column(name="habilitado",nullable=false)
-	private boolean habilitado;
 
-
-	public Producto(String descripcion, float costo, float precioDeVenta, String nombre, boolean habilitado) {
+	public Producto(String descripcion, float costo, float precioDeVenta, String nombre) {
 		super();
 		this.descripcion = descripcion;
 		this.costo = costo;
 		this.precioDeVenta = precioDeVenta;
 		this.nombre = nombre;
-		this.habilitado = habilitado;
 	}
-
-
+	
 	
 }
