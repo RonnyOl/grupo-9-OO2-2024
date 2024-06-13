@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +31,7 @@ public class Lote {
 	@Column (name="aceptado",nullable=false)
 	private boolean aceptado;
 	
-	 @OneToOne(fetch = FetchType.LAZY)
+	 @OneToOne(optional=false)
 	 @JoinColumn(name="id_orden_de_compra", nullable=false)
 	 private OrdenDeCompra ordenDeCompra;
 

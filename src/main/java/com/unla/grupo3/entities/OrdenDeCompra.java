@@ -35,17 +35,17 @@ public class OrdenDeCompra {
 	@Column(name="fecha_emision", unique=true, nullable=false)
 	private LocalDate fechaEmision;
 	
-	@ManyToOne(fetch = FetchType.LAZY) 
+	@ManyToOne(optional=false)
 	@JoinColumn(name = "stock_id", nullable = false)
 	private Stock stock;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY) 
+	@ManyToOne(optional=true)
 	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 	
 	
- 	@ManyToOne(fetch = FetchType.LAZY) 
+ 	@ManyToOne(optional=false)
 	@JoinColumn(name = "proveedor_id", nullable = false)
 	private Proveedor proveedor;
 

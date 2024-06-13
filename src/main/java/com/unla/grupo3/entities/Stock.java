@@ -32,8 +32,8 @@ public class Stock {
 	@Column(name="reabastecer",nullable=false)
 	private boolean reabastecer;
 	
-	@OneToOne
-    @JoinColumn(name = "id_producto")
+	@OneToOne(optional=false)
+    @JoinColumn(name = "id_producto",nullable=false)
 	private Producto producto;
 
 	public Stock(int puntoMinimoDeStock, int cantidadActual, boolean reabastecer, Producto producto) {
