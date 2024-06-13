@@ -2,13 +2,9 @@ package com.unla.grupo3.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +17,7 @@ public class Proveedor {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int idProveedor;
 	
 	@Column(name="nombre_empresa", nullable=false)
 	private String nombreEmpresa;
@@ -31,6 +27,16 @@ public class Proveedor {
 	
 	@Column(name="direccion", nullable=false)
 	private String direccion;
+
+	
+	public Proveedor(String nombreEmpresa, String cuil, String direccion) {
+		super();
+		this.nombreEmpresa = nombreEmpresa;
+		this.cuil = cuil;
+		this.direccion = direccion;
+	}
+	
+	
 	
 	
 	

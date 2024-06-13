@@ -29,14 +29,21 @@ public class Producto {
 	
 	@Column(name="nombre",nullable=false)
 	private String nombre;
+	
+	
+	@Column(name="habilitado",nullable=false)
+	private boolean habilitado;
 
-	public Producto(String descripcion, float costo, float precioDeVenta, String nombre) {
+
+	public Producto(String descripcion, float costo, float precioDeVenta, String nombre, boolean habilitado) {
 		super();
 		this.descripcion = descripcion;
 		this.costo = costo;
 		this.precioDeVenta = precioDeVenta;
 		this.nombre = nombre;
+		this.habilitado = habilitado;
 	}
-	
+
+
 	
 }

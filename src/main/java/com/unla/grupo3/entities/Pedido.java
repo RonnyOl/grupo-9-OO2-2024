@@ -11,7 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,20 +25,36 @@ public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int idPedido;
 	
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
-
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name = "user_id", nullable = true)
+	private User user;
 	
 	@Column(name="total",nullable=false)
 	private int total;
 	
-	public Pedido(LocalDateTime createdAt, int total) {
+	@Column(name="cantidad",nullable=false)
+	private int cantidad;
+
+	
+	 @OneToOne
+	 @JoinColumn(name="producto_id", nullable=false)
+	    private Producto producto;
+
+
+	public Pedido(LocalDateTime createdAt, User user, int total, int cantidad, Producto producto) {
 		super();
 		this.createdAt = createdAt;
+		this.user = user;
 		this.total = total;
+		this.cantidad = cantidad;
+		this.producto = producto;
 	}
+	
+
 
 }

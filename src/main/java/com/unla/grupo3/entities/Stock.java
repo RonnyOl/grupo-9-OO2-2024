@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,14 +31,19 @@ public class Stock {
 	
 	@Column(name="reabastecer",nullable=false)
 	private boolean reabastecer;
-
-	public Stock(Producto producto, int puntoMinimoDeStock, int cantidadActual, boolean reabastecer) {
-		super();
 	
+	@OneToOne
+    @JoinColumn(name = "id_producto")
+	private Producto producto;
+
+	public Stock(int puntoMinimoDeStock, int cantidadActual, boolean reabastecer, Producto producto) {
+		super();
 		this.puntoMinimoDeStock = puntoMinimoDeStock;
 		this.cantidadActual = cantidadActual;
 		this.reabastecer = reabastecer;
+		this.producto = producto;
 	}
-	
-	
+
+	 
+	 
 }
