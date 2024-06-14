@@ -41,7 +41,7 @@ public class Pedido {
 	@Column(name="cantidad",nullable=false)
 	private int cantidad;
 
-	 @OneToOne
+	 @OneToOne (optional=false)
 	 @JoinColumn(name="producto_id", nullable=false)
 	 private Producto producto;
 
