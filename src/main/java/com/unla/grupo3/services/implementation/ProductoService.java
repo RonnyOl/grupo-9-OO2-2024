@@ -69,9 +69,6 @@ public class ProductoService  {
 	}
 	
 	
-	
-	
-	
 	/*@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.unla.grupo3.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>VIBRAS-compras online</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/logoPagina.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body style="background-color: aqua;" id="page-top">
+
+		<ul>
+		       <li th:each="product : ${lista}">
+		           <div>
+		               <h2 th:text="${product.nombre}">Product Name</h2>
+		               <p th:text="${product.precioDeVenta}">Product Description</p>
+					   <button th>ir a la vista</button>
+		           </div>
+		       </li>
+		   </ul>
+		
+		<!-- Portfolio Grid-->
+		       <section class="page-section bg-light" id="productos">
+		           <div class="container">
+		               <div class="text-center">
+		                   <h2 class="section-heading text-uppercase">Productos</h2>
+		                   <h3 class="section-subheading text-muted">Elije que producto deseas comprar</h3>
+		               </div>
+		               <div class="row">
+		                   <div class="col-lg-4 col-sm-6 mb-4">
+							<!-- Portfolio item 1-->
+							                        <div th:each="producto : ${lista}" class="portfolio-item">
+							                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+							                                <div class="portfolio-hover">
+							                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+							                                </div>
+							                                <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
+							                            </a>
+							                            <div class="portfolio-caption">	
+					
+							                                <div th:text="${producto.nombre}" class="portfolio-caption-heading"></div>
+							                                <div th:text="${producto.precioDeVenta}" class="portfolio-caption-subheading text-muted">INSERTAR</div>
+							                            	<button><a style="text-decoration: none;" href="/producto/individual/1">Ver</a></button>
+														</div>
+							                        </div>
+							                    </div>
+							                    <div class="col-lg-4 col-sm-6 mb-4">
+							                        
+		
+
+     
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

@@ -32,12 +32,5 @@ public class HomeController {
 	public RedirectView redirectToHomeIndex() {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
-	
-	@GetMapping("/productview")
-	public ModelAndView productview() {
-		ModelAndView test = new ModelAndView(ViewRouteHelper.PRODUCTVIEW);
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//modelAndView.addObject("username", user.getUsername());
-		return test;
-	}
+
 }

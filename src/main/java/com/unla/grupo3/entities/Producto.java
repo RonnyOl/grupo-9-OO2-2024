@@ -33,7 +33,7 @@ public class Producto {
 	private boolean habilitado;
 	
 	//UN PRODUCTO PUEDE EXISTIR SIN UN STOCK CREADO
-	@OneToOne(mappedBy="stock",optional=true)
+	@OneToOne(mappedBy="producto",optional=true)
 	private Stock stock;
 	
 

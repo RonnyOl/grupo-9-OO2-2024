@@ -16,10 +16,4 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
     //@Query("SELECT u FROM User u JOIN FETCH u.userRoles WHERE u.username = (:username)")
     //public abstract User findByUsernameAndFetchUserRolesEagerly(@Param("username") String username);
 
-    public abstract  List<Stock> FindAll();
-
-    @Query("SELECT  p FROM  Stock s JOIN FETCH s.producto where p.idProducto = (:id) ")
-    public abstract Stock traerProductoPorID(@Param("id") int id);
-
-
 }
