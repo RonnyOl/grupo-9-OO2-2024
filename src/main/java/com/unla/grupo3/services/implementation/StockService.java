@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.repositories.IStockRepository;
+import com.unla.grupo3.services.IStockService;
 
 @Service("stockService")
-public class StockService  {
+public class StockService implements IStockService {
 
     private IStockRepository stockRepository;
 

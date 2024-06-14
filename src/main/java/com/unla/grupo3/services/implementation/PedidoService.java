@@ -11,9 +11,11 @@ import com.unla.grupo3.entities.Pedido;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.repositories.IPedidoRepository;
+import com.unla.grupo3.services.IOrdenDeCompraService;
+import com.unla.grupo3.services.IPedidoService;
 
 @Service("pedidoService")
-public class PedidoService  {
+public class PedidoService implements IPedidoService {
 
 	private IPedidoRepository pedidoRepository;
 

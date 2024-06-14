@@ -11,10 +11,11 @@ import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.repositories.IOrdenDeCompraRepositoy;
+import com.unla.grupo3.services.IOrdenDeCompraService;
 
 
 @Service("ordenDeCompraService")
-public class OrdenDeCompraService  {
+public class OrdenDeCompraService  implements IOrdenDeCompraService {
 
 	private IOrdenDeCompraRepositoy OrdenDeCompraRepository;
 

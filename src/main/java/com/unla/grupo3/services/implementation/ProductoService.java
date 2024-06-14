@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.repositories.IProductoRepository;
+import com.unla.grupo3.services.IProductoService;
 
 @Service("productoService")
-public class ProductoService  {
+public class ProductoService implements IProductoService {
 
 	private IProductoRepository productoRepository;
 

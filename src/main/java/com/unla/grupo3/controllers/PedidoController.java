@@ -11,7 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.grupo3.entities.Pedido;
 import com.unla.grupo3.helpers.ViewRouteHelper;
-import com.unla.grupo3.services.implementation.PedidoService;
+import com.unla.grupo3.services.IPedidoService;
+
 
 
 
@@ -20,9 +21,9 @@ import com.unla.grupo3.services.implementation.PedidoService;
 @RequestMapping("/pedido")
 public class PedidoController {
 
-	private PedidoService pedidoService;
+	private IPedidoService pedidoService;
 	
-	public PedidoController(PedidoService pedidoService) {
+	public PedidoController(IPedidoService pedidoService) {
 		this.pedidoService = pedidoService;
 	}
 
