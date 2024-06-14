@@ -44,4 +44,18 @@ public class Stock {
 		this.producto = producto;
 	}
 
+	
+	
+	public void  validarRabastecer() {
+		
+		if(this.cantidadActual < this.puntoMinimoDeStock) {
+			
+			this.reabastecer = true;
+			
+		}
+		
+		
+	}
+	
+	
 }

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.repositories.IProveedorRepository;
+import com.unla.grupo3.services.IProveedorService;
 
 @Service("proveedorService")
-public class ProveedorService {
+public class ProveedorService implements IProveedorService {
 	
 	private IProveedorRepository proveedorRepository;
 	

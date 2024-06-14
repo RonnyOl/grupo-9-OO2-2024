@@ -53,5 +53,17 @@ public class Pedido {
 	}
 	
 
+	public float calcularTotal() {
+		
+		float total = 0 ;
+		
+		total = this.producto.getPrecioDeVenta() * this.cantidad;
+		
+		
+		return total;
+	}
+	
+	
+	
 
 }
