@@ -32,7 +32,7 @@ public class Lote {
 	private boolean aceptado;
 	
 	 @OneToOne(optional=false)
-	 @JoinColumn(name="id_orden_de_compra", nullable=false)
+	 @JoinColumn(name="id_orden_de_compra", nullable=false, unique=true)
 	 private OrdenDeCompra ordenDeCompra;
 
 	public Lote(LocalDate fechaRecepcion, boolean aceptado, OrdenDeCompra ordenDeCompra) {

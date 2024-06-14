@@ -15,26 +15,25 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table (name="stock",uniqueConstraints=@UniqueConstraint(columnNames= { "id_producto"}))
+@Table(name = "stock", uniqueConstraints = @UniqueConstraint(columnNames = { "id_producto" }))
 public class Stock {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idStock;
 
-	
-	@Column(name="punto_minimo_de_stock",nullable=false)
+	@Column(name = "punto_minimo_de_stock", nullable = false)
 	private int puntoMinimoDeStock;
-	
-	@Column(name="cantidad_actual",nullable=false)
+
+	@Column(name = "cantidad_actual", nullable = false)
 	private int cantidadActual;
-	
-	@Column(name="reabastecer",nullable=false)
+
+	@Column(name = "reabastecer", nullable = false)
 	private boolean reabastecer;
-	
-	//STOCK DEBE CREARSE SI O SI CON UN PRODUCTO ASOCIADO
-	@OneToOne(optional=false)
-    @JoinColumn(name = "id_producto",nullable=false)
+
+	// STOCK DEBE CREARSE SI O SI CON UN PRODUCTO ASOCIADO
+	@OneToOne(optional = false)
+	@JoinColumn(name = "id_producto", nullable = false, unique = true)
 	private Producto producto;
 
 	public Stock(int puntoMinimoDeStock, int cantidadActual, boolean reabastecer, Producto producto) {
@@ -45,6 +44,4 @@ public class Stock {
 		this.producto = producto;
 	}
 
-	 
-	 
 }

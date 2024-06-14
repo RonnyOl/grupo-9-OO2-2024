@@ -1,4 +1,5 @@
 package com.unla.grupo3.entities;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +33,9 @@ public class Producto {
 	@Column (name="habilitado",nullable=false)
 	private boolean habilitado;
 	
-	//UN PRODUCTO PUEDE EXISTIR SIN UN STOCK CREADO
-	@OneToOne(mappedBy="producto",optional=true)
+	//UN PRODUCTO PUEDE EXISTIR SIN UN STOCK CREADO 
+	//SI SE ELIMINA EL STOCK SE ELIMINA EL PRODUCTO ASOCIADO A ESE STOCK 
+	@OneToOne(mappedBy="producto", cascade = CascadeType.ALL,optional=true)
 	private Stock stock;
 	
 
