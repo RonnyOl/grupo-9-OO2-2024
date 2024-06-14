@@ -23,6 +23,16 @@ public class ViewRouteHelper {
 	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
+<<<<<<< HEAD
 	public final static String ROUTE_INDI = "/producto";
+=======
+	
+	public final static String RUTA_PRODUCTS = "/lista";
+
+	
+	
+	
+	
+>>>>>>> 70814bf2917abc1659c88f062e87aed52a4abd0a
 	
 }
