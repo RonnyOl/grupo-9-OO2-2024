@@ -17,7 +17,7 @@ public interface IProductoService {
 		
 		//HABILITAR O DESHABILITAR PRODUCTO
 		
-		public boolean cambiarEstadoDeProducto(int id,boolean nuevoEstado);
+		public boolean cambiarEstadoDeProducto(Optional <Producto> p,boolean nuevoEstado);
 		
 		//TRAER PRODUCTO POR ID CON SU STOCK
 		

@@ -9,9 +9,13 @@ public class ViewRouteHelper {
 	//USER
 	public final static String USER_LOGIN = "user/login";
 	public final static String USER_LOGOUT = "user/logout";
+	
 	//Productos
 	public final static String PRODUCTS = "producto/lista";
 	public final static String INDI = "producto/individual";
+	public final static String NEW_PRODUCTO = "producto/nuevo";
+	public final static String ADMIN_PRODUCTO = "producto/administrar";
+
 	
 	//Pedidos
 	public final static String ORDER = "pedido/lista";

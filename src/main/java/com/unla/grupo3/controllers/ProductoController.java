@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.helpers.ViewRouteHelper;
-import com.unla.grupo3.services.implementation.ProductoService;
+import com.unla.grupo3.services.IProductoService;
 
 
 
@@ -18,32 +18,46 @@ import com.unla.grupo3.services.implementation.ProductoService;
 @RequestMapping("/producto")
 public class ProductoController {
 
-	private ProductoService productService;
+	private IProductoService productService;
 	
-	public ProductoController(ProductoService productService) {
+	public ProductoController(IProductoService productService) {
 		this.productService = productService;
 	}
 
 	@GetMapping("/lista")
 	public ModelAndView productos() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PRODUCTS);
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 		
 		List<Producto> lista = productService.traerProductos();
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
 	
-	@GetMapping("/individual/{id}")
-	
+	@GetMapping("/individual/{id}")	
 	public ModelAndView individual(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI);
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 		
 		Optional<Producto> objeto = productService.traerProducto(id);
 		modelAndView.addObject("producto", objeto.get());
 		return modelAndView;
 	}
+	
+	
+	@GetMapping("/nuevo")
+	public ModelAndView nuevoProducto() {
+		
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_PRODUCTO);
+		
+		return modelAndView;
+	}
 
+	@GetMapping("/administrar")
+	public ModelAndView administrarProducto() {
+		
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ADMIN_PRODUCTO);
+		return modelAndView;
+	}
 	
 }

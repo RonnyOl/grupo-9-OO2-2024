@@ -42,8 +42,8 @@ public class ProductoService implements IProductoService {
 	
 	//HABILITAR O DESHABILITAR PRODUCTO
 	
-	public boolean cambiarEstadoDeProducto(int id,boolean nuevoEstado) {
-		Optional<Producto> p=productoRepository.findById(id);
+	public boolean cambiarEstadoDeProducto(Optional<Producto> p,boolean nuevoEstado) {
+
 		if(p.isPresent()) {
 			p.get().setHabilitado(nuevoEstado);
 			this.agregarOModificarProducto(p.get());
