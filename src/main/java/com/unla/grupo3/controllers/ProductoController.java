@@ -5,9 +5,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IProductoService;
@@ -49,8 +53,15 @@ public class ProductoController {
 	public ModelAndView nuevoProducto() {
 		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_PRODUCTO);
+		modelAndView.addObject("nuevo", new Producto());
 		
 		return modelAndView;
+	}
+	
+	@PostMapping("/crear")
+	public RedirectView create(@ModelAttribute("producto")Producto producto) {
+		productService.agregarOModificarProducto(producto);
+		return new RedirectView(ViewRouteHelper.RUTA_PRODUCTS);
 	}
 
 	@GetMapping("/administrar")

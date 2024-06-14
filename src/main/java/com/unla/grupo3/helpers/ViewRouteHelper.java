@@ -24,5 +24,11 @@ public class ViewRouteHelper {
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
 	
+	public final static String RUTA_PRODUCTS = "/lista";
+
+	
+	
+	
+	
 	
 }
