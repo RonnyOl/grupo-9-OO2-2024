@@ -47,6 +47,18 @@ public class ProductoService  {
 		}
 		return new ArrayList<>(grantedAuthorities);
 	}
+	
+	
+	CONSULTAS A LA BD PARA PRODUCTO:
+	//service de producto
+	-agregarProducto
+	-modificarProducto
+	-eliminarProducto
+	-traerProducto(int id)
+	-traerProducto(String nombre)
+	-traerProductos //devuelve la lista completa
+	-deshabilitarProducto
+	-eliminarProducto
 	*/
 	
 }

@@ -27,10 +27,14 @@ public class UserController {
 		return ViewRouteHelper.USER_LOGOUT;
 	}
 
+	
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//user.getUserRoles();
 		return "redirect:/index";
 	}
+	
+	
+	
 }
