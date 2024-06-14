@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IProductoService;
@@ -53,11 +56,20 @@ public class ProductoController {
 		return modelAndView;
 	}
 
-	@GetMapping("/administrar")
-	public ModelAndView administrarProducto() {
-		
+	@GetMapping("/administrar/{id}")
+	public ModelAndView administrarProducto(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ADMIN_PRODUCTO);
+		Optional<Producto> objeto = productService.traerProducto(id);
+		modelAndView.addObject("producto", objeto.get());
 		return modelAndView;
+	}
+	
+	@PostMapping("/habilitacion/{id}")
+	public RedirectView cambiarEstadoDeProducto(@PathVariable("id") int id) {
+		
+		Optional<Producto> objeto = productService.traerProducto(id);
+		productService.cambiarEstadoDeProducto(objeto, !objeto.get().isHabilitado());
+		return new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ id);
 	}
 	
 }

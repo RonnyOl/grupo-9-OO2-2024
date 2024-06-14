@@ -23,6 +23,6 @@ public class ViewRouteHelper {
 	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
-	
+	public final static String ROUTE_INDI = "/producto";
 	
 }

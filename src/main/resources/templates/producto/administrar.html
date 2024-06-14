@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link href="/css/stylesProduct.css" rel="stylesheet" />
+</head>
+
+<body style="margin:0;padding: 0;">
+
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="#page-top"><img src="/assets/img/logoPagina.png" alt="..."
+					style="width: 80px; height: auto;" /></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars ms-1"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+
+					<li th:if="${userrole == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link"
+							href="/">Administrar</a></li>
+					<li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
+					<li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="individual-body"
+		style="width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;">
+
+		<form class="formulario-administrar" action="#" th:action="@{/producto/modificar}"
+			th:object="${producto}" method="post">
+
+			</p>
+			<p>
+				Nombre: <input type="text" th:field="${producto.nombre}" />
+			</p>
+			<p>
+				Descripcion: <input type="text" th:field="${producto.descripcion}" />
+			</p>
+			<p>
+				Precio de venta: <input type="number" th:field="${producto.precioDeVenta}" />
+			</p>
+			<p>
+				Costo: <input type="number" th:field="${producto.costo}" />
+			</p>
+			
+			<p th:text="${producto.habilitado ? 'El producto se encuentra habilitado': 'El producto se encuentra inhabilitado'}">
+				
+			</p>
+
+			<input type="submit" value="Realizar cambios" />
+		</form>
+		
+		<form action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
+		    <button type="submit" th:text="${producto.habilitado ? 'Deshabilitar producto':'Habilitar producto'}" >
+				
+			</button>
+			</form>
+		
+		<form class="formulario-administrar" action="#" th:action="@{/producto/administrar/post}"
+					th:object="${producto}" method="post">
+
+					</p>
+					<p>
+						Nombre: <input type="text" th:field="${producto.stock.puntoMinimoDeStock}" />
+					</p>
+					
+
+					<input type="submit" value="Edit" />
+		</form>
+
+
+	</div>
+
+</body>
+
+</html>
