@@ -18,15 +18,6 @@
     </head>
     <body style="background-color: aqua;" id="page-top">
 
-		<ul>
-		       <li th:each="product : ${lista}">
-		           <div>
-		               <h2 th:text="${product.nombre}">Product Name</h2>
-		               <p th:text="${product.precioDeVenta}">Product Description</p>
-					   <button th>ir a la vista</button>
-		           </div>
-		       </li>
-		   </ul>
 		
 		<!-- Portfolio Grid-->
 		       <section class="page-section bg-light" id="productos">
@@ -49,7 +40,10 @@
 					
 							                                <div th:text="${producto.nombre}" class="portfolio-caption-heading"></div>
 							                                <div th:text="${producto.precioDeVenta}" class="portfolio-caption-subheading text-muted">INSERTAR</div>
-							                            	<button><a style="text-decoration: none;" href="/producto/individual/1">Ver</a></button>
+															<button>
+																<a th:href="@{/producto/individual/{id}(id=${producto.idProducto})}" style="text-decoration: none;">Ver</a>
+															</button>
+														
 														</div>
 							                        </div>
 							                    </div>
