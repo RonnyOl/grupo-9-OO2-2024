@@ -31,7 +31,7 @@ public class Pedido {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
-	@ManyToOne(fetch = FetchType.LAZY) 
+	@ManyToOne(optional=false) 
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
