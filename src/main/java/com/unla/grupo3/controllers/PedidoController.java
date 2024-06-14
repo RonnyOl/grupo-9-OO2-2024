@@ -8,40 +8,42 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.unla.grupo3.entities.Producto;
+
+import com.unla.grupo3.entities.Pedido;
 import com.unla.grupo3.helpers.ViewRouteHelper;
-import com.unla.grupo3.services.implementation.ProductoService;
+import com.unla.grupo3.services.implementation.PedidoService;
+
 
 
 
 @Controller
-@RequestMapping("/producto")
-public class ProductoController {
+@RequestMapping("/pedido")
+public class PedidoController {
 
-	private ProductoService productService;
+	private PedidoService pedidoService;
 	
-	public ProductoController(ProductoService productService) {
-		this.productService = productService;
+	public PedidoController(PedidoService pedidoService) {
+		this.pedidoService = pedidoService;
 	}
 
 	@GetMapping("/lista")
-	public ModelAndView productos() {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PRODUCTS);
+	public ModelAndView Pedidos() {							 
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		List<Producto> lista = productService.traerProductos();
+		List<Pedido> lista = pedidoService.traerPedido();
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
 	
 	@GetMapping("/individual/{id}")
-	
-	public ModelAndView individual(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI);
+														
+	public ModelAndView individualPedidos(@PathVariable("id") int id) {
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		Optional<Producto> objeto = productService.traerProducto(id);
-		modelAndView.addObject("producto", objeto.get());
+		Optional<Pedido> objeto = pedidoService.traerPedido(id);
+		modelAndView.addObject("Pedido", objeto.get());
 		return modelAndView;
 	}
 
