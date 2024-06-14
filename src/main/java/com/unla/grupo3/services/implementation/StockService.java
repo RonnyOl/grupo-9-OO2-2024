@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.repositories.IStockRepository;
 
@@ -40,14 +41,19 @@ public class StockService  {
     }
 
 
-    //TRAER Stock POR ID CON SU producto
+    //TRAER Stock POR ID 
 
-    public Optional<Stock> traerProducto(int id) {
+    public Optional<Stock> traerStock(int id) {
         return stockRepository.findById(id);
     }
 
+    //TRAER Stock POR producto
 
-    //TRAER LISTA DE STOCK CON SU PRODUCTO 
+    public Optional<Stock> traerStock(Producto producto) {
+        return stockRepository.findByProducto(producto);
+    }
+    
+    //TRAER LISTA DE STOCK 
     public List<Stock> traerStock(){
         return stockRepository.findAll();
     }
