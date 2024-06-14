@@ -69,37 +69,4 @@ public class ProductoService  {
 	}
 	
 	
-	/*@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.unla.grupo3.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
-		return buildUser(user, buildGrantedAuthorities(user.getUserRoles()));
-	}
-
-	private User buildUser(com.unla.grupo3.entities.User user, List<GrantedAuthority> grantedAuthorities) {
-		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
-						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
-						grantedAuthorities);
-	}
-
-	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		for(UserRole userRole: userRoles) {
-			grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
-		}
-		return new ArrayList<>(grantedAuthorities);
-	}
-	
-	
-	CONSULTAS A LA BD PARA PRODUCTO:
-	//service de producto
-	-agregarProducto
-	-modificarProducto
-	-eliminarProducto
-	-traerProducto(int id)
-	-traerProducto(String nombre)
-	-traerProductos //devuelve la lista completa
-	-deshabilitarProducto
-	-eliminarProducto
-	*/
-	
 }
