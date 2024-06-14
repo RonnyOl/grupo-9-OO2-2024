@@ -28,14 +28,7 @@ public class HomeController {
 	@GetMapping("/index")
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
-	    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    System.out.println(userDetails);
-	    List<String> authorities = userDetails.getAuthorities().stream()
-	            .map(GrantedAuthority::getAuthority)
-	            .collect(Collectors.toList());
 	    
-	
-		modelAndView.addObject("userrole", authorities.get(0));
 		return modelAndView;
 	}
 
