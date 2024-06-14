@@ -47,16 +47,16 @@
 
 .seccion_entera{
 	background-color: #373b44;
-	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .lista-card{
-	min-width: 30%;
+	min-width: 25%;
 	min-height: 30rem;
-	
-	max-width: 30%;
+	max-width: 25%;
 	max-height: 30rem;
+	
+	
 	background-color: #fff;
 	flex-direction: column;
 	justify-content: center;
@@ -71,4 +71,5 @@
 	display: flex;
 	justify-content: center;
 	gap: 6rem;
+	flex-wrap: wrap;
 }

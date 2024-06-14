@@ -23,7 +23,7 @@
 
 	<!-- Portfolio Grid-->
 	<section class="page-section seccion_entera" id="productos">
-		<div class="container">
+		<div style="width: 100%;display: flex; flex-direction: column;justify-content: center;align-items: center;">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase text-white fs-1">Productos</h2>
 				<h3 class="section-subheading text-white">Elije que producto deseas comprar</h3>
@@ -33,25 +33,24 @@
 				<!-- Portfolio item 1-->
 				<div th:each="producto : ${lista}" class="portfolio-item lista-card">
 
-
 					<div>
 						<div th:text="${producto.nombre}" class="portfolio-caption-heading fs-3"></div>
 					</div>
 					<img width="250px" height="250px"
 						th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
-					<div>
-					<div th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading fs-4"></div>
+					<div >
+					<h3 th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading fs-4 mb-3"></h3>
 					
-						<button class="boton-compra">
-							<a th:href="@{/producto/individual/{id}(id=${producto.idProducto})}"
+						
+							<a class="boton-compra" th:href="@{/producto/individual/{id}(id=${producto.idProducto})}"
 								style="text-decoration: none;">Ver</a>
-						</button>
+			
 					</div>
 
 				</div>
 			</div>
-
-
+		</div>
+</section>
 
 
 			<!-- Bootstrap core JS-->
