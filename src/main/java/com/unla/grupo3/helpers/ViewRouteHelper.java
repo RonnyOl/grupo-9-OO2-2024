@@ -12,6 +12,11 @@ public class ViewRouteHelper {
 	//Productos
 	public final static String PRODUCTS = "producto/lista";
 	public final static String INDI = "producto/individual";
+	
+	//Pedidos
+	public final static String ORDER = "pedido/lista";
+	public final static String INDI_ORDER = "pedido/individual";
+	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
 	
