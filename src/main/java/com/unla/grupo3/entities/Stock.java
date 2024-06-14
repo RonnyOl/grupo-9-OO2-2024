@@ -32,6 +32,7 @@ public class Stock {
 	@Column(name="reabastecer",nullable=false)
 	private boolean reabastecer;
 	
+	//STOCK DEBE CREARSE SI O SI CON UN PRODUCTO ASOCIADO
 	@OneToOne(optional=false)
     @JoinColumn(name = "id_producto",nullable=false)
 	private Producto producto;

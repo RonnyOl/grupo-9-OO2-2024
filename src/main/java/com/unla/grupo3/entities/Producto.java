@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,13 +28,23 @@ public class Producto {
 	
 	@Column(name="nombre",nullable=false)
 	private String nombre;
+	
+	@Column (name="habilitado",nullable=false)
+	private boolean habilitado;
+	
+	//UN PRODUCTO PUEDE EXISTIR SIN UN STOCK CREADO
+	@OneToOne(mappedBy="stock",optional=true)
+	private Stock stock;
+	
 
-	public Producto(String descripcion, float costo, float precioDeVenta, String nombre) {
+	public Producto(String descripcion, float costo, float precioDeVenta, String nombre,Stock stock,boolean habilitado) {
 		super();
 		this.descripcion = descripcion;
 		this.costo = costo;
 		this.precioDeVenta = precioDeVenta;
 		this.nombre = nombre;
+		this.stock=stock;
+		this.habilitado=habilitado;
 	}
 	
 	
