@@ -3,13 +3,14 @@
 	background-color: #373b44;
 }
 .individual-image {
-	width: 40%;
-	height: 80%;
+	width: 30%;
+	height: 60%;
 	margin-left:5rem;
-	background-color:#e1b866 ;
+	background-color:rgb(128, 128, 128) ;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 50%;
 }
 
 .individual-info {
@@ -25,7 +26,8 @@
 
 .individual-image img {
 	border: 5px inset #000;
-	border-radius: 5rem;
+	border-radius: 50%;
+	
 }
 
 

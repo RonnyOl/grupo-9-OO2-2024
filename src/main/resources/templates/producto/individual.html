@@ -11,49 +11,59 @@
 
 <body style="margin:0;padding: 0;">
 
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
-	            <div class="container">
-	                <a class="navbar-brand" href="#page-top"><img src="/assets/img/logoPagina.png" alt="..."style="width: 80px; height: auto;" /></a>
-	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-	                    Menu
-	                    <i class="fas fa-bars ms-1"></i>
-	                </button>
-	                <div class="collapse navbar-collapse" id="navbarResponsive">
-	                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-							
-							<li th:if="${userrole == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link" href="/">Administrar</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-	                
-	                    </ul>
-	                </div>
-	            </div>
-	        </nav>
-	
-	<div class="individual-body" style="width: 100vw;height: 100vh; display: flex;align-items: center;">
-		<div class="individual-image">
-			<img width="500px" height="500px"
-									th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
-		</div>
-		<div class="individual-info">
-			<div style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 5rem;text-align: center;gap: 2rem;">
-			<h1 th:text="${producto.nombre}" class="portfolio-caption-heading individual-nombre"></h1>
-			<h5 th:text="${producto.descripcion}" class="portfolio-caption-subheading individual-descripcion"></h5>
-			</div>
-			<div style="margin-bottom: 5rem;display: flex;flex-direction: column;justify-content: center; align-items: center;">
-			
-			
-			<h6 th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading individual-precio"></h6>
-			<div class="d-flex flex-column gap-2">
-				
-				<button th:disabled="${producto.habilitado != true}" th:text="${producto.habilitado} ? 'Comprar':'Sin stock'" class="boton-compra portfolio-caption-subheading"></button>
-				<a th:href="@{/producto/administrar/{id}(id=${producto.idProducto})}" class="btn btn-danger portfolio-caption-subheading">Administrar</a>
-			</div>
-			
-			</div>
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"
+					style="width: 80px; height: auto;" /></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars ms-1"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 
+					<li th:if="${userrole == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link"
+							href="/">Administrar</a></li>
+					<li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
+					<li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="individual-body" style="width: 100vw;height: 100vh; display: flex;align-items: center;">
+		
+		<div class="individual-image">
+			<img width="500px" height="500px" th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
+		</div>
+		
+		<div class="individual-info">
+			<div
+				style="display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 5rem;text-align: center;gap: 2rem;">
+				<h1 th:text="${producto.nombre}" class="portfolio-caption-heading individual-nombre"></h1>
+				<h5 th:text="${producto.descripcion}" class="portfolio-caption-subheading individual-descripcion"></h5>
+			</div>
+			<div
+				style="margin-bottom: 5rem;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+
+
+				<h6 th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading individual-precio"></h6>
+				<div class="d-flex flex-column gap-2">
+
+					<button th:disabled="${producto.habilitado != true}"
+						th:text="${producto.habilitado} ? 'Comprar':'Sin stock'"
+						class="boton-compra portfolio-caption-subheading"></button>
+					<a th:href="@{/producto/administrar/{id}(id=${producto.idProducto})}"
+						class="btn btn-danger portfolio-caption-subheading">Administrar</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
