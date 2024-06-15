@@ -50,8 +50,9 @@ public class StockService implements IStockService {
 
     //TRAER Stock POR producto
 
-    public Optional<Stock> traerStock(Producto producto) {
-        return stockRepository.findByProducto(producto);
+
+    public List<Stock> traerStock(Producto producto) {
+        return stockRepository.findAllByProducto(producto);
     }
     
     //TRAER LISTA DE STOCK 

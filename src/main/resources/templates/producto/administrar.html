@@ -37,11 +37,14 @@
 
 	<div class="individual-body"
 		style="width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;">
-
-		<form class="formulario-administrar" action="#" th:action="@{/producto/modificar}"
+		<div style="color: aliceblue;display: flex;flex-direction: column;gap:3rem;">
+		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/producto/modificar}"
 			th:object="${producto}" method="post">
 
 			</p>
+			
+			<input  type="hidden" th:field="${producto.idProducto}" />
+			
 			<p>
 				Nombre: <input type="text" th:field="${producto.nombre}" />
 			</p>
@@ -62,24 +65,22 @@
 			<input type="submit" value="Realizar cambios" />
 		</form>
 		
-		<form action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
+		<form class="formulario-administrar d-flex flex-column border p-3" style="display: flex;justify-content: center;" action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
 		    <button type="submit" th:text="${producto.habilitado ? 'Deshabilitar producto':'Habilitar producto'}" >
 				
 			</button>
 			</form>
 		
-		<form class="formulario-administrar" action="#" th:action="@{/producto/administrar/post}"
-					th:object="${producto}" method="post">
-
-					</p>
-					<p>
-						Nombre: <input type="text" th:field="${producto.stock.puntoMinimoDeStock}" />
-					</p>
+		<div class="formulario-administrar d-flex flex-column border p-3">
 					
+					<p th:text="'Punto mínimo de stock  : ' + ${producto.stock.puntoMinimoDeStock}"></p>
+					<p th:text="'Cantidad actual : ' + ${producto.stock.cantidadActual}"></p>
+					<p th:text="'¿Se tiene que reabasteser? : ' + ${producto.stock.reabastecer == false ? 'No': 'Si'}"></p>	
 
 					<input type="submit" value="Edit" />
-		</form>
-
+		</div>
+		
+		</div>
 
 	</div>
 

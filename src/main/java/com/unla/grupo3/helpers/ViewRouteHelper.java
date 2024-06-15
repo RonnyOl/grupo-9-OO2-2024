@@ -29,10 +29,5 @@ public class ViewRouteHelper {
 	
 	public final static String RUTA_PRODUCTS = "/lista";
 
-	
-	
-	
-	
 
-	
 }

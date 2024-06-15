@@ -18,6 +18,7 @@ import com.unla.grupo3.services.IProductoService;
 
 
 
+
 @Controller
 @RequestMapping("/producto")
 public class ProductoController {
@@ -78,6 +79,18 @@ public class ProductoController {
 		Optional<Producto> objeto = productService.traerProducto(id);
 		productService.cambiarEstadoDeProducto(objeto, !objeto.get().isHabilitado());
 		return new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ id);
+	}
+	
+	@PostMapping("/modificar")
+	public RedirectView cambiarEstadoDeProducto(@ModelAttribute("producto") Producto producto) {
+		
+		Optional<Producto> p = productService.traerProducto(producto.getIdProducto());
+		if (p.isPresent()) {
+			productService.agregarOModificarProducto(producto);
+		}
+		
+		
+		return new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ p.get().getIdProducto());
 	}
 	
 }

@@ -18,6 +18,7 @@ import com.unla.grupo3.services.IStockService;
 
 
  ///CONFIGURAR LOS HELPERS
+/// areglar tema listas
 
 
 @Controller
@@ -48,12 +49,12 @@ public class StockController {
 	/// TRAER STOCK FILTRADO POR SU PRODUCTO
 	
 	@GetMapping("/particular/{id}")				
-	public ModelAndView individualStock(@PathVariable("producto") int id) {
+	public ModelAndView individualStock(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		
 		Optional<Producto> p = productoService.traerProducto(id);
-		Optional<Stock> objeto = stockService.traerStock(p.get());
-		modelAndView.addObject("stock", objeto.get());
+		List<Stock> lista = stockService.traerStock(p.get());
+		modelAndView.addObject("stock", lista);
 		return modelAndView;
 	}
 	
