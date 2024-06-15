@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IProductoService;
-
+import com.unla.grupo3.services.implementation.ProductoService;
 
 
 

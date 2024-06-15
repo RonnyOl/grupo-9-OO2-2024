@@ -34,7 +34,8 @@ public class ViewRouteHelper {
 	public final static String INDI_STOCK ="stock/individual";
 	
 	//Orden de compra
-	public final static String ORDERS = "orden/individual";
+	public final static String ORDERS = "orden/lista";
 	public final static String INDI_ORDER = "orden/individual";
+	public final static String NEW_ORDER = "orden/nueva";
 
 }

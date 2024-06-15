@@ -6,19 +6,21 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo3.entities.OrdenDeCompra;
+import com.unla.grupo3.entities.Producto;
+import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IOrdenDeCompraService;
+import com.unla.grupo3.services.IProveedorService;
 import com.unla.grupo3.services.IStockService;
-
-
-
-
 
 
 @Controller
@@ -27,11 +29,12 @@ public class OrdenDeCompraController {
 
 	private IOrdenDeCompraService ordenService;
 	private IStockService stockService;
+	private IProveedorService proveedorService;
 	
-	
-	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService) {
+	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService) {
 		this.ordenService = ordenCompraService;
 		this.stockService = stockService;
+		this.proveedorService= proveedorService;
 		
 	}
 	
@@ -46,9 +49,8 @@ public class OrdenDeCompraController {
 		return modelAndView;
 	}
 	
-	//POR ID
-	
-	@GetMapping("/individual/id/{id}")														
+	//POR ID	
+	@GetMapping("/individual/{id}")														
 	public ModelAndView individualOrden(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -60,12 +62,7 @@ public class OrdenDeCompraController {
 
 	
 	/// POR FECHA
-	
-<<<<<<< HEAD
-	@GetMapping("/individual/fecha/{id}")	
-=======
 	@GetMapping("/individualPorFecha/{id}")	
->>>>>>> 2648b7d20783d3de4be20f084768cf5a4fe8bb12
 	public ModelAndView individualOrden(@PathVariable("f") LocalDate f) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,8 +71,6 @@ public class OrdenDeCompraController {
 		modelAndView.addObject("ordenDeCompra", objeto.get());
 		return modelAndView;
 	}
-
-	
 	/// POR USER
 	/// la estructura esta armada, hay que cambiar varias cosas
 	
@@ -101,6 +96,39 @@ public class OrdenDeCompraController {
 		modelAndView.addObject("ordenCompra", lista);
 		return modelAndView;
 	}
+	
+	@GetMapping("/nueva/{idStock}")
+	public ModelAndView nuevaOrdenDeCompra(@PathVariable("idStock") int idStock ) {
+		
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_ORDER);
+		Optional<Stock> stockReal = stockService.traerStock(idStock);
+
+
+		if (stockReal.isPresent()) {
+			OrdenDeCompra orden = new OrdenDeCompra();
+			orden.setStock(stockReal.get());
+			List<Proveedor> lstProveedores = proveedorService.traerProveedores();
+			
+			System.out.println(lstProveedores.get(0).getNombreEmpresa());
+			System.out.println(lstProveedores.get(1).getNombreEmpresa());
+			System.out.println(lstProveedores.get(0).getIdProveedor());
+			System.out.println(lstProveedores.get(1).getIdProveedor());
+
+
+			
+			modelAndView.addObject("orden",orden);
+			modelAndView.addObject("proveedores", lstProveedores);
+		}
+		
+		return modelAndView;
+	}
+	
+    @PostMapping("/agregar")
+    public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra) {
+        ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
+        return  new RedirectView (); // Ajusta la redirección según tus necesidades
+    }
+	
 	
 	
 	

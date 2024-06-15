@@ -2,6 +2,8 @@ package com.unla.grupo3.entities;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ public class OrdenDeCompra {
 	@Column(name="cantidad_a_Comprar",nullable=false)
 	private int cantidadAComprar;
 	
-	@Column(name="fecha_emision",nullable=false)
+	@CreationTimestamp
 	private LocalDate fechaEmision;
 	
 	@ManyToOne(optional=false)
