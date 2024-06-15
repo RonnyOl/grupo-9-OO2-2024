@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>VIBRAS-compras online</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/img/logoPagina.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+		<link href="/css/stylesProduct.css" rel="stylesheet" />
+		<style>
+		        .glass-effect {
+		           background: transparent;
+		            border-radius: 10px;
+		            backdrop-filter: blur(15px);
+		            -webkit-backdrop-filter: blur(10px);
+		            border: 1px solid rgba(255, 255, 255, 0.3);
+		            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+		        }
+		    </style>	
+		
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+		
+		
+		
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
+	            <div class="container">
+	                <a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"style="width: 80px; height: auto;" /></a>
+	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	                    Menu
+	                    <i class="fas fa-bars ms-1"></i>
+	                </button>
+	                <div class="collapse navbar-collapse" id="navbarResponsive">
+	                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+							
+							<li th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link" href="/">Administrar</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+							
+							           
+							
+	                    </ul>
+	                </div>
+	            </div>
+	        </nav>
+			
+		<section style="display:flex;width:100%;height: 100vh;background-image: url('assets/img/backgroundPage.png');justify-content: center;align-items: center;background-position: center;">
+			<div class="glass-effect section-botones">
+				
+				<a class="administrar-btn administar-boton1">
+					Lotes
+				</a>
+				<a class="administrar-btn administar-boton2">
+					ODC
+				</a>
+				<a class="administrar-btn administar-boton3">
+					Proveedores
+				</a>
+				<a class="administrar-btn administar-boton4">
+					Ventas
+				</a>
+				
+				
+			</div>
+		</section>
+       
+     
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

@@ -38,9 +38,16 @@ public class HomeController {
 		return mV;
 	}
 
+	@GetMapping("/administrar")
+	public ModelAndView administracion() {
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.ADM);
+		return mV;
+	}
+	
 	@GetMapping("/")
 	public RedirectView redirectToHomeIndex() {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
+	
 
 }

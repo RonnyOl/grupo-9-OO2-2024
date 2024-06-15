@@ -75,3 +75,47 @@
 	gap: 6rem;
 	flex-wrap: wrap;
 }
+
+
+
+.section-botones {
+	width: 60%; 
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 3rem;
+}
+
+.administrar-btn{
+padding: 0.3rem 5rem;
+background-color: #161917;
+flex: 0 0 40rem;
+text-align: center;
+text-decoration: none;
+padding: 1.2rem 5rem;
+border-radius: 15rem;
+font-size: 2rem;
+}
+.administar-boton1{
+
+background-color: #fc5956;
+color: #fff;
+}
+
+.administar-boton2{
+
+background-color:#f8572d;
+color: #fff;
+}
+.administar-boton3{
+
+background-color:rgb(225, 164, 0);
+color: #fff;
+}
+.administar-boton4{
+
+background-color:#ff9934;
+color: #fff;
+}
