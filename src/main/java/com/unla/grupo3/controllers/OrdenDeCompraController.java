@@ -22,7 +22,7 @@ import com.unla.grupo3.services.IStockService;
 
 
 @Controller
-@RequestMapping("/ordenCompra")
+@RequestMapping("/ordenDeCompra")
 public class OrdenDeCompraController {
 
 	private IOrdenDeCompraService ordenService;
@@ -48,8 +48,7 @@ public class OrdenDeCompraController {
 	
 	//POR ID
 	
-	@GetMapping("/individual/{id}")
-														
+	@GetMapping("/individual/id/{id}")														
 	public ModelAndView individualOrden(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -62,7 +61,7 @@ public class OrdenDeCompraController {
 	
 	/// POR FECHA
 	
-	@GetMapping("/individual/{id}")	
+	@GetMapping("/individual/fecha/{id}")	
 	public ModelAndView individualOrden(@PathVariable("f") LocalDate f) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -89,7 +88,7 @@ public class OrdenDeCompraController {
 	
 	/// POR STOCK
 	
-	@GetMapping("/particular/{id}")				
+	@GetMapping("/individual/stock/{id}")				
 	public ModelAndView individualOrdenCompra(@PathVariable("stock") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		
