@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.unla.grupo3.services.implementation.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,16 +28,13 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalControllerAdvice {
 
-    @ModelAttribute("userrole")
-    public String addUserRoleToModel() {
-        if (SecurityContextHolder.getContext().getAuthentication().getName() != "anonymousUser") {
-        	
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            List<String> authorities = userDetails.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.toList());
-            return authorities.isEmpty() ? "ROLE_USER" : authorities.get(0);
-        }
-        return "ROLE_ANONYMOUS";
-    }
+	 @ModelAttribute("user")
+	    public UserDetails addUserRoleToModel() {
+	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        if (authentication != null && authentication.isAuthenticated() && 
+	                !authentication.getName().equals("anonymousUser")) {
+	            return (UserDetails) authentication.getPrincipal();
+	        }
+	        return null;
+	    }
 }
