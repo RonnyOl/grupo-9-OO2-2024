@@ -24,7 +24,7 @@ import com.unla.grupo3.services.IStockService;
 
 
 @Controller
-@RequestMapping("/ordenDeCompra")
+@RequestMapping("/ordendecompra")
 public class OrdenDeCompraController {
 
 	private IOrdenDeCompraService ordenService;
@@ -108,14 +108,7 @@ public class OrdenDeCompraController {
 			OrdenDeCompra orden = new OrdenDeCompra();
 			orden.setStock(stockReal.get());
 			List<Proveedor> lstProveedores = proveedorService.traerProveedores();
-			
-			System.out.println(lstProveedores.get(0).getNombreEmpresa());
-			System.out.println(lstProveedores.get(1).getNombreEmpresa());
-			System.out.println(lstProveedores.get(0).getIdProveedor());
-			System.out.println(lstProveedores.get(1).getIdProveedor());
 
-
-			
 			modelAndView.addObject("orden",orden);
 			modelAndView.addObject("proveedores", lstProveedores);
 		}
@@ -125,13 +118,18 @@ public class OrdenDeCompraController {
 	
     @PostMapping("/agregar")
     public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra) {
-        ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
-        return  new RedirectView (); // Ajusta la redirección según tus necesidades
+    	
+    	Optional<Proveedor> nuevo = proveedorService.traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
+    	System.out.println(ordenDeCompra.getProveedor().getNombreEmpresa());
+    	System.out.println(ordenDeCompra.getStock().getCantidadActual());
+    	if (nuevo.isPresent()) {
+    		ordenDeCompra.setProveedor(nuevo.get());
+    		ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
+    	}
+    	
+
+        return new RedirectView(ViewRouteHelper.ROUTE_INDI_ODC+"/individual/"+ordenDeCompra.getIdOrdenDeCompra()); 
     }
-	
-	
-	
-	
-	
+
 	
 }

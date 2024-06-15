@@ -16,26 +16,26 @@ public class ViewRouteHelper {
 	public final static String NEW_PRODUCTO = "producto/nuevo";
 	public final static String ADMIN_PRODUCTO = "producto/administrar";
 
-	
 	//Pedidos
 	public final static String PEDIDOS = "pedido/lista";
 	public final static String INDI_PEDIDO = "pedido/individual";
-	
-	/**** Redirects ****/
-	public final static String ROUTE = "/index";
-
-	public final static String ROUTE_INDI = "/producto";
-
-	
-	public final static String RUTA_PRODUCTS = "/lista";
 	
 	//Stock
 	public final static String STOCKS ="stock/lista";
 	public final static String INDI_STOCK ="stock/individual";
 	
 	//Orden de compra
-	public final static String ORDERS = "orden/lista";
-	public final static String INDI_ORDER = "orden/individual";
-	public final static String NEW_ORDER = "orden/nueva";
+	public final static String ORDERS = "ordendecompra/lista";
+	public final static String INDI_ORDER = "ordendecompra/individual";
+	public final static String NEW_ORDER = "ordendecompra/nueva";
 
+	/**** Redirects ****/
+	public final static String ROUTE = "/index";
+
+	public final static String ROUTE_INDI = "/producto";
+
+	public final static String ROUTE_INDI_ODC = "/ordendecompra";
+	
+	public final static String RUTA_PRODUCTS = "/lista";
+	
 }

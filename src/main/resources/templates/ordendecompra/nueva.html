@@ -40,14 +40,15 @@
 		<div style="color: aliceblue;display: flex;flex-direction: column;gap:3rem;">
 	
 		<h3>Formulario para generar una nueva orden de compra:</h3>	
-		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/ordenDeCompra/agregar}"
+		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/ordendecompra/agregar}"
 			th:object="${orden}" method="post">
-
-			</p>
-			
+				
+	
 				<input  type="hidden" th:field="*{idOrdenDeCompra}" />
-			
-			<p>
+				<input  type="hidden" th:field="*{stock.idStock}" />
+				<input  type="hidden" th:field="*{stock.cantidadActual}" />
+				<input  type="hidden" th:field="*{stock.puntoMinimoDeStock}" />
+				<input  type="hidden" th:field="*{stock.reabastecer}" />
 				Producto a comprar: <input type="text" th:field="*{stock.producto.nombre} " />
 			</p>
 			<p>
@@ -56,7 +57,7 @@
 
 			<p>
 				    Proveedor:
-				    <select th:field="*{proveedor.idProveedor}">
+				    <select th:field="${orden.proveedor}">
 				        <option value="" disabled selected>Seleccione un proveedor</option>
 				        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}" th:text="${proveedor.nombreEmpresa}">
 				        </option>

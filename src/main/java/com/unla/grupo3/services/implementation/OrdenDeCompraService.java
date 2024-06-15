@@ -25,9 +25,8 @@ public class OrdenDeCompraService  implements IOrdenDeCompraService {
 	
 	//AGREGAR O MODIFICAR ORDEN DE COMPRA
 	
-	public boolean agregarOModificarOrdenDeCompra(OrdenDeCompra ordenDeCompra) {
-		OrdenDeCompraRepository.save(ordenDeCompra);
-		return true;
+	public OrdenDeCompra agregarOModificarOrdenDeCompra(OrdenDeCompra ordenDeCompra) {
+		return OrdenDeCompraRepository.save(ordenDeCompra);
 	}
 	
 	//ELIMINAR ORDEN DE COMPORA

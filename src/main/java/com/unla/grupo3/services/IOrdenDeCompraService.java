@@ -16,7 +16,7 @@ public interface IOrdenDeCompraService {
 
 	//AGREGAR O MODIFICAR ORDEN DE COMPRA
 	
-	public boolean agregarOModificarOrdenDeCompra(OrdenDeCompra ordenDeCompra);
+	public OrdenDeCompra agregarOModificarOrdenDeCompra(OrdenDeCompra ordenDeCompra);
 	//ELIMINAR ORDEN DE COMPORA
 	
 	public boolean eliminarOrdenDeCompra(int id) ;

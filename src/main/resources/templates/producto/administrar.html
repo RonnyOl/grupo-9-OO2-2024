@@ -72,7 +72,7 @@
 			</form>
 		
 
-			<form class="formulario-administrar d-flex flex-column border p-3" style="display: flex;justify-content: center;" action="#" th:action="@{/ordenDeCompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
+			<form class="formulario-administrar d-flex flex-column border p-3" style="display: flex;justify-content: center;" action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
 				<input  type="hidden" value="${producto.stock.idStock}" />
 					<p th:text="'Punto mínimo de stock  : ' + ${producto.stock.puntoMinimoDeStock}"></p>
 					<p th:text="'Cantidad actual : ' + ${producto.stock.cantidadActual}"></p>
