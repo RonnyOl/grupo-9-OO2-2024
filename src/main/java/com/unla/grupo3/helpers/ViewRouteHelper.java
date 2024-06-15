@@ -38,4 +38,16 @@ public class ViewRouteHelper {
 	
 	public final static String RUTA_PRODUCTS = "/lista";
 	
+	public final static String ROUTE_LOTE = "/lote";
+	
+	//Lote
+	
+	public final static String LOTE = "/Lote/";
+	public final static String LOTES = "/Lote/lista";
+	public final static String INDI_LOTE = "/Lote/individual";
+
+	
+	
+	
+	
 }
