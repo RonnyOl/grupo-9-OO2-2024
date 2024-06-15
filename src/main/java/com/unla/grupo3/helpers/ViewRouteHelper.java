@@ -28,6 +28,9 @@ public class ViewRouteHelper {
 
 	
 	public final static String RUTA_PRODUCTS = "/lista";
-
-
+	
+	//Stock
+	public final static String STOCKS ="stock/lista";
+	public final static String INDI_STOCK ="stock/individual";
+	
 }

@@ -18,7 +18,7 @@ public interface IStockService {
     public Optional<Stock> traerStock(int id);
 
     //TRAER Stock POR producto
-    public List<Stock> traerStock(Producto producto);
+    public Optional<Stock> traerStock(Producto producto);
 
     //TRAER LISTA DE STOCK 
     public List<Stock> traerStock();

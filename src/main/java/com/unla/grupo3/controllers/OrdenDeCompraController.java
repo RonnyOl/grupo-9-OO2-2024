@@ -61,7 +61,11 @@ public class OrdenDeCompraController {
 	
 	/// POR FECHA
 	
+<<<<<<< HEAD
 	@GetMapping("/individual/fecha/{id}")	
+=======
+	@GetMapping("/individualPorFecha/{id}")	
+>>>>>>> 2648b7d20783d3de4be20f084768cf5a4fe8bb12
 	public ModelAndView individualOrden(@PathVariable("f") LocalDate f) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
