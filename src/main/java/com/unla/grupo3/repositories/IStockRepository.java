@@ -1,6 +1,7 @@
 package com.unla.grupo3.repositories;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,6 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
 
 	
 	public abstract Optional<Stock> findByProducto (Producto producto);
+	
+	
 }
