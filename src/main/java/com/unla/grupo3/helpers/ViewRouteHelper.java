@@ -5,6 +5,7 @@ public class ViewRouteHelper {
 	//HOME
 	public final static String INDEX = "home/index";
 	public final static String HELLO = "home/hello";
+	public final static String ADM = "home/administrar";
 	public final static String PRODUCTVIEW = "home/productview";
 	//USER
 	public final static String USER_LOGIN = "user/login";
@@ -15,7 +16,8 @@ public class ViewRouteHelper {
 	public final static String INDI = "producto/individual";
 	public final static String NEW_PRODUCTO = "producto/nuevo";
 	public final static String ADMIN_PRODUCTO = "producto/administrar";
-
+	
+	
 	//Pedidos
 	public final static String PEDIDOS = "pedido/lista";
 	public final static String INDI_PEDIDO = "pedido/individual";
@@ -37,5 +39,17 @@ public class ViewRouteHelper {
 	public final static String ROUTE_INDI_ODC = "/ordendecompra";
 	
 	public final static String RUTA_PRODUCTS = "/lista";
+	
+	public final static String ROUTE_LOTE = "/lote";
+	
+	//Lote
+	
+	public final static String LOTE = "/Lote/";
+	public final static String LOTES = "/Lote/lista";
+	public final static String INDI_LOTE = "/Lote/individual";
+
+	
+	
+	
 	
 }
