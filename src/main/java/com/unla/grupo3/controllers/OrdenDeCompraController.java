@@ -39,7 +39,7 @@ public class OrdenDeCompraController {
 
 	@GetMapping("/lista")
 	public ModelAndView ordenesDeCompra() {							 
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDER);
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
 		
 		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra();
 		modelAndView.addObject("lista", lista);

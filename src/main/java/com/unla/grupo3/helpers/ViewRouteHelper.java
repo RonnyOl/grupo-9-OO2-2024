@@ -18,8 +18,8 @@ public class ViewRouteHelper {
 
 	
 	//Pedidos
-	public final static String ORDER = "pedido/lista";
-	public final static String INDI_ORDER = "pedido/individual";
+	public final static String PEDIDOS = "pedido/lista";
+	public final static String INDI_PEDIDO = "pedido/individual";
 	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
@@ -33,4 +33,8 @@ public class ViewRouteHelper {
 	public final static String STOCKS ="stock/lista";
 	public final static String INDI_STOCK ="stock/individual";
 	
+	//Orden de compra
+	public final static String ORDERS = "orden/individual";
+	public final static String INDI_ORDER = "orden/individual";
+
 }
