@@ -2,28 +2,101 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+		
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/stylesProduct.css" rel="stylesheet" />
+    <style>
+		
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .individual-body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .formulario-administrar {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .detalle {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .detalle span {
+            font-weight: bold;
+        }
+
+        .detalle .valor {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 
-<body style="margin:0;padding: 0;">
 
-	<div class="individual-body" style="width: 100vw;height: 100vh; display: flex;align-items: center;">
-
-		<div class="formulario-administrar individual-info d-flex flex-column border p-3">
-
-			<span th:text="${ordenDeCompra.cantidadAComprar}"></span>
-			<span th:text="${ordenDeCompra.user.username}"></span>
-			<span th:text="${user.username}"></span>
-
+<body>
+    <div class="individual-body">
+		
+			   
+        <div class="formulario-administrar">
 			
+			<div class="detalle">
+			<span>se genero la siguiente orden de compra: </span>
+			</div>
 			
-		</div>
-	</div>
+            <div class="detalle">
+                <span>Producto:</span>
+                <span class="valor" th:text="${ordenDeCompra.stock.producto.nombre}"></span>
+            </div>
 
+            <div class="detalle">
+                <span>Cantidad solicitada:</span>
+                <span class="valor" th:text="${ordenDeCompra.cantidadAComprar}"></span>
+            </div>
+
+            <div class="detalle">
+                <span>Fecha de emisión:</span>
+                <span class="valor" th:text="${ordenDeCompra.fechaEmision}"></span>
+            </div>
+
+            <div class="detalle">
+                <span>Generada por:</span>
+                <span class="valor" th:text="${ordenDeCompra.user.username}"></span>
+            </div>
+
+            <div class="detalle">
+                <span>Proveedor:</span>
+                <span class="valor" th:text="${ordenDeCompra.proveedor.nombreEmpresa}"></span>
+			
+            </div>
+			<a href="/producto/lista" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; text-decoration: none;">Continuar</a>
+			
+        </div>
+    </div>
+
+
+								
+	
 </body>
 
 </html>
