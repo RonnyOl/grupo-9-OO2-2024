@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,10 +19,12 @@ import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.entities.Stock;
+import com.unla.grupo3.entities.User;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IOrdenDeCompraService;
 import com.unla.grupo3.services.IProveedorService;
 import com.unla.grupo3.services.IStockService;
+import com.unla.grupo3.services.implementation.UserService;
 
 
 @Controller
@@ -30,12 +34,13 @@ public class OrdenDeCompraController {
 	private IOrdenDeCompraService ordenService;
 	private IStockService stockService;
 	private IProveedorService proveedorService;
+	private UserService userService;
 	
-	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService) {
+	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService, UserService userService) {
 		this.ordenService = ordenCompraService;
 		this.stockService = stockService;
 		this.proveedorService= proveedorService;
-		
+		this.userService=userService;
 	}
 	
 	// TODOS
@@ -117,13 +122,14 @@ public class OrdenDeCompraController {
 	}
 	
     @PostMapping("/agregar")
-    public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra) {
+    public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra, @AuthenticationPrincipal UserDetails userDetails) {
     	
     	Optional<Proveedor> nuevo = proveedorService.traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
-    	System.out.println(ordenDeCompra.getProveedor().getNombreEmpresa());
-    	System.out.println(ordenDeCompra.getStock().getCantidadActual());
-    	if (nuevo.isPresent()) {
+    	User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+    	
+    	if (nuevo.isPresent() && userDetails.isAccountNonExpired()) {
     		ordenDeCompra.setProveedor(nuevo.get());
+    		ordenDeCompra.setUser(user);
     		ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
     	}
     	
