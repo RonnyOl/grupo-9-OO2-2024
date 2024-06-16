@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.Lote;
 import com.unla.grupo3.entities.OrdenDeCompra;
-import com.unla.grupo3.events.LoteCreadoEvent;
 import com.unla.grupo3.repositories.ILoteRepositoy;
 import com.unla.grupo3.repositories.IOrdenDeCompraRepository;
 import com.unla.grupo3.services.ILoteService;
@@ -24,13 +23,12 @@ public class LoteService  implements ILoteService {
 	
 	private ILoteRepositoy loteRepository;
 	private IOrdenDeCompraService ordenDeCompraService;
-    private ApplicationEventPublisher eventPublisher; //PERMITE GENERAR UN NUEVO EVENTO CUANDO SE CREA UN LOTE 
+
 	
 
 	public LoteService(ILoteRepositoy loteRepository,IOrdenDeCompraService ordenDeCompraService,ApplicationEventPublisher eventPublisher) {
 		this.loteRepository = loteRepository;
 		this.ordenDeCompraService=ordenDeCompraService;
-		this.eventPublisher=eventPublisher;
 	}
 	
 	
@@ -105,8 +103,7 @@ public class LoteService  implements ILoteService {
 			
 				Lote nuevoLote = new Lote(LocalDate.now(),false,ordenConLote);
 
-				nuevoLote=this.agregarOModificarLote(nuevoLote);
-		        eventPublisher.publishEvent(new LoteCreadoEvent(nuevoLote)); //CREA EL NUEVO EVENTO Y ENVIA EL LOTE CREADO JUNTO CON ÉL
+				nuevoLote=this.agregarOModificarLote(nuevoLote);      
 		        creado=true;
 			}
 			

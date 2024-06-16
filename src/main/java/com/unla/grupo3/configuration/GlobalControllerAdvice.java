@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.unla.grupo3.entities.Lote;
-import com.unla.grupo3.events.LoteCreadoEvent;
 import com.unla.grupo3.services.implementation.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
