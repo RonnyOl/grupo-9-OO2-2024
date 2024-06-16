@@ -45,10 +45,10 @@
 	
 	
 	<!-- Portfolio Grid-->
-	<section class="page-section seccion_entera" id="productos">
+	<section class="page-section seccion-entera" id="productos">
 	
 		
-		<div style="width: 100%;display: flex; flex-direction: column;justify-content: center;align-items: center;">
+		<div class="seccion-entera-title">
 			<div class="text-center">
 				
 				<h2 class="section-heading text-uppercase text-white fs-1">Productos</h2>
@@ -58,9 +58,6 @@
 			
         	
 			<div class="lista-card-container">
-				
-				
-
 				<!-- Portfolio item 1-->
 				<div th:each="producto : ${lista}" class="portfolio-item lista-card">
 
@@ -80,7 +77,8 @@
 
 				</div>
 			</div>
-			<div th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" class="button-container" style="width: 100%; display: flex; justify-content: center;margin-top: 2rem;">
+			
+			<div th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" class="button-container btn-agregar" >
 				<a class="btn btn-primary btn-xl text-uppercase" href="/producto/nuevo">Agregar Nuevo Producto</a>
 			</div>
 		</div>

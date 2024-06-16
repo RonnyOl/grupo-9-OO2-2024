@@ -1,0 +1,75 @@
+#mainNav{
+	background-color: rgb(61, 66, 75);
+	border-bottom:1px solid rgb(128, 128, 128, 0.5);
+}
+
+
+/**CSS DEL PRODUCTO INDIVIDUAL**/
+.individual-odc-body {
+	background-color: #373b44;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	width: 100vw;
+	           height: 100vh;
+	           display: flex;
+	           align-items: center;
+	           justify-content: center;
+}
+
+.formulario-administrar {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .detalle {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .detalle span {
+            font-weight: bold;
+        }
+
+        .detalle .valor {
+            display: block;
+            margin-top: 5px;
+        }
+		.btn-continuar{
+			padding: 10px 20px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; text-decoration: none;
+		}
+/*********************************************************************************************************/
+/**NUEVA ODC**/
+.nueva-odc-body{
+	background-color: #373b44;
+		width: 100%;height: 100vh; display: flex;align-items: center;justify-content: center;
+}
+
+.nueva-odc-container{
+	color: #000;display: flex;flex-direction: column;gap:3rem;
+}
+
+
+/*********************************************************************************************************/
+
+/**NUEVO Producto**/
+
+.nuevo-seccion{
+	background-color: #373b44;
+	width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;
+}
+
+.nuevo-container{
+	color: aliceblue;display: flex;flex-direction: column;gap:3rem;
+}
+
+/*********************************************************************************************************/
+

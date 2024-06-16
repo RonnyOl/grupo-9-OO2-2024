@@ -1,6 +1,16 @@
-/**CSS DEL**/
+#mainNav{
+	background-color: rgb(61, 66, 75);
+	border-bottom:1px solid rgb(128, 128, 128, 0.5);
+}
+
+
+/**CSS DEL PRODUCTO INDIVIDUAL**/
 .individual-body {
 	background-color: #373b44;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
 }
 .individual-image {
 	width: 30%;
@@ -24,6 +34,42 @@
 	flex-direction: column;
 }
 
+.individual-info-title{
+	display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 5rem;text-align: center;gap: 2rem;
+}
+
+.individual-info-precio{
+	margin-bottom: 5rem;display: flex;flex-direction: column;justify-content: center; align-items: center;
+}
+
+.input-quantity {
+    width: 100px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.input-quantity:focus {
+    border-color: #61a3e3;
+    box-shadow: 0 0 5px rgba(97, 163, 227, 0.5);
+}
+
+.input-quantity::-webkit-inner-spin-button, 
+.input-quantity::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-quantity:hover {
+    border-color: #61a3e3;
+}
+
 .individual-image img {
 	border: 5px inset #000;
 	border-radius: 50%;
@@ -44,12 +90,48 @@
 	background-color: #161917;
 	color: white;
 }
+/*********************************************************************************************************/
+/**Administrar Producto**/
+.administrar-seccion{
+	background-color: #373b44;
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;
+}
+.administrar-container{
+	
+	color: aliceblue;display: flex;flex-direction: column;gap:3rem;
+}
+
+
+/*********************************************************************************************************/
+
+/**NUEVO Producto**/
+
+.nuevo-seccion{
+	background-color: #373b44;
+	width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;
+}
+
+.nuevo-container{
+	color: aliceblue;display: flex;flex-direction: column;gap:3rem;
+}
+
+/*********************************************************************************************************/
+
 
 /**Lista de productos**/
 
-.seccion_entera{
+.seccion-entera{
 	background-color: #373b44;
 	min-height: 100vh;
+}
+
+.seccion-entera-title{
+	width: 100%;display: flex; flex-direction: column;justify-content: center;align-items: center;
+	
 }
 
 .lista-card{
@@ -88,6 +170,7 @@
 	gap: 3rem;
 }
 
+.btn-agregar{width: 100%; display: flex; justify-content: center;margin-top: 2rem;}
 .administrar-btn{
 padding: 0.3rem 5rem;
 background-color: #161917;

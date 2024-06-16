@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Orden de Compra</title>
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+	<link href="/css/stylesOdc.css" rel="stylesheet" />
 </head>
 
 <body style="margin:0;padding: 0;">
@@ -35,15 +35,14 @@
 		</div>
 	</nav>
 
-	<div class="individual-body"
-		style="width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;">
-		<div style="color: aliceblue;display: flex;flex-direction: column;gap:3rem;">
+	<div class="nueva-odc-body">
+		<div class="nueva-odc-container" >
 	
 		<h3>Formulario para generar una nueva orden de compra:</h3>	
 		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/ordendecompra/crear}"
 			th:object="${orden}" method="post">
 
-				<input  type="number" th:field="*{idOrdenDeCompra}" />
+				<input  type="hidden" th:field="*{idOrdenDeCompra}" />
 				<input  type="hidden" th:field="*{stock.idStock}" />
 				<input  type="hidden" th:field="*{stock.cantidadActual}" />
 				<input  type="hidden" th:field="*{stock.puntoMinimoDeStock}" />

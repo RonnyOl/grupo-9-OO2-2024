@@ -9,9 +9,9 @@
 	<link href="/css/stylesProduct.css" rel="stylesheet" />
 </head>
 
-<body style="margin:0;padding: 0;">
+<body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
+	<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
 	            <div class="container">
 	                <a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"style="width: 80px; height: auto;" /></a>
 	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,21 +25,18 @@
 	                        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-							
-							           
-							
+
 	                    </ul>
 	                </div>
 	            </div>
 	        </nav>
 			
-	<div class="individual-body"
-		style="width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;">
-		<div style="color: aliceblue;display: flex;flex-direction: column;gap:3rem;">
+	<div class="administrar-seccion">
+		<div class="administrar-container">
 		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/producto/modificar}"
 			th:object="${producto}" method="post">
 
-			</p>
+			</p> 
 			
 			<input  type="hidden" th:field="${producto.idProducto}" />
 			
@@ -63,14 +60,13 @@
 			<input type="submit" value="Realizar cambios" />
 		</form>
 		
-		<form class="formulario-administrar d-flex flex-column border p-3" style="display: flex;justify-content: center;" action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
+		<form class="formulario-administrar d-flex flex-column border p-3 justify-content-center" action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
 		    <button type="submit" th:text="${producto.habilitado ? 'Deshabilitar producto':'Habilitar producto'}" >
 				
 			</button>
 			</form>
 		
-			
-			<form th:if="${producto.stock != null}" class="formulario-administrar d-flex flex-column border p-3" style="display: flex;justify-content: center;" action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
+			<form th:if="${producto.stock != null}" class="formulario-administrar d-flex flex-column border p-3 justify-content-center" action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
 				<input  type="hidden" value="${producto.stock.idStock}" />
 					<p th:text="'Punto mínimo de stock  : ' + ${producto.stock.puntoMinimoDeStock}"></p>
 					<p th:text="'Cantidad actual : ' + ${producto.stock.cantidadActual}"></p>
@@ -78,7 +74,7 @@
 
 					<input type="submit" value="Generar una nueva Orden de Compra" />
 			</form>
-			<form th:if="${producto.stock == null}" class="formulario-administrar d-flex flex-column border p-3" style="display: flex;justify-content: center;" action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
+			<form th:if="${producto.stock == null}" class="formulario-administrar d-flex flex-column border p-3 justify-content-center"  action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
 								<p> No se cuenta con stock, se tiene que generar orden de compra</p>
 								
 
