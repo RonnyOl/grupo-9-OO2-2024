@@ -38,10 +38,18 @@ public class PedidoController {
 	}
 
 	@GetMapping("/pedidosrealizados")
-	public ModelAndView Pedidos(@AuthenticationPrincipal UserDetails userDetails) {							 
+	public ModelAndView PedidosRealizados(@AuthenticationPrincipal UserDetails userDetails) {							 
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
+		modelAndView.addObject("lista", lista);
+		return modelAndView;
+	}
+	
+	@GetMapping("/pedidos")
+	public ModelAndView Pedidos() {							 
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
+		List<Pedido> lista = pedidoService.traerPedido();
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}

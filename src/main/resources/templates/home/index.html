@@ -31,9 +31,10 @@
 	                <div class="collapse navbar-collapse" id="navbarResponsive">
 	                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 							
-							<li th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link" href="/">Administrar</a></li>
+							<li th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link" href="/administrar">Administrar</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
+							<li class="nav-item"><a class="nav-link" href="/pedido/pedidosrealizados">Mis pedidos</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 							
 							           

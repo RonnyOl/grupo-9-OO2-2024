@@ -45,11 +45,23 @@
 	<section class="page-section seccion_entera" id="productos">
 		<div class="container">
 			<div class="text-center">
-				<h2 class="section-heading text-uppercase text-white fs-1">Productos</h2>
-				<h3 class="section-subheading text-white">Elije que producto deseas comprar</h3>
+				<h2 class="section-heading text-uppercase text-white fs-1">Aqui podras ver todos tus pedidos</h2>
+				<h3 class="section-subheading text-white">Presionando"Mas info" podras acceder a la informacion que necesites saber </h3>
 			</div>
 			<div class="lista-card-container">
-
+			
+				<div th:if="${#lists.isEmpty(lista)}">	
+					<h3 >TODAVIA NO TIENES NINGUN PEDIDO REALIZADO PRESIONA AQUI PARA IR A NUESTRA SECCION DE PRODUCTOS
+						<a class="btn btn-primary btn-xl text-uppercase" href="/producto/lista">comprar</a>
+					</h3>
+				</div>
+				
+				<div th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}">	
+					<h3 >TOCA AQUI PARA VER TODAS LOS PEDIDOS REALIZADOS EN LA TIENDA
+						<a class="btn btn-primary btn-xl text-uppercase" href="/pedido/pedidos">Ver pedidos</a>
+					</h3>
+				</div>
+				
 				<!-- Portfolio item 1-->
 				<div th:each="pedido : ${lista}" class="portfolio-item lista-card">
 
@@ -62,10 +74,11 @@
 					<div>
 						<span th:text="'Cantidad:' + ${pedido.total}"></span>
 						
-						<button class="boton-compra">
-							<a th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
-								style="text-decoration: none;">Ver Pedido</a>
-						</button>
+						<div class="mt-3">
+							<a class="boton-compra " th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
+								style="text-decoration: none;">Mas info</a>
+						</div>
+						
 					</div>
 
 				</div>
