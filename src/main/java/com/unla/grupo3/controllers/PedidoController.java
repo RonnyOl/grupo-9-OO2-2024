@@ -37,23 +37,23 @@ public class PedidoController {
 		this.userService=userService;
 	}
 
-	@GetMapping("/pedidosRealizados")
-	public ModelAndView Pedidos() {							 
+	@GetMapping("/pedidosrealizados")
+	public ModelAndView Pedidos(@AuthenticationPrincipal UserDetails userDetails) {							 
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
-		
-		List<Pedido> lista = pedidoService.traerPedido();
+		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
 	
-	@GetMapping("/{id}")													
+	@GetMapping("/individual/{id}")													
 	public ModelAndView individualPedidos(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_PEDIDO);
 		
 		
 		Optional<Pedido> objeto = pedidoService.traerPedido(id);
 		
-		if(objeto.isPresent()) modelAndView.addObject("Pedido", objeto.get());
+		if(objeto.isPresent()) modelAndView.addObject("pedido", objeto.get());
 		
 		return modelAndView;
 	}
@@ -79,12 +79,13 @@ public class PedidoController {
  	public RedirectView nuevoPedido(@PathVariable("idProducto") int idProducto, @RequestParam int cantidadAComprar, @AuthenticationPrincipal UserDetails userDetails) {
 		
 		Optional<Producto> producto =productoService.traerProducto(idProducto);
+		System.out.println(producto.get().getNombre());
+		System.out.println(cantidadAComprar);
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		
 		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
-			
 			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
-			
+			productoService.modificarStockProducto(producto.get(), cantidadAComprar);
 		}
 		
 		return new RedirectView (ViewRouteHelper.ROUTE_ORDERS);//DEBE REDIRECCIONAR A UNA LISTA QUE MUESTRE LOS PEDIDOS HECHOS POR ESTE USUARIO

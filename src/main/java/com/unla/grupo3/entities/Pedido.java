@@ -45,10 +45,10 @@ public class Pedido {
 
 	public Pedido(User user, int cantidad, Producto producto) {
 		super();
+		this.producto = producto;
+		this.cantidad = cantidad;
 		this.user = user;
 		this.setTotal(this.calcularTotal());
-		this.cantidad = cantidad;
-		this.producto = producto;
 	}
 	
 

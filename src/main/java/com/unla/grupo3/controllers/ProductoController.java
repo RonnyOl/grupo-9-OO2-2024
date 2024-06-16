@@ -71,10 +71,8 @@ public class ProductoController {
 		System.out.println("--->"+producto.getIdProducto());
 		System.out.println(puntoMinimo);*/
 		producto.setStock(new Stock(puntoMinimo,0,true,producto));
-		
 		producto = productService.agregarOModificarProducto(producto);
 		System.out.println("---............>"+producto.getIdProducto());
-		
 		return new RedirectView(ViewRouteHelper.RUTA_PRODUCTS);
 	}
 	

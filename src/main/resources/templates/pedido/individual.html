@@ -2,29 +2,76 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Pedido</title>
-	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/stylesProduct.css" rel="stylesheet" />
+    <style>
+        .pedido-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+
+        .pedido-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pedido-card img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        .pedido-info {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .pedido-info span {
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .pedido-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 
-<body style="margin:0;padding: 0;">
+<body>
 
-	<div class="individual-body" style="width: 100vw;height: 100vh; display: flex;align-items: center;">
+    <div class=" individual-body pedido-container">
 
-		<div class="formulario-administrar individual-info d-flex flex-column border p-3">
+        <div class="pedido-card">
+            <div class="pedido-header">Detalles del Pedido</div>
+            <img th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}" alt="Producto">
+            <div class="pedido-info">
+                <span th:text="'Producto: ' + ${pedido.producto.nombre}"></span>
+                <span th:text="'Precio individual: $' + ${pedido.producto.precioDeVenta}"></span>
+                <span th:text="'Cantidad comprada: ' + ${pedido.cantidad}"></span>
+                <span th:text="'Total a pagar: $' + ${pedido.total}"></span>
+                <span th:text="'Realizado por el cliente: ' + ${pedido.user.username}"></span>
+            </div>
+        </div>
 
-			<span th:text="'Producto:' + ${pedido.producto.nombre}"></span>
-			<span th:text="'Precio individual:' + ${pedido.producto.precioDeVenta}"></span>
-			<span th:text="'Cantidad comprada:' + ${pedido.cantidad}"></span>
-			<span th:text="'Total a pagar:' + ${pedido.total}"></span>
-
-			<span th:text="'Realizado por el cliente:' + ${pedido.user.username}"></span>
-
-
-		</div>
-	</div>
+    </div>
 
 </body>
 

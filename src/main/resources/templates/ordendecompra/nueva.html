@@ -42,13 +42,15 @@
 		<h3>Formulario para generar una nueva orden de compra:</h3>	
 		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/ordendecompra/crear}"
 			th:object="${orden}" method="post">
-				
-	
+
 				<input  type="number" th:field="*{idOrdenDeCompra}" />
 				<input  type="hidden" th:field="*{stock.idStock}" />
 				<input  type="hidden" th:field="*{stock.cantidadActual}" />
 				<input  type="hidden" th:field="*{stock.puntoMinimoDeStock}" />
 				<input  type="hidden" th:field="*{stock.reabastecer}" />
+				
+				<!--Atributos de orden de compra-->
+				
 				Producto a comprar: <input type="text" th:field="*{stock.producto.nombre} " />
 			</p>
 			<p>
@@ -57,6 +59,8 @@
 			
 			<p th:text="'Usuario asignado: ' + ${user.username}">
 			</p>
+			
+			<input  type="hidden" th:field="${orden.tieneLote}" value="false"/>
 
 			<p>
 				    Proveedor:

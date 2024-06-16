@@ -20,6 +20,7 @@ public interface IProductoService {
 		public boolean cambiarEstadoDeProducto(Optional <Producto> p,boolean nuevoEstado);
 		
 		//TRAER PRODUCTO POR ID CON SU STOCK
+		public boolean modificarStockProducto(Producto producto, int cantidad);
 		
 		public Optional<Producto> traerProducto(int id);
 		//TRAER PRODUCTO POR NOMBRE CON SU STOCK
