@@ -46,11 +46,9 @@ public class OrdenDeCompra {
  	@Column(name="tiene_lote",nullable=false)
  	private boolean tieneLote; 
  	
-	public OrdenDeCompra(int cantidadAComprar, LocalDate fechaEmision, Stock stock, User user,
-			Proveedor proveedor, boolean tieneLote) {
+	public OrdenDeCompra(int cantidadAComprar, Stock stock, User user,Proveedor proveedor, boolean tieneLote) {
 		super();
 		this.cantidadAComprar = cantidadAComprar;
-		this.fechaEmision = fechaEmision;
 		this.stock = stock;
 		this.user = user;
 		this.proveedor = proveedor;

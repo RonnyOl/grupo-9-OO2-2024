@@ -21,6 +21,7 @@ import com.unla.grupo3.entities.User;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IPedidoService;
 import com.unla.grupo3.services.IProductoService;
+import com.unla.grupo3.services.IStockService;
 import com.unla.grupo3.services.implementation.UserService;
 
 @Controller
@@ -29,11 +30,13 @@ public class PedidoController {
 
 	private IPedidoService pedidoService;
 	private IProductoService productoService;
+	private IStockService stockService;
 	private UserService userService;
 	
-	public PedidoController(IPedidoService pedidoService, IProductoService productoService, UserService userService) {
+	public PedidoController(IPedidoService pedidoService, IProductoService productoService, UserService userService, IStockService stockService) {
 		this.pedidoService = pedidoService;
 		this.productoService=productoService;
+		this.stockService=stockService;
 		this.userService=userService;
 	}
 
@@ -96,6 +99,8 @@ public class PedidoController {
 		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
 			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
 			productoService.modificarStockProducto(producto.get(), cantidadAComprar);
+			stockService.validarRabastecer(idProducto); //SE LE ENVIA EL ID DEL PRODUCTO YA QUE EL STOCK TIENE ASIGNADO SOLO 1 PRODUCTO 
+			
 		}
 		
 		return new RedirectView (ViewRouteHelper.ROUTE_ORDERS);//DEBE REDIRECCIONAR A UNA LISTA QUE MUESTRE LOS PEDIDOS HECHOS POR ESTE USUARIO

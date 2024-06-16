@@ -31,7 +31,7 @@ public class ProductoService implements IProductoService {
 	
 	public boolean modificarStockProducto(Producto producto, int cantidad) {
 		
-		 producto.getStock().setCantidadActual(producto.getStock().getCantidadActual()-cantidad);
+		producto.getStock().setCantidadActual(producto.getStock().getCantidadActual()-cantidad);
 		producto = this.agregarOModificarProducto(producto);
 		return true;
 	}

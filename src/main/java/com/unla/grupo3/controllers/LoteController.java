@@ -17,6 +17,8 @@ import com.unla.grupo3.entities.Lote;
 import com.unla.grupo3.events.LoteCreadoEvent;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.ILoteService;
+import com.unla.grupo3.services.IProductoService;
+import com.unla.grupo3.services.IStockService;
 
 
 @Controller
@@ -26,10 +28,14 @@ public class LoteController {
 	
 
 	private ILoteService loteService;
+	private IStockService stockService;
+	private IProductoService productoService;
 	
 
-	public LoteController(ILoteService loteService) {
+	public LoteController(ILoteService loteService,IStockService stockService,IProductoService productoService) {
 		this.loteService = loteService;
+		this.stockService=stockService;
+		this.productoService=productoService;
 	}
 
 	@GetMapping("/lista")
@@ -53,14 +59,17 @@ public class LoteController {
 	@PostMapping("/aceptacion/{id}")		
 	public RedirectView cambiarEstadoDeLote(@PathVariable("id") int id) {
 		
-		Optional<Lote> objeto = loteService.traerLote(id);
-		loteService.cambiarEstadoDeLote(objeto, !objeto.get().isAceptado());
+		Optional<Lote> lote = loteService.traerLote(id);
+		loteService.cambiarEstadoDeLote(lote,true);
+		productoService.modificarStockProducto(lote.get().getOrdenDeCompra().getStock().getProducto(), lote.get().getOrdenDeCompra().getCantidadAComprar());
+		stockService.validarRabastecer(lote.get().getOrdenDeCompra().getStock().getIdStock());
+		
 		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual" + "/"+ id);
 	}
 	
 	
 	@PostMapping("/modificar")					///agregar HELPER
-	public RedirectView cambiarEstadoDeLote(@ModelAttribute("lote") Lote lote) {
+	public RedirectView modificarLote(@ModelAttribute("lote") Lote lote) {
 		
 		Optional<Lote> l = loteService.traerLote(lote.getIdLote());
 		if (l.isPresent()) {
