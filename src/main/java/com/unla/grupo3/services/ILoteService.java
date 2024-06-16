@@ -37,5 +37,5 @@ public interface ILoteService {
 	
 	public boolean cambiarEstadoDeLote(Optional<Lote> l,boolean aceptado);
 	
-	
+	public List<Lote> findAllByAceptadoFalse();
 }

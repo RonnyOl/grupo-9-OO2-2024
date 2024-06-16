@@ -114,7 +114,9 @@ public class LoteService  implements ILoteService {
 		}
 
 	
-	
+		public List<Lote> findAllByAceptadoFalse(){
+			return loteRepository.findAllByAceptadoFalse();
+		}
 	
 	
 

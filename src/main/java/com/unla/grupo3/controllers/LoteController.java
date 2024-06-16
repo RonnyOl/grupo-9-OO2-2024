@@ -73,9 +73,10 @@ public class LoteController {
 	//Y que provoca que se envie  a una nueva vista para ver el nuevo lote creado y aceptar o no el nuevo lote que se creó
 	@EventListener(LoteCreadoEvent.class) 
 	public ModelAndView mostrarNuevoLote(LoteCreadoEvent event) {
+		
 		Lote loteRecibido = event.getLoteCreado();
-		return this.individual(loteRecibido.getIdLote());
+		List<Lote> lotesSinAceptar = loteService.findAllByAceptadoFalse();
+		return this.individual(lotesSinAceptar.size());
 	}
-	
-	
+
 }

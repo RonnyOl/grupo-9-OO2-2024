@@ -2,6 +2,7 @@ package com.unla.grupo3.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.unla.grupo3.entities.Lote;
+import com.unla.grupo3.events.LoteCreadoEvent;
 import com.unla.grupo3.services.implementation.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,4 +40,5 @@ public class GlobalControllerAdvice {
 	        }
 	        return null;
 	    }
+
 }

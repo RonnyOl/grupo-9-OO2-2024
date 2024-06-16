@@ -16,14 +16,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+	<link href="/css/stylesOdc.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 	<!-- Portfolio Grid-->
-	<section class="page-section seccion_entera" id="productos">
+	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase text-white fs-1">Productos</h2>
@@ -32,21 +32,19 @@
 			<div class="lista-card-container">
 
 				<!-- Portfolio item 1-->
-				<div th:each="producto : ${lista}" class="portfolio-item lista-card">
+				<div th:each="orden : ${lista}" class="portfolio-item lista-card">
 
 
 					<div>
-						<div th:text="${producto.nombre}" class="portfolio-caption-heading fs-3"></div>
+						<div th:text="${orden.idOrdenDeCompra}" class="portfolio-caption-heading fs-3"></div>
 					</div>
-					<img width="250px" height="250px"
-						th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
-					<div>
-					<div th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading fs-4"></div>
 					
-						<button class="boton-compra">
-							<a th:href="@{/producto/individual/{id}(id=${producto.idProducto})}"
+					<div th:text="${orden.fechaEmision}" class="portfolio-caption-subheading fs-4"></div>
+					<div th:text="${orden.user.username}" class="portfolio-caption-subheading fs-4"></div>
+						
+							<a class="boton-ver" th:href="@{/ordendecompra/individual/{id}(id=${orden.idOrdenDeCompra})}"
 								style="text-decoration: none;">Ver</a>
-						</button>
+						
 					</div>
 
 				</div>
