@@ -2,13 +2,14 @@ package com.unla.grupo3.services;
 
 import java.util.List;
 import java.util.Optional;
+
 import com.unla.grupo3.entities.Proveedor;
 
 
 public interface IProveedorService {
 	
 	// toma un proveedor y lo agrega 
-		public boolean agregarModificarProveedor(Proveedor proveedor);
+		public Proveedor agregarModificarProveedor(Proveedor proveedor);
 		
 		//Busca y elimina a un proveedor por id
 		public boolean eliminarProveedor(int id);

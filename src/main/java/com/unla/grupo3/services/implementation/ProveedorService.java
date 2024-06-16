@@ -19,9 +19,9 @@ public class ProveedorService implements IProveedorService {
 	}
 	
 	// toma un proveedor y lo agrega 
-	public boolean agregarModificarProveedor(Proveedor proveedor) {
-		proveedorRepository.save(proveedor);
-		return true;
+	public Proveedor agregarModificarProveedor(Proveedor proveedor) {
+		return proveedorRepository.save(proveedor);
+		
 	}
 	
 	//Busca y elimina a un proveedor por id
@@ -53,6 +53,7 @@ public class ProveedorService implements IProveedorService {
 	public List<Proveedor> traerProveedores(){
 		return proveedorRepository.findAll();
 	}
+
 	
 	
 

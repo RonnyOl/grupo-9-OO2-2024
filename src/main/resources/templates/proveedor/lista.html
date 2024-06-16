@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>VIBRAS-compras online</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" href="assets/img/logoPagina.png" />
+	<!-- Font Awesome icons (free version)-->
+	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+	<!-- Google fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link href="/css/stylesLote.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+
+	<div th:include="/navbar/navbar.html::navbarGeneral">
+
+	</div>
+
+	<!-- Portfolio Grid-->
+	<section class="page-section seccion-entera-lista-lote" id="productos">
+
+		<span th:text="${test}"></span>
+
+
+		<div class="seccion-entera-title">
+			<div class="text-center">
+
+				<h2 class="section-heading text-uppercase text-white fs-1">Proveedores</h2>
+				<h3 class="section-subheading text-white">Proveedores generados</h3>
+
+			</div>
+
+
+			<div class="lista-card-container">
+				<!-- Portfolio item 1-->
+				<div th:each="proveedor : ${lista}" class="portfolio-item lista-card">
+
+					<div>
+
+						<div th:text="${proveedor.idProveedor}" class="portfolio-caption-heading fs-3"></div>
+						<img width="250px" height="250px"
+							th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
+						<div th:text="${proveedor.cuil}" class="portfolio-caption-heading fs-3"></div>
+						<div th:text="${proveedor.direccion}" class="portfolio-caption-heading fs-3"></div>
+					</div>
+
+					<a class="boton-verlote" th:href="@{/proveedor/individual/{id}(id=${proveedor.idProveedor})}"
+						style="text-decoration: none;">Ver</a>
+					
+				</div>
+					
+			</div>
+					<a class="btn btn-primary btn-xl text-uppercase" href="/proveedor/nuevo">Agregar Nuevo Proveedor</a>
+		</div>
+
+	
+	</section>
+
+
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<!-- * *                               SB Forms JS                               * *-->
+	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>

@@ -34,7 +34,13 @@ public class ViewRouteHelper {
 	
 	//Lote
 	public final static String LOTES = "lote/lista";
-	public final static String INDI_LOTE = "/lote/individual";
+	public final static String INDI_LOTE = "lote/individual";
+	
+	//Proveedor
+	public final static String PROVEEDORES = "proveedor/lista";
+	public final static String INDI_PROVEEDOR = "proveedor/individual";
+	public final static String NEW_PROVEEDOR = "proveedor/nuevo";
+	public final static String ADMIN_PROVEEDOR = "proveedor/administrar";
 
 
 	/**** Redirects ****/
@@ -49,6 +55,8 @@ public class ViewRouteHelper {
 	public final static String ROUTE_LOTE = "/lote";
 	
 	public final static String ROUTE_ORDERS = "/pedido/pedidosrealizados";
+	
+	public final static String ROUTE_PROVEEDOR = "/proveedor";
 
 
 
