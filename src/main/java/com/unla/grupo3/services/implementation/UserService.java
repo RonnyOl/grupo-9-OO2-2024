@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -44,4 +45,10 @@ public class UserService implements UserDetailsService {
 		}
 		return new ArrayList<>(grantedAuthorities);
 	}
+	
+	public com.unla.grupo3.entities.User findByUsernameAndFetchUserRolesEagerly(String username) {
+		return userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+	};
+	
+	
 }

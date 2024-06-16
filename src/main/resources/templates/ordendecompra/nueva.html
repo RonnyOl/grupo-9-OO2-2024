@@ -54,6 +54,9 @@
 			<p>
 				Cantidad a comprar: <input type="number" th:field="*{cantidadAComprar}" />
 			</p>
+			
+			<p th:text="'Usuario asignado: ' + ${user.username}">
+			</p>
 
 			<p>
 				    Proveedor:

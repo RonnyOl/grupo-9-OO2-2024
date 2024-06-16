@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link href="/css/stylesProduct.css" rel="stylesheet" />
+</head>
+
+<body style="margin:0;padding: 0;">
+
+	<div class="individual-body" style="width: 100vw;height: 100vh; display: flex;align-items: center;">
+
+		<div class="formulario-administrar individual-info d-flex flex-column border p-3">
+			
+			<h2 class="text-center">Detalles del Lote</h2>
+
+				<strong>Fecha de Recepción:</strong>
+				<span th:text="${#dates.format(lote.fechaRecepcion, 'dd/MM/yyyy')}"></span>
+				
+				<strong>Aceptado:</strong>
+				<span th:text="${lote.aceptado} ? 'Si' : 'No'"></span>
+				
+				<strong>Orden de Compra:</strong>
+				<div><strong>Fecha de Emisión:</strong> <span th:text="${#dates.format(lote.ordenDeCompra.fechaEmision, 'dd/MM/yyyy')}"></span>
+				<div><strong>Cantidad:</strong> <span th:text="${lote.ordenDeCompra.cantidad}"></span></div>
+				<div><strong>Usuario:</strong> <span th:text="${lote.ordenDeCompra.usuario.nombreUsuario}"></span></div>
+			
+		</div>
+	</div>
+
+</body>
+
+</html>

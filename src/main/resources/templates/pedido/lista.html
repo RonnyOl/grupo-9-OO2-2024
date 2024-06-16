@@ -31,20 +31,20 @@
 			<div class="lista-card-container">
 
 				<!-- Portfolio item 1-->
-				<div th:each="producto : ${lista}" class="portfolio-item lista-card">
+				<div th:each="pedido : ${lista}" class="portfolio-item lista-card">
 
 
 					<div>
-						<div th:text="${producto.nombre}" class="portfolio-caption-heading fs-3"></div>
+						<div th:text="${pedido.producto.nombre}" class="portfolio-caption-heading fs-3"></div>
 					</div>
 					<img width="250px" height="250px"
-						th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
+						th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}">
 					<div>
-					<div th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading fs-4"></div>
-					
+						<span th:text="'Cantidad:' + ${pedido.total}"></span>
+						
 						<button class="boton-compra">
-							<a th:href="@{/producto/individual/{id}(id=${producto.idProducto})}"
-								style="text-decoration: none;">Ver</a>
+							<a th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
+								style="text-decoration: none;">Ver Pedido</a>
 						</button>
 					</div>
 
