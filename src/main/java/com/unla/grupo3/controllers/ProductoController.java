@@ -59,9 +59,9 @@ public class ProductoController {
 		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_PRODUCTO);
 		modelAndView.addObject("nuevoProducto", new Producto());
-		
 		return modelAndView;
 	}
+	
 	
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("nuevoProducto")Producto producto,@RequestParam("puntoMinimo") int puntoMinimo) {
