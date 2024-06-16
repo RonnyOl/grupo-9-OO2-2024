@@ -51,7 +51,11 @@
 							th:src="@{'/assets/img/productos/' + ${lote.ordenDeCompra.stock.producto.idProducto} + '.jpg'}">
 						<div th:text="${lote.fechaRecepcion}" class="portfolio-caption-heading fs-3"></div>
 
-						<div th:text="${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
+						<div th:if="${lote.ordenDeCompra.user != null}" th:text="${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
+						<div th:if="${lote.ordenDeCompra.user == null}"  class="portfolio-caption-heading fs-3">
+							<p>Este lote se genero de forma automatica</p>
+						</div>
+						
 					</div>
 
 					<a class="boton-verlote" th:href="@{/lote/individual/{id}(id=${lote.idLote})}"

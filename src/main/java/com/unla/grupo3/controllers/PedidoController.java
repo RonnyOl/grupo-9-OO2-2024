@@ -98,7 +98,7 @@ public class PedidoController {
 		
 		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
 			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
-			productoService.modificarStockProducto(producto.get(), cantidadAComprar);
+			productoService.restarStockProducto(producto.get(), cantidadAComprar);
 			stockService.validarRabastecer(idProducto); //SE LE ENVIA EL ID DEL PRODUCTO YA QUE EL STOCK TIENE ASIGNADO SOLO 1 PRODUCTO 
 			
 		}

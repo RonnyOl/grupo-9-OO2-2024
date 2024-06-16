@@ -21,6 +21,7 @@ import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.helpers.ViewRouteHelper;
+import com.unla.grupo3.services.ILoteService;
 import com.unla.grupo3.services.IOrdenDeCompraService;
 import com.unla.grupo3.services.IProveedorService;
 import com.unla.grupo3.services.IStockService;
@@ -34,12 +35,14 @@ public class OrdenDeCompraController {
 	private IOrdenDeCompraService ordenService;
 	private IStockService stockService;
 	private IProveedorService proveedorService;
+	private ILoteService loteService;
 	private UserService userService;
 	
-	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService, UserService userService) {
+	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService,ILoteService loteService, UserService userService) {
 		this.ordenService = ordenCompraService;
 		this.stockService = stockService;
 		this.proveedorService= proveedorService;
+		this.loteService = loteService;
 		this.userService=userService;
 	}
 	
@@ -130,6 +133,8 @@ public class OrdenDeCompraController {
     		ordenDeCompra.setProveedor(nuevo.get());
     		ordenDeCompra.setUser(user);
     		ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
+    		loteService.verificarYCrearLote();
+    		
     	}
 
 

@@ -35,8 +35,12 @@
 		        <p><strong>Producto:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.nombre}"></span></p>
 		        <p><strong>Costo:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.costo}"></span></p>
 		        <p><strong>Fecha de la orden:</strong> <span th:text="${lote.ordenDeCompra.fechaEmision}"></span></p>
-		        <p><strong>Usuario:</strong> <span th:text="${lote.ordenDeCompra.user.username}"></span></p>
-		    </div>
+				
+				<div th:if="${lote.ordenDeCompra.user != null}" th:text="${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
+				<div th:if="${lote.ordenDeCompra.user == null}"  class="portfolio-caption-heading fs-3">
+					<p>Este lote se genero de forma automatica</p>
+				</div>		   
+			</div>
 		</div>
 	</div>
 
