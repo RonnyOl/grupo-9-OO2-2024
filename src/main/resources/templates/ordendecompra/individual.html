@@ -2,59 +2,58 @@
 <html lang="en">
 
 <head>
-		
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="/css/styles.css" rel="stylesheet" />
-    <link href="/css/stylesOdc.css" rel="stylesheet" />
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link href="/css/stylesOdc.css" rel="stylesheet" />
 
 </head>
 
 
 <body>
-    <div class="individual-odc-body">
-		
-			   
-        <div class="formulario-administrar">
-			
+	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
+
+	<div class="individual-odc-body">
+
+
+		<div class="formulario-administrar">
+
 			<div class="detalle">
-			<span>se genero la siguiente orden de compra: </span>
+				<span>Producto:</span>
+				<span class="valor" th:text="${ordenDeCompra.stock.producto.nombre}"></span>
 			</div>
-			
-            <div class="detalle">
-                <span>Producto:</span>
-                <span class="valor" th:text="${ordenDeCompra.stock.producto.nombre}"></span>
-            </div>
 
-            <div class="detalle">
-                <span>Cantidad solicitada:</span>
-                <span class="valor" th:text="${ordenDeCompra.cantidadAComprar}"></span>
-            </div>
+			<div class="detalle">
+				<span>Cantidad solicitada:</span>
+				<span class="valor" th:text="${ordenDeCompra.cantidadAComprar}"></span>
+			</div>
 
-            <div class="detalle">
-                <span>Fecha de emisión:</span>
-                <span class="valor" th:text="${ordenDeCompra.fechaEmision}"></span>
-            </div>
+			<div class="detalle">
+				<span>Fecha de emisión:</span>
+				<span class="valor" th:text="${ordenDeCompra.fechaEmision}"></span>
+			</div>
 
-            <div class="detalle">
-                <span>Generada por:</span>
-                <span class="valor" th:text="${ordenDeCompra.user.username}"></span>
-            </div>
+			<div class="detalle">
+				<span>Generada por:</span>
+				<span class="valor" th:text="${ordenDeCompra.user.username}"></span>
+			</div>
 
-            <div class="detalle">
-                <span>Proveedor:</span>
-                <span class="valor" th:text="${ordenDeCompra.proveedor.nombreEmpresa}"></span>
-			
-            </div>
-			<a href="/producto/lista" class="btn-continuar">Continuar</a>
-			
-        </div>
-    </div>
+			<div class="detalle">
+				<span>Proveedor:</span>
+				<span class="valor" th:text="${ordenDeCompra.proveedor.nombreEmpresa}"></span>
+
+			</div>
+
+			<a href="/producto/lista" class="btn-continuar">Volver</a>
+
+		</div>
+	</div>
 
 
-								
-	
+
+
 </body>
 
 </html>

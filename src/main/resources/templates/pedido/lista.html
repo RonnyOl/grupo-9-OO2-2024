@@ -20,48 +20,27 @@
 </head>
 
 <body id="page-top">
-	<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
-	            <div class="container">
-	                <a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"style="width: 80px; height: auto;" /></a>
-	                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-	                    Menu
-	                    <i class="fas fa-bars ms-1"></i>
-	                </button>
-	                <div class="collapse navbar-collapse" id="navbarResponsive">
-	                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-							
-							<li th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link" href="/">Administrar</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-							
-							           
-							
-	                    </ul>
-	                </div>
-	            </div>
-	        </nav>
+
+	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
+
+
 	<!-- Portfolio Grid-->
 	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
 			<div class="text-center">
-				<h2 class="section-heading text-uppercase text-white fs-1">Aqui podras ver todos tus pedidos</h2>
-				<h3 class="section-subheading text-white">Presionando"Mas info" podras acceder a la informacion que necesites saber </h3>
+				<h2 th:if="${user.authorities[0].authority != 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">Aqui podras ver todos tus pedidos</h2>
+				<h2 th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">Aqui podras ver todos los pedidos</h2>
+				<h3 class="section-subheading text-white">Presionando "Mas info" podras acceder a la informacion que
+					necesites saber </h3>
 			</div>
 			<div class="lista-card-container">
-			
-				<div th:if="${#lists.isEmpty(lista)}">	
-					<h3 >TODAVIA NO TIENES NINGUN PEDIDO REALIZADO PRESIONA AQUI PARA IR A NUESTRA SECCION DE PRODUCTOS
+
+				<div th:if="${#lists.isEmpty(lista)}">
+					<h3>TODAVIA NO TIENES NINGUN PEDIDO REALIZADO PRESIONA AQUI PARA IR A NUESTRA SECCION DE PRODUCTOS
 						<a class="btn btn-primary btn-xl text-uppercase" href="/producto/lista">comprar</a>
 					</h3>
 				</div>
-				
-				<div th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}">	
-					<h3 >TOCA AQUI PARA VER TODAS LOS PEDIDOS REALIZADOS EN LA TIENDA
-						<a class="btn btn-primary btn-xl text-uppercase" href="/pedido/pedidos">Ver pedidos</a>
-					</h3>
-				</div>
-				
+
 				<!-- Portfolio item 1-->
 				<div th:each="pedido : ${lista}" class="portfolio-item lista-card">
 
@@ -72,15 +51,23 @@
 					<img width="250px" height="250px"
 						th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}">
 					<div>
-						<span th:text="'Cantidad:' + ${pedido.total}"></span>
-						
+						<span th:text="'Total: ' + ${pedido.total}"></span>
+						<span th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" th:text="'Hecho por: ' + ${pedido.user.username}"></span>
 						<div class="mt-3">
 							<a class="boton-compra " th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
 								style="text-decoration: none;">Mas info</a>
 						</div>
-						
+
 					</div>
 
+
+				</div>
+				<div class="d-flex flex-column" th:each="authority : ${user.authorities}"
+					th:if="${btnVer == true}">
+					<h3 class="text-light">TOCA AQUI PARA VER TODAS LOS PEDIDOS REALIZADOS EN LA TIENDA
+
+					</h3>
+					<a class="btn btn-primary btn-xl text-uppercase" href="/pedido/pedidos">Ver pedidos</a>
 				</div>
 			</div>
 

@@ -33,7 +33,7 @@ public class ViewRouteHelper {
 	
 	
 	//Lote
-	public final static String LOTES = "/lote/lista";
+	public final static String LOTES = "lote/lista";
 	public final static String INDI_LOTE = "/lote/individual";
 
 

@@ -6,55 +6,88 @@
 
 /**CSS DEL PEDIDO INDIVIDUAL**/
 
-.individual-pedido{
-	background-color: #373b44;
-		width: 100%;height: 100vh; display: flex;align-items: center;justify-content: center;
+.individual-pedido {
+    background-color: #373b44;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
 .pedido-container {
-	            width: 100%;
-	            height: 100vh;
-	            display: flex;
-	            justify-content: center;
-	            align-items: center;
-	           
-	        }
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-	        .pedido-card {
-	            background: white;
-	            border-radius: 10px;
-	            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	            padding: 20px;
-	            max-width: 600px;
-	            width: 100%;
-	            display: flex;
-	            flex-direction: column;
-	            align-items: center;
-	            gap: 1rem;
-	        }
+.pedido-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
 
-	        .pedido-card img {
-	            border-radius: 10px;
-	            width: 100%;
-	            height: auto;
-	        }
+.pedido-card img {
+    border-radius: 15px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
 
-	        .pedido-info {
-	            text-align: center;
-	            font-size: 1.1rem;
-	            color: #333;
-	        }
+.pedido-info {
+    text-align: left;
+    font-size: 1rem;
+    color: #333;
+    width: 100%;
+}
 
-	        .pedido-info span {
-	            display: block;
-	            margin: 0.5rem 0;
-	        }
+.pedido-info span {
+    display: block;
+    margin: 0.5rem 0;
+}
 
-	        .pedido-header {
-	            font-size: 1.5rem;
-	            font-weight: bold;
-	            margin-bottom: 1rem;
-	        }
+.pedido-header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.back-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.back-icon:hover {
+    color: #61a3e3;
+}
+
+.pedido-info .label {
+    font-weight: bold;
+    color: #555;
+}
+
+.pedido-info .value {
+    color: #000;
+}
+
 /*********************************************************************************************************/
 /**LISTA ODC**/
 

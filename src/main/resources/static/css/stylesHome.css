@@ -1,0 +1,104 @@
+/* Navbar */
+#mainNav {
+    background-color: rgb(61, 66, 75);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+/* Administrar */
+.seccion-administrar {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../assets/img/backgroundPage.png');
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.seccion-administrar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+    z-index: 1;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-agregar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.section-botones {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.administrar-btn {
+    padding: 1rem 5rem;
+    background-color: #161917;
+    flex: 1 1 30rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.administrar-btn:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+	color: aliceblue;
+}
+
+.administar-boton1 {
+    background-color: #fc5956;
+}
+
+.administar-boton2 {
+    background-color: #f8572d;
+}
+
+.administar-boton3 {
+    background-color: rgb(225, 164, 0);
+}
+
+.administar-boton4 {
+    background-color: #ff9934;
+}

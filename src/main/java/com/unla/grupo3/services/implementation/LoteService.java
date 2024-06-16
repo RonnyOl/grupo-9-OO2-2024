@@ -100,8 +100,8 @@ public class LoteService  implements ILoteService {
 			if (ordenSinLote.isPresent()) {
 				//ASIGNA LA PRIMERA DE LA LISTA, COMO EL METODO SE EJECUTA CADA CIERTO TIEMPO, SI EXISTEN MAS SE VAN A IR CREANDO PROGRESIVAMENTE
 				ordenSinLote.get().setTieneLote(true);
-				OrdenDeCompra ordenConLote =ordenSinLote.get();
-				ordenConLote=ordenDeCompraService.agregarOModificarOrdenDeCompra(ordenConLote);
+				OrdenDeCompra ordenConLote = ordenSinLote.get();
+				ordenConLote = ordenDeCompraService.agregarOModificarOrdenDeCompra(ordenConLote);
 			
 				Lote nuevoLote = new Lote(LocalDate.now(),false,ordenConLote);
 
@@ -109,7 +109,6 @@ public class LoteService  implements ILoteService {
 		        eventPublisher.publishEvent(new LoteCreadoEvent(nuevoLote)); //CREA EL NUEVO EVENTO Y ENVIA EL LOTE CREADO JUNTO CON ÉL
 		        creado=true;
 			}
-			
 			
 			return creado;
 		}

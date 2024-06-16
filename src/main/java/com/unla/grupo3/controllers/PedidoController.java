@@ -43,6 +43,7 @@ public class PedidoController {
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
 		modelAndView.addObject("lista", lista);
+		modelAndView.addObject("btnVer", true);
 		return modelAndView;
 	}
 	
@@ -51,6 +52,7 @@ public class PedidoController {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		List<Pedido> lista = pedidoService.traerPedido();
 		modelAndView.addObject("lista", lista);
+		modelAndView.addObject("btnVer", false);
 		return modelAndView;
 	}
 	

@@ -7,46 +7,25 @@
     <title>Pedido</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <link href="/css/stylesPedido.css" rel="stylesheet" />
-	
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark " id="mainNav">
-		            <div class="container">
-		                <a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"style="width: 80px; height: auto;" /></a>
-		                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-		                    Menu
-		                    <i class="fas fa-bars ms-1"></i>
-		                </button>
-		                <div class="collapse navbar-collapse" id="navbarResponsive">
-		                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-								
-								<li th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link" href="/administrar">Administrar</a></li>
-		                        <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
-		                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
-								<li class="nav-item"><a class="nav-link" href="/pedido/pedidosrealizados">Mis pedidos</a></li>
-		                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-								
-								           
-								
-		                    </ul>
-		                </div>
-		            </div>
-		        </nav>
-	
-	
+    <div th:include="/navbar/navbar.html::navbarGeneral"></div>
+
     <div class="individual-pedido pedido-container">
 
         <div class="pedido-card">
+            <a href="/pedido/pedidos"><i class="fas fa-arrow-left back-icon"></i></a>
             <div class="pedido-header">Detalles del Pedido</div>
             <img th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}" alt="Producto">
             <div class="pedido-info">
-                <span th:text="'Producto: ' + ${pedido.producto.nombre}"></span>
-                <span th:text="'Precio individual: $' + ${pedido.producto.precioDeVenta}"></span>
-                <span th:text="'Cantidad comprada: ' + ${pedido.cantidad}"></span>
-                <span th:text="'Total a pagar: $' + ${pedido.total}"></span>
-                <span th:text="'Realizado por el cliente: ' + ${pedido.user.username}"></span>
+                <span><span class="label">Producto:</span> <span class="value" th:text="${pedido.producto.nombre}"></span></span>
+                <span><span class="label">Precio individual:</span> <span class="value" th:text="'$' + ${pedido.producto.precioDeVenta}"></span></span>
+                <span><span class="label">Cantidad comprada:</span> <span class="value" th:text="${pedido.cantidad}"></span></span>
+                <span><span class="label">Total a pagar:</span> <span class="value" th:text="'$' + ${pedido.total}"></span></span>
+                <span><span class="label">Realizado por el cliente:</span> <span class="value" th:text="${pedido.user.username}"></span></span>
             </div>
         </div>
 

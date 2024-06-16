@@ -6,40 +6,73 @@
 
 /**CSS DEL PRODUCTO INDIVIDUAL**/
 .individual-body {
-	background-color: #373b44;
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	align-items: center;
+    background-color: #373b44;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
 }
+
 .individual-image {
-	width: 30%;
-	height: 60%;
-	margin-left:5rem;
-	background-color:rgb(128, 128, 128) ;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 50%;
+    width: 30%;
+    height: 60%;
+    margin-left: 2rem;
+    background-color: rgb(128, 128, 128);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
 }
 
 .individual-info {
-	width: 35%;
-	height: 65%; 
-	background-color:#fcffd9;
-	margin:0 15rem;
-	display:flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
+    width: 35%;
+    height: 65%;
+    background-color: #fcffd9;
+    margin: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
-.individual-info-title{
-	display: flex;flex-direction: column;justify-content: center;align-items: center;margin-top: 5rem;text-align: center;gap: 2rem;
+.back-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.individual-info-precio{
-	margin-bottom: 5rem;display: flex;flex-direction: column;justify-content: center; align-items: center;
+.back-icon:hover {
+    color: #61a3e3;
+}
+
+.individual-info-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    text-align: center;
+    gap: 2rem;
+}
+
+.individual-info-precio {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .input-quantity {
@@ -60,7 +93,7 @@
     box-shadow: 0 0 5px rgba(97, 163, 227, 0.5);
 }
 
-.input-quantity::-webkit-inner-spin-button, 
+.input-quantity::-webkit-inner-spin-button,
 .input-quantity::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -71,25 +104,32 @@
 }
 
 .individual-image img {
-	border: 5px inset #000;
-	border-radius: 50%;
-	
+    border: 5px inset #000;
+    border-radius: 50%;
 }
-
 
 .individual-nombre {
-	font-size: 4rem;
+    font-size: 3rem;
 }
 
-.individual-precio{
-	font-size: 2rem;
+.individual-precio {
+    font-size: 2rem;
 }
 
-.boton-compra{
-	padding: 0.5rem 5rem;
-	background-color: #161917;
-	color: white;
+.boton-compra {
+    padding: 0.5rem 5rem;
+    background-color: #161917;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.boton-compra:hover {
+    background-color: #333;
+}
+
 /*********************************************************************************************************/
 /**Administrar Producto**/
 .administrar-seccion{

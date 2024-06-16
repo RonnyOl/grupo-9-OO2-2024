@@ -6,28 +6,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+	<link href="/css/stylesLote.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/85cce2a6a8.js" crossorigin="anonymous"></script>
 </head>
 
-<body style="margin:0;padding: 0;">
+<body>
+	
+	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
+	
+	<div class="lote-individual-body">
 
-	<div class="individual-body" style="width: 100vw;height: 100vh; display: flex;align-items: center;">
-
-		<div class="formulario-administrar individual-info d-flex flex-column border p-3">
-			
-			<h2 class="text-center">Detalles del Lote</h2>
-
-<!--PENDIENTE AGREGAR LAS FECHAS  -->
-				<strong>Aceptado:</strong>
-				<span th:text="${lote.aceptado} ? 'Si' : 'No'"></span>
-				
-				<strong>Orden de Compra:</strong>
-				<div><strong>Cantidad:</strong> <span th:text="${lote.ordenDeCompra.cantidadAComprar}"></span></div>
-				<div><strong>Producto:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.nombre}"></span></div>
-				<div><strong>Costo:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.costo}"></span></div>
-
-				<div><strong>Usuario:</strong> <span th:text="${lote.ordenDeCompra.user.username}"></span></div>
-			
+		<div class="lote-individual-info d-flex flex-column border p-3">
+		    <div class="icon-container">
+		        <a href="/lote/lista">
+		            <i class="fa-solid fa-arrow-left"></i>
+		        </a>
+		    </div>
+		    <!-- Resto del contenido -->
+		    <div class="lote-individual-info-lote">
+		        <h1 class="text-center">Detalles del Lote</h1>
+		        <strong>Aceptado:</strong>
+		        <span th:text="${lote.aceptado} ? 'Si' : 'No'"></span>
+		        <p><strong>Fecha de recepcion:</strong> <span th:text="${lote.fechaRecepcion}"></span></p>
+		    </div>
+		    <div class="lote-individual-info-orden">
+		        <h2>Orden de Compra</h2>
+		        <p><strong>Cantidad:</strong> <span th:text="${lote.ordenDeCompra.cantidadAComprar}"></span></p>
+		        <p><strong>Producto:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.nombre}"></span></p>
+		        <p><strong>Costo:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.costo}"></span></p>
+		        <p><strong>Fecha de la orden:</strong> <span th:text="${lote.ordenDeCompra.fechaEmision}"></span></p>
+		        <p><strong>Usuario:</strong> <span th:text="${lote.ordenDeCompra.user.username}"></span></p>
+		    </div>
 		</div>
 	</div>
 
