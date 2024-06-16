@@ -9,7 +9,7 @@ public interface IProductoService {
 	
 	
 	//AGREGAR O MODIFICAR PRODUCTO
-	public boolean agregarOModificarProducto(Producto producto);
+	public Producto agregarOModificarProducto(Producto producto);
 		
 		//ELIMINAR PRODUCTO
 		

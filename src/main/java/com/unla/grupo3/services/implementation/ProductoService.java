@@ -24,9 +24,9 @@ public class ProductoService implements IProductoService {
 	
 	//AGREGAR O MODIFICAR PRODUCTO
 	
-	public boolean agregarOModificarProducto(Producto producto) {
-		productoRepository.save(producto);
-		return true;
+	public Producto agregarOModificarProducto(Producto producto) {
+		return productoRepository.save(producto);
+		
 	}
 	
 	//ELIMINAR PRODUCTO

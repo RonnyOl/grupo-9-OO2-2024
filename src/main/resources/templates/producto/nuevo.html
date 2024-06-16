@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Orden de Compra</title>
+	<title>Crear producto</title>
 	<link href="/css/styles.css" rel="stylesheet" />
 	<link href="/css/stylesProduct.css" rel="stylesheet" />
 </head>
@@ -14,7 +14,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
 		<div class="container">
-			<a class="navbar-brand" href="#page-top"><img src="/assets/img/logoPagina.png" alt="..."
+			<a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"
 					style="width: 80px; height: auto;" /></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,11 +24,13 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 
-					<li th:if="${userrole == 'ROLE_ADMIN'}" class="nav-item"><a class="nav-link"
-							href="/">Administrar</a></li>
+					<li th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}"
+						class="nav-item"><a class="nav-link" href="/">Administrar</a></li>
 					<li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
 					<li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
 					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+
+
 
 				</ul>
 			</div>
@@ -38,36 +40,47 @@
 	<div class="individual-body"
 		style="width: 100vw;height: 100vh; display: flex;align-items: center;justify-content: center;">
 		<div style="color: aliceblue;display: flex;flex-direction: column;gap:3rem;">
-	
-		<h3>Formulario para generar una nueva orden de compra:</h3>	
-		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/ordendecompra/crear}"
-			th:object="${orden}" method="post">
-				
-	
-				<input  type="number" th:field="*{idOrdenDeCompra}" />
-				<input  type="hidden" th:field="*{stock.idStock}" />
-				<input  type="hidden" th:field="*{stock.cantidadActual}" />
-				<input  type="hidden" th:field="*{stock.puntoMinimoDeStock}" />
-				<input  type="hidden" th:field="*{stock.reabastecer}" />
-				Producto a comprar: <input type="text" th:field="*{stock.producto.nombre} " />
-			</p>
-			<p>
-				Cantidad a comprar: <input type="number" th:field="*{cantidadAComprar}" />
-			</p>
 
-			<p>
-				    Proveedor:
-				    <select th:field="${orden.proveedor}">
-				        <option value="" disabled selected>Seleccione un proveedor</option>
-				        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}" th:text="${proveedor.nombreEmpresa}">
-				        </option>
-				    </select>
+			<h3>Formulario para generar un nuevo producto:</h3>
+			<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/producto/crear}"
+				th:object="${nuevoProducto}" method="post">
+
+				<p>
+
+					<input type="hidden" th:field="${nuevoProducto.idProducto}" />
+				</p>
+
+				<p>
+					Nombre del producto:
+					<input type="text" th:field="*{nombre}" />
+				</p>
+				<p>
+					Costo del producto
+					<input type="number" th:field="*{costo}" />
+				</p>
+				<p>
+					Precio de venta del producto
+					<input type="number" th:field="*{precioDeVenta}" />
+				</p>
+				<p>
+					Descripción del producto:
+					<input type="text" th:field="*{descripcion}" />
+				</p>
+				<p>
+
+					<input type="hidden" th:field="*{habilitado}" th:value="false" />
+				</p>
+	
+
+				<p>
+					Punto mínimo de stock:
+					<input type="number" name="puntoMinimo" />
 				</p>
 
 
-			<input type="submit" value="Generar Orden de Compra" />
-		</form>
-		
+				<input type="submit" value="Generar nuevo producto" />
+			</form>
+
 
 </body>
 

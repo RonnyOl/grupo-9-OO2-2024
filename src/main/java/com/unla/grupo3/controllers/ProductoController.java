@@ -3,16 +3,20 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sound.midi.Soundbank;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo3.entities.Producto;
+import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IProductoService;
 import com.unla.grupo3.services.implementation.ProductoService;
@@ -54,16 +58,26 @@ public class ProductoController {
 	public ModelAndView nuevoProducto() {
 		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_PRODUCTO);
-		modelAndView.addObject("nuevo", new Producto());
+		modelAndView.addObject("nuevoProducto", new Producto());
 		
 		return modelAndView;
 	}
 	
 	@PostMapping("/crear")
-	public RedirectView create(@ModelAttribute("producto")Producto producto) {
-		productService.agregarOModificarProducto(producto);
+	public RedirectView create(@ModelAttribute("nuevoProducto")Producto producto,@RequestParam("puntoMinimo") int puntoMinimo) {
+		System.out.println(producto.getNombre());
+		System.out.println(puntoMinimo+"<----------");
+		/*int puntoMinimo = producto.getStock().getPuntoMinimoDeStock();
+		System.out.println("--->"+producto.getIdProducto());
+		System.out.println(puntoMinimo);*/
+		producto.setStock(new Stock(puntoMinimo,0,true,producto));
+		
+		producto = productService.agregarOModificarProducto(producto);
+		System.out.println("---............>"+producto.getIdProducto());
+		
 		return new RedirectView(ViewRouteHelper.RUTA_PRODUCTS);
 	}
+	
 
 	@GetMapping("/administrar/{id}")
 	public ModelAndView administrarProducto(@PathVariable("id") int id) {

@@ -38,7 +38,7 @@ public class ViewRouteHelper {
 
 	public final static String ROUTE_INDI_ODC = "/ordendecompra";
 	
-	public final static String RUTA_PRODUCTS = "/lista";
+	public final static String RUTA_PRODUCTS = "lista";
 	
 	public final static String ROUTE_LOTE = "/lote";
 	
