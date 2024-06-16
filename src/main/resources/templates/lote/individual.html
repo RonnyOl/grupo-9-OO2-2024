@@ -17,16 +17,16 @@
 			
 			<h2 class="text-center">Detalles del Lote</h2>
 
-				<strong>Fecha de Recepción:</strong>
-				<span th:text="${#dates.format(lote.fechaRecepcion, 'dd/MM/yyyy')}"></span>
-				
+<!--PENDIENTE AGREGAR LAS FECHAS  -->
 				<strong>Aceptado:</strong>
 				<span th:text="${lote.aceptado} ? 'Si' : 'No'"></span>
 				
 				<strong>Orden de Compra:</strong>
-				<div><strong>Fecha de Emisión:</strong> <span th:text="${#dates.format(lote.ordenDeCompra.fechaEmision, 'dd/MM/yyyy')}"></span>
-				<div><strong>Cantidad:</strong> <span th:text="${lote.ordenDeCompra.cantidad}"></span></div>
-				<div><strong>Usuario:</strong> <span th:text="${lote.ordenDeCompra.usuario.nombreUsuario}"></span></div>
+				<div><strong>Cantidad:</strong> <span th:text="${lote.ordenDeCompra.cantidadAComprar}"></span></div>
+				<div><strong>Producto:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.nombre}"></span></div>
+				<div><strong>Costo:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.costo}"></span></div>
+
+				<div><strong>Usuario:</strong> <span th:text="${lote.ordenDeCompra.user.username}"></span></div>
 			
 		</div>
 	</div>

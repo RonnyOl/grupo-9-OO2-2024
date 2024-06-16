@@ -29,12 +29,13 @@ public interface ILoteService {
 	///ID
 	
 	public Optional<Lote> traerLote(int id);
-
 	
+	//VERIFICA Y CREA UN LOTE DEPENDIENDO DE SI LA LISTA DE ORDENES DE COMPRA NO VIENE VACIA
+	public boolean verificarYCrearLote() ;
 	
 	//ACEPTAR O NO LOTE
 	
-		public boolean cambiarEstadoDeLote(Optional<Lote> l,boolean aceptado);
+	public boolean cambiarEstadoDeLote(Optional<Lote> l,boolean aceptado);
 	
 	
 }

@@ -3,6 +3,7 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,17 +14,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo3.entities.Lote;
+import com.unla.grupo3.events.LoteCreadoEvent;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.ILoteService;
 
 
 @Controller
-@RequestMapping("/Lote")
+@RequestMapping("/lote")
 
 public class LoteController {
 	
 
 	private ILoteService loteService;
+	
+
+	public LoteController(ILoteService loteService) {
+		this.loteService = loteService;
+	}
 
 	@GetMapping("/lista")
 	public ModelAndView Lotes() {								
@@ -37,9 +44,9 @@ public class LoteController {
 	public ModelAndView individual(@PathVariable("id") int id) {	
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_LOTE);
 
-		
+		System.out.println(id);
 		Optional<Lote> objeto = loteService.traerLote(id);
-		modelAndView.addObject("producto", objeto.get());
+		modelAndView.addObject("lote", objeto.get());
 		return modelAndView;
 	}
 	
@@ -59,12 +66,16 @@ public class LoteController {
 		if (l.isPresent()) {
 			loteService.agregarOModificarLote(lote);
 		}
-		
-		
 		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual" + "/"+ l.get().getIdLote());
 	}
 	
-		
+	//Este metodo no tiene una ruta directa de acceso, sino que se va a ejecutar cuando se cree el evento que dispara la generacion de un nuevo lote
+	//Y que provoca que se envie  a una nueva vista para ver el nuevo lote creado y aceptar o no el nuevo lote que se creó
+	@EventListener(LoteCreadoEvent.class) 
+	public ModelAndView mostrarNuevoLote(LoteCreadoEvent event) {
+		Lote loteRecibido = event.getLoteCreado();
+		return this.individual(loteRecibido.getIdLote());
+	}
 	
 	
 }

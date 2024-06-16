@@ -36,11 +36,11 @@ public interface IOrdenDeCompraService {
 	 //PROBABLEMENTE NO SE USE
 	public List<OrdenDeCompra> traerOrdenDeCompra(User user, Stock stock);
 	
-	//TRAER LISTA DE PRODUCTOS CON SU STOCK 
+	//TRAER LISTA DE ORDEN DE COMPRA 
 	public List<OrdenDeCompra> traerOrdenDeCompra();
 	
-	
-	
+	//TRAER LISTA DE ORDENES DE COMPRA CON EL ATRIBUTO tieneLote en false
+	public Optional<OrdenDeCompra> traerOrdenDeCompraSinLote();
 
 
 }

@@ -5,10 +5,16 @@ package com.unla.grupo3.services.implementation;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.Lote;
+import com.unla.grupo3.entities.OrdenDeCompra;
+import com.unla.grupo3.events.LoteCreadoEvent;
 import com.unla.grupo3.repositories.ILoteRepositoy;
+import com.unla.grupo3.repositories.IOrdenDeCompraRepository;
 import com.unla.grupo3.services.ILoteService;
+import com.unla.grupo3.services.IOrdenDeCompraService;
 
 
 
@@ -16,13 +22,15 @@ import com.unla.grupo3.services.ILoteService;
 public class LoteService  implements ILoteService {
 	
 	
-	private ILoteRepositoy loteRepositoy;
-
+	private ILoteRepositoy loteRepository;
+	private IOrdenDeCompraService ordenDeCompraService;
+    private ApplicationEventPublisher eventPublisher; //PERMITE GENERAR UN NUEVO EVENTO CUANDO SE CREA UN LOTE 
 	
-	
 
-	public LoteService(ILoteRepositoy loteRepository) {
-		this.loteRepositoy = loteRepository;
+	public LoteService(ILoteRepositoy loteRepository,IOrdenDeCompraService ordenDeCompraService,ApplicationEventPublisher eventPublisher) {
+		this.loteRepository = loteRepository;
+		this.ordenDeCompraService=ordenDeCompraService;
+		this.eventPublisher=eventPublisher;
 	}
 	
 	
@@ -30,7 +38,7 @@ public class LoteService  implements ILoteService {
 	
 		public Lote agregarOModificarLote(Lote lote) {
 			
-			return this.loteRepositoy.save(lote);
+			return this.loteRepository.save(lote);
 		}
 		
 		//ELIMINAR ORDEN DE COMPORA
@@ -39,11 +47,11 @@ public class LoteService  implements ILoteService {
 			
 			boolean borrado = false;
 			
-			Optional<Lote> lote = this.loteRepositoy.findByIdLote(id);
+			Optional<Lote> lote = this.loteRepository.findById(id);
 			
 			if(lote.isPresent()) {
 				
-				this.loteRepositoy.delete(lote.get());	
+				this.loteRepository.delete(lote.get());	
 				
 				borrado = true;
 			}
@@ -53,7 +61,7 @@ public class LoteService  implements ILoteService {
 		
 		///TODOS
 		public List<Lote> traerLote(){
-		return this.loteRepositoy.findAll();
+		return this.loteRepository.findAll();
 		}
 
 		///FECHA
@@ -67,7 +75,8 @@ public class LoteService  implements ILoteService {
 		
 		public Optional<Lote> traerLote(int id){
 			
-			return this.traerLote(id);
+			
+			return loteRepository.findById(id);
 		}
 		
 		
@@ -82,6 +91,30 @@ public class LoteService  implements ILoteService {
 			}
 			return false;
 		}
+
+		//VERIFICA Y CREA UN LOTE DEPENDIENDO DE SI LA LISTA DE ORDENES DE COMPRA NO VIENE VACIA
+		public boolean verificarYCrearLote() {
+			boolean creado=false;
+			Optional<OrdenDeCompra> ordenSinLote = ordenDeCompraService.traerOrdenDeCompraSinLote();
+			
+			if (ordenSinLote.isPresent()) {
+				//ASIGNA LA PRIMERA DE LA LISTA, COMO EL METODO SE EJECUTA CADA CIERTO TIEMPO, SI EXISTEN MAS SE VAN A IR CREANDO PROGRESIVAMENTE
+				ordenSinLote.get().setTieneLote(true);
+				OrdenDeCompra ordenConLote =ordenSinLote.get();
+				ordenConLote=ordenDeCompraService.agregarOModificarOrdenDeCompra(ordenConLote);
+			
+				Lote nuevoLote = new Lote(LocalDate.now(),false,ordenConLote);
+
+				nuevoLote=this.agregarOModificarLote(nuevoLote);
+		        eventPublisher.publishEvent(new LoteCreadoEvent(nuevoLote)); //CREA EL NUEVO EVENTO Y ENVIA EL LOTE CREADO JUNTO CON ÉL
+		        creado=true;
+			}
+			
+			
+			return creado;
+		}
+
+	
 	
 	
 	

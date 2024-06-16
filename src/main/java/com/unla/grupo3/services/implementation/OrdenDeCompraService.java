@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
-import com.unla.grupo3.repositories.IOrdenDeCompraRepositoy;
+import com.unla.grupo3.repositories.IOrdenDeCompraRepository;
 import com.unla.grupo3.services.IOrdenDeCompraService;
 
 
 @Service("ordenDeCompraService")
 public class OrdenDeCompraService  implements IOrdenDeCompraService {
 
-	private IOrdenDeCompraRepositoy OrdenDeCompraRepository;
+	private IOrdenDeCompraRepository OrdenDeCompraRepository;
 
-	public OrdenDeCompraService(IOrdenDeCompraRepositoy OrdenDeCompraRepository) {
+	public OrdenDeCompraService(IOrdenDeCompraRepository OrdenDeCompraRepository) {
 		this.OrdenDeCompraRepository = OrdenDeCompraRepository;
 	}
 	
@@ -68,10 +68,18 @@ public class OrdenDeCompraService  implements IOrdenDeCompraService {
 		return OrdenDeCompraRepository.findByUserAndStock(user,stock);	
 	}
 	
-	//TRAER LISTA DE PRODUCTOS CON SU STOCK 
+	//TRAER LISTA DE ORDEN DE COMPRA  
 	public List<OrdenDeCompra> traerOrdenDeCompra(){
 		return OrdenDeCompraRepository.findAll();
 	}
+	
+	//TRAER UNA ORDEN DE COMPRA CON EL ATRIBUTO tieneLote en false
+	
+	public Optional<OrdenDeCompra> traerOrdenDeCompraSinLote(){
+		return OrdenDeCompraRepository.findByTieneLote();
+	}
+	
+	
 	
 	
 

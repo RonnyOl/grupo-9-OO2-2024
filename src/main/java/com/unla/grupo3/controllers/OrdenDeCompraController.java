@@ -126,13 +126,12 @@ public class OrdenDeCompraController {
     	
     	Optional<Proveedor> nuevo = proveedorService.traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
     	User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
-    	System.out.println(ordenDeCompra.getCantidadAComprar());
     	if (nuevo.isPresent() && userDetails.isAccountNonExpired()) {
     		ordenDeCompra.setProveedor(nuevo.get());
     		ordenDeCompra.setUser(user);
     		ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
     	}
-    	System.out.println(ordenDeCompra.getCantidadAComprar());
+
 
         return new RedirectView(ViewRouteHelper.ROUTE_INDI_ODC+"/individual/"+ordenDeCompra.getIdOrdenDeCompra()); 
     }
