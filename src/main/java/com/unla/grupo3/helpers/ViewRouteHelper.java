@@ -46,7 +46,7 @@ public class ViewRouteHelper {
 	
 	public final static String RUTA_PRODUCTS = "lista";
 	
-	public final static String ROUTE_LOTE = "/lista";
+	public final static String ROUTE_LOTE = "/lote";
 	
 	public final static String ROUTE_ORDERS = "/pedido/pedidosrealizados";
 

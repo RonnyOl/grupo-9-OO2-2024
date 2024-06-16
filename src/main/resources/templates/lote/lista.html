@@ -28,6 +28,8 @@
 	<!-- Portfolio Grid-->
 	<section class="page-section seccion-entera-lista-lote" id="productos">
 
+		<span th:text="${test}"></span>
+
 
 		<div class="seccion-entera-title">
 			<div class="text-center">
@@ -43,22 +45,27 @@
 				<div th:each="lote : ${lista}" class="portfolio-item lista-card">
 
 					<div>
-						
+
 						<div th:text="${lote.idLote}" class="portfolio-caption-heading fs-3"></div>
 						<img width="250px" height="250px"
-												th:src="@{'/assets/img/productos/' + ${lote.ordenDeCompra.stock.producto.idProducto} + '.jpg'}">
+							th:src="@{'/assets/img/productos/' + ${lote.ordenDeCompra.stock.producto.idProducto} + '.jpg'}">
 						<div th:text="${lote.fechaRecepcion}" class="portfolio-caption-heading fs-3"></div>
-						
+
 						<div th:text="${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
 					</div>
+
+					<a class="boton-verlote" th:href="@{/lote/individual/{id}(id=${lote.idLote})}"
+						style="text-decoration: none;">Ver</a>
 					
-						<a class="boton-verlote" th:href="@{/lote/individual/{id}(id=${lote.idLote})}"
-							style="text-decoration: none;">Ver</a>
-
-					</div>
-
+					<form action="#" th:action="@{/lote/aceptacion/{id}(id=${lote.idLote})}" method="post">
+					<button th:if="${lote.aceptado == false}" class="btn btn-success"
+						style="text-decoration: none;">Aceptar lote</button>
+					</button>
+					</form>
 				</div>
+
 			</div>
+		</div>
 
 		</div>
 	</section>

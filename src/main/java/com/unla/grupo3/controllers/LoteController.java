@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo3.entities.Lote;
-import com.unla.grupo3.events.LoteCreadoEvent;
+
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.ILoteService;
 
@@ -54,8 +54,9 @@ public class LoteController {
 	public RedirectView cambiarEstadoDeLote(@PathVariable("id") int id) {
 		
 		Optional<Lote> objeto = loteService.traerLote(id);
-		loteService.cambiarEstadoDeLote(objeto, !objeto.get().isAceptado());
-		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual" + "/"+ id);
+		System.out.println(id +"<-------------");
+		loteService.cambiarEstadoDeLote(objeto, true);
+		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual/"+ id);
 	}
 	
 	
@@ -69,14 +70,5 @@ public class LoteController {
 		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual" + "/"+ l.get().getIdLote());
 	}
 	
-	//Este metodo no tiene una ruta directa de acceso, sino que se va a ejecutar cuando se cree el evento que dispara la generacion de un nuevo lote
-	//Y que provoca que se envie  a una nueva vista para ver el nuevo lote creado y aceptar o no el nuevo lote que se creó
-	@EventListener(LoteCreadoEvent.class) 
-	public ModelAndView mostrarNuevoLote(LoteCreadoEvent event) {
-		
-		Lote loteRecibido = event.getLoteCreado();
-		List<Lote> lotesSinAceptar = loteService.findAllByAceptadoFalse();
-		return this.individual(lotesSinAceptar.size());
-	}
-
+	
 }
