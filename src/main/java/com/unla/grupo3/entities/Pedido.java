@@ -33,7 +33,7 @@ public class Pedido {
 	private User user;
 	
 	@Column(name="total",nullable=false)
-	private int total;
+	private float total;
 	
 	@Column(name="cantidad",nullable=false)
 	private int cantidad;
@@ -43,11 +43,10 @@ public class Pedido {
 	 private Producto producto;
 
 
-	public Pedido(LocalDateTime createdAt, User user, int total, int cantidad, Producto producto) {
+	public Pedido(User user, int cantidad, Producto producto) {
 		super();
-		this.createdAt = createdAt;
 		this.user = user;
-		this.total = total;
+		this.setTotal(this.calcularTotal());
 		this.cantidad = cantidad;
 		this.producto = producto;
 	}

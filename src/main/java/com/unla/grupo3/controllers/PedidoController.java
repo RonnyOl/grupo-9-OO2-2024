@@ -3,6 +3,8 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,9 +17,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo3.entities.Pedido;
 import com.unla.grupo3.entities.Producto;
+import com.unla.grupo3.entities.User;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IPedidoService;
 import com.unla.grupo3.services.IProductoService;
+import com.unla.grupo3.services.implementation.UserService;
 
 @Controller
 @RequestMapping("/pedido")
@@ -25,10 +29,12 @@ public class PedidoController {
 
 	private IPedidoService pedidoService;
 	private IProductoService productoService;
+	private UserService userService;
 	
-	public PedidoController(IPedidoService pedidoService, IProductoService productoService) {
+	public PedidoController(IPedidoService pedidoService, IProductoService productoService, UserService userService) {
 		this.pedidoService = pedidoService;
 		this.productoService=productoService;
+		this.userService=userService;
 	}
 
 	@GetMapping("/pedidosRealizados")
@@ -69,12 +75,19 @@ public class PedidoController {
 		return modelAndView;
 	}
 	
-	@PostMapping("/venta")
- 	public RedirectView nuevoPedido(@ModelAttribute("pedido") Pedido pedido) {
+	@PostMapping("/venta/{idProducto}")
+ 	public RedirectView nuevoPedido(@PathVariable("idProducto") int idProducto, @RequestParam int cantidadAComprar, @AuthenticationPrincipal UserDetails userDetails) {
 		
+		Optional<Producto> producto =productoService.traerProducto(idProducto);
+		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		
+		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
+			
+			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
+			
+		}
 		
-		return new RedirectView ();//DEBE REDIRECCIONAR A UNA LISTA QUE MUESTRE LOS PEDIDOS HECHOS POR ESTE USUARIO
+		return new RedirectView (ViewRouteHelper.ROUTE_ORDERS);//DEBE REDIRECCIONAR A UNA LISTA QUE MUESTRE LOS PEDIDOS HECHOS POR ESTE USUARIO
 	}
 
 	

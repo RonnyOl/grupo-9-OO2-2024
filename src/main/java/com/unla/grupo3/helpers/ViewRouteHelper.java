@@ -42,6 +42,10 @@ public class ViewRouteHelper {
 	
 	public final static String ROUTE_LOTE = "/lote";
 	
+	public final static String ROUTE_ORDERS = "/pedidosRealizados";
+
+
+	
 	//Lote
 	
 	public final static String LOTE = "/Lote/";
