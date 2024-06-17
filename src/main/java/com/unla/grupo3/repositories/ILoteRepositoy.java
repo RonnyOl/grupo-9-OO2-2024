@@ -13,6 +13,7 @@ import com.unla.grupo3.entities.Lote;
 
 
 
+//Interfaz de LoteRepository
 
 @Repository("loteRepository")
 public interface ILoteRepositoy extends JpaRepository<Lote, Serializable> {

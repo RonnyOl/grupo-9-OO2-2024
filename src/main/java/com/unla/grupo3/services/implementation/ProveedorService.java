@@ -9,22 +9,26 @@ import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.repositories.IProveedorRepository;
 import com.unla.grupo3.services.IProveedorService;
 
+
+//Implementacion de la Interfaz ProveedorService
 @Service("proveedorService")
 public class ProveedorService implements IProveedorService {
 	
+	//Vincula el Repositorio
 	private IProveedorRepository proveedorRepository;
 	
+	//
 	public ProveedorService(IProveedorRepository proveedorRepository) {
 		this.proveedorRepository = proveedorRepository;
 	}
 	
-	// toma un proveedor y lo agrega 
+	//Agrega o Modifica un Proveedor
 	public Proveedor agregarModificarProveedor(Proveedor proveedor) {
 		return proveedorRepository.save(proveedor);
 		
 	}
 	
-	//Busca y elimina a un proveedor por id
+	//Elimina un Proveedor
 	public boolean eliminarProveedor(int id) {
 		Optional<Proveedor> p=proveedorRepository.findById(id);
 		if(p.isPresent()) {
@@ -34,22 +38,22 @@ public class ProveedorService implements IProveedorService {
 		return false;
 	}
 	
-	//trae un proveedor por id
+	//Trae un Proveedor por id
 	public Optional<Proveedor> traerProveedor(int id) {
 		return proveedorRepository.findById(id);
 	}
 	
-	//Trae por nombre empresa
+	//Trae un Proveedor por nombreEmpresa
 	public Optional<Proveedor> traerProveedor(String nombreEmpresa){
 		return proveedorRepository.findByNombreEmpresa(nombreEmpresa);
 	}
 	
-	//Trae por nombre empresa y cuil
+	//Trae un Proveedor por nombreEmpresa y Cuil
 	public Optional<Proveedor> traerProveedor(String nombreEmpresa, String cuil){
 		return proveedorRepository.findByNombreEmpresaAndCuil(nombreEmpresa, cuil);
 	}
 	
-	//trae todos los proveedores
+	//Trae Lista de Proveedores
 	public List<Proveedor> traerProveedores(){
 		return proveedorRepository.findAll();
 	}

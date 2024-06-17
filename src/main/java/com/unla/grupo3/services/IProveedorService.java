@@ -5,25 +5,27 @@ import java.util.Optional;
 
 import com.unla.grupo3.entities.Proveedor;
 
-
+//Interfaz a implementar de ProveedorService
 public interface IProveedorService {
 	
-	// toma un proveedor y lo agrega 
+	
+		
+		//Agrega o Modifica un Proveedor
 		public Proveedor agregarModificarProveedor(Proveedor proveedor);
 		
-		//Busca y elimina a un proveedor por id
+		//Elimina un Proveedor
 		public boolean eliminarProveedor(int id);
 		
-		//trae un proveedor por id
+		//Trae un Proveedor por id
 		public Optional<Proveedor> traerProveedor(int id);
 		
-		//Trae por nombre empresa
+		//Trae un Proveedor por nombreEmpresa
 		public Optional<Proveedor> traerProveedor(String nombreEmpresa);
 		
-		//Trae por nombre empresa y cuil
+		//Trae un Proveedor por nombreEmpresa y Cuil
 		public Optional<Proveedor> traerProveedor(String nombreEmpresa, String cuil);
 		
-		//trae todos los proveedores
+		//Trae Lista de Proveedores
 		public List<Proveedor> traerProveedores();
 		
 		

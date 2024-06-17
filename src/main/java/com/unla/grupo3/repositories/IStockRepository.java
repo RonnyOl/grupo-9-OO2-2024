@@ -11,12 +11,15 @@ import org.springframework.stereotype.Repository;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 
+
+//Interfaz de StockRepository
 @Repository("stockRepository")
 public interface IStockRepository extends JpaRepository<Stock, Serializable> {
 
-	
+	//Devuelve un Stock filtrado por su Producto
 	public abstract Optional<Stock> findByProducto (Producto producto);
 	
+	//Devuelve un Stock donde su atributo reabastecer = true
 	@Query("SELECT s FROM Stock s  WHERE s.reabastecer = true")
 	public abstract Optional<Stock> findByReabastecerTrue();
 }

@@ -13,7 +13,7 @@ import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
 
-
+//Interfaz de OrdenDeCompraRepository
 @Repository("ordenDeCompraRepository")
 public interface IOrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, Serializable> {
 
@@ -38,7 +38,3 @@ public interface IOrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, S
 	
 }
 
-
-//-- REPOSITORIO Y SERVICIO DE ODC --
-//TRAER TODAS LAS ORDENES DE COMPRA (PARA VISTA DE ADMIN)
-//FILTRAR POR LAS CREADAS POR UN ADMIN (USER!=NULL)  Y LAS CREADAS POR STOCK (USER==NULL)
