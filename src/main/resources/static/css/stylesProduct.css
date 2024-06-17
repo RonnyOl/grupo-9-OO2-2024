@@ -16,38 +16,42 @@
     box-sizing: border-box;
 }
 
+.individual-container-info{
+	background-color: #fff;
+	display: flex;
+	padding: 2rem;
+	border-radius: 3rem;
+	justify-content: center;
+	align-items: center;
+}
+
 .individual-image {
-    width: 30%;
-    height: 60%;
-    margin-left: 2rem;
-    background-color: rgb(128, 128, 128);
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
 }
 
+
+
 .individual-info {
-    width: 35%;
-    height: 65%;
-    background-color: #fcffd9;
-    margin: 0 2rem;
+    width: 50%;
+    background-color: rgb(250, 255, 185);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     position: relative;
-    border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    padding: 2rem;
-    box-sizing: border-box;
+    padding: 3rem;
+	margin-left: 1rem;
 }
 
 .back-icon {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1.5rem;
+    font-size: 3rem;
     color: #333;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -64,15 +68,14 @@
     align-items: center;
     margin-top: 2rem;
     text-align: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .individual-info-precio {
-    margin-bottom: 2rem;
+	margin-top: 2rem;	
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 .input-quantity {
@@ -106,6 +109,29 @@
 .individual-image img {
     border: 5px inset #000;
     border-radius: 50%;
+	box-shadow: 0rem 0rem 1rem #161917;
+ 
+}
+
+.individual-image img:hover{
+	animation: scaleAnimation 3s ease-in alternate;
+}
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1., 0.7);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.individual-image img:hover {
+    transform: scale(1,0.7);
+	transition: 1s;
 }
 
 .individual-nombre {
@@ -114,6 +140,7 @@
 
 .individual-precio {
     font-size: 2rem;
+	text-align: center;
 }
 
 .boton-compra {

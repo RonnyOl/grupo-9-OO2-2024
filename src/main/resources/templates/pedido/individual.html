@@ -18,19 +18,37 @@
 
         <div class="pedido-card">
             <a href="/pedido/pedidos"><i class="fas fa-arrow-left back-icon"></i></a>
-            <div class="pedido-header">Detalles del Pedido</div>
-            <img th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}" alt="Producto">
-            <div class="pedido-info">
-                <span><span class="label">Producto:</span> <span class="value" th:text="${pedido.producto.nombre}"></span></span>
-                <span><span class="label">Precio individual:</span> <span class="value" th:text="'$' + ${pedido.producto.precioDeVenta}"></span></span>
-                <span><span class="label">Cantidad comprada:</span> <span class="value" th:text="${pedido.cantidad}"></span></span>
-                <span><span class="label">Total a pagar:</span> <span class="value" th:text="'$' + ${pedido.total}"></span></span>
-                <span><span class="label">Realizado por el cliente:</span> <span class="value" th:text="${pedido.user.username}"></span></span>
-            </div>
+         	<div class="pedido-card-image">
+            <img class="text-center" th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}" width="700px" alt="Producto">
+			</div>
+			<div class="pedido-info">
+			    <div class="pedido-header">Detalles del Pedido</div>
+			    <div class="pedido-detail">
+			        <span class="label">Producto:</span>
+			        <span class="value" th:text="${pedido.producto.nombre}"></span>
+			    </div>
+			    <div class="pedido-detail">
+			        <span class="label">Precio individual:</span>
+			        <span class="value" th:text="'$' + ${pedido.producto.precioDeVenta}"></span>
+			    </div>
+			    <div class="pedido-detail">
+			        <span class="label">Cantidad comprada:</span>
+			        <span class="value" th:text="${pedido.cantidad}"></span>
+			    </div>
+			    <div class="pedido-detail">
+			        <span class="label">Total a pagar:</span>
+			        <span class="value" th:text="'$' + ${pedido.total}"></span>
+			    </div>
+			    <div class="pedido-detail">
+			        <span class="label">Realizado por el cliente:</span>
+			        <span class="value" th:text="${pedido.user.username}"></span>
+			    </div>
+			</div>
+			
         </div>
 
     </div>
-
+	<div th:include="/footer/footer.html::footerGeneral"></div>
 </body>
 
 </html>

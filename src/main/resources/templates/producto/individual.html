@@ -14,42 +14,56 @@
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
-	<div class="individual-body" style="width: 100%;height: 100vh; display: flex;align-items: center;">
-
-		<div class="individual-image">
-			<img width="500px" height="500px" th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
-		</div>
-
-		<div class="individual-info">
-			<i class="fas fa-arrow-left back-icon" onclick="history.back()"></i>
-			<div class="individual-info-title">
-				<h1 th:text="${producto.nombre}" class="portfolio-caption-heading individual-nombre"></h1>
-				<h5 th:text="${producto.descripcion}" class="portfolio-caption-subheading individual-descripcion"></h5>
+	<div class="individual-body">
+		<div class="individual-container-info">
+			<div class="individual-image">
+				<img width="500px" height="500px"
+					th:src="@{'/assets/img/productos/' + ${producto.idProducto} + '.jpg'}">
 			</div>
 
-			<div class="individual-info-precio">
-				<div>
-					<h6 th:text="${producto.precioDeVenta}+'$'" class="portfolio-caption-subheading individual-precio"
-						id="precioProducto"></h6>
-						<h6 th:text="'Cantidad: '+${producto.stock.cantidadActual-1}"></h6>
+			<div class="individual-info">
+				<i class="fas fa-arrow-left back-icon" onclick="history.back()"></i>
+				<div class="individual-info-title">
+					<h1 th:text="${producto.nombre}" class="portfolio-caption-heading individual-nombre"></h1>
+					<h5 th:text="${producto.descripcion}"
+						class="w-75 portfolio-caption-subheading individual-descripcion">
+					</h5>
 				</div>
-				<div class="d-flex flex-column gap-2">
-					<form class="d-flex flex-column gap-2 justify-content-center align-items-center" action="#"
-						th:action="@{/pedido/venta/{idproducto}(idproducto=${producto.idProducto})}"
-						th:object="${producto}" method="post">
-						<input class="input-quantity" type="number" name="cantidadAComprar" required min="1"
-							th:max="${producto.stock.cantidadActual - 1}" id="cantidadAComprar"
-							oninput="actualizarTotal(); validarCantidad();" />
-						<p>Total: <span id="totalPrecio">0</span>$</p>
-						<button th:disabled="${producto.habilitado != true}"
-							th:text="${producto.habilitado} ? 'Comprar':'Sin stock'"
-							class="boton-compra portfolio-caption-subheading"></button>
-						<a th:href="@{/producto/administrar/{id}(id=${producto.idProducto})}"
-							class="btn btn-danger portfolio-caption-subheading">Administrar</a>
-					</form>
+
+				<div class="individual-info-precio">
+					<div class="d-flex align-items-center gap-3">
+						<h6 th:text="${producto.precioDeVenta}+'$    '"
+							class="portfolio-caption-subheading individual-precio" id="precioProducto"></h6>
+
+						<h6 class="fs-4" th:text="'Cantidad: '+${producto.stock.cantidadActual-1}"></h6>
+					</div>
+
+					<div class="d-flex flex-column gap-2">
+						<form class="d-flex flex-column gap-2 justify-content-center align-items-center" action="#"
+							th:action="@{/pedido/venta/{idproducto}(idproducto=${producto.idProducto})}"
+							th:object="${producto}" method="post">
+							<div class="d-flex justify-content-center align-items-center gap-3">
+								<input class="input-quantity" type="number" name="cantidadAComprar" required min="1"
+									th:max="${producto.stock.cantidadActual - 1}" id="cantidadAComprar"
+									oninput="actualizarTotal(); validarCantidad();" />
+								<p class="mt-2 fs-3 d-flex justify-content-center align-items-center"><strong
+										class="fs-3">Total: </strong><span id="totalPrecio">0</span>$</p>
+
+
+							</div>
+							<button th:disabled="${producto.habilitado != true}"
+								th:text="${producto.habilitado} ? 'Comprar':'Sin stock'"
+								class="boton-compra portfolio-caption-subheading"></button>
+							<a th:href="@{/producto/administrar/{id}(id=${producto.idProducto})}"
+								class="btn btn-danger portfolio-caption-subheading">Administrar</a>
+						</form>
+					</div>
+
 				</div>
 			</div>
 		</div>
+
+
 	</div>
 
 	<script>
@@ -72,6 +86,7 @@
 		}
 
 	</script>
+	<div th:include="/footer/footer.html::footerGeneral"></div>
 </body>
 
 </html>
