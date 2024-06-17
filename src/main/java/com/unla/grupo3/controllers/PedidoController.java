@@ -91,14 +91,15 @@ public class PedidoController {
  	public RedirectView nuevoPedido(@PathVariable("idProducto") int idProducto, @RequestParam int cantidadAComprar, @AuthenticationPrincipal UserDetails userDetails) {
 		
 		Optional<Producto> producto =productoService.traerProducto(idProducto);
-		System.out.println(producto.get().getNombre());
-		System.out.println(cantidadAComprar);
+
+		
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		
 		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
 			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
-			productoService.restarStockProducto(producto.get(), cantidadAComprar);
-			stockService.validarRabastecer(idProducto); //SE LE ENVIA EL ID DEL PRODUCTO YA QUE EL STOCK TIENE ASIGNADO SOLO 1 PRODUCTO 
+			
+			stockService.restarStock(producto.get().getStock(), cantidadAComprar);
+			stockService.validarRabastecer(producto.get().getStock().getIdStock()); 
 			
 		}
 		

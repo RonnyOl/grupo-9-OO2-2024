@@ -8,37 +8,27 @@ import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.repositories.IProductoRepository;
 import com.unla.grupo3.services.IProductoService;
+import com.unla.grupo3.services.IStockService;
 
 //Implementacion de la Interfaz IProductoService
 @Service("productoService")
 public class ProductoService implements IProductoService {
 
+	//Vinculacion del Repositorio
 	private IProductoRepository productoRepository;
 
+
+	
+	//Constructor del Service
 	public ProductoService(IProductoRepository productoRepository) {
 		this.productoRepository = productoRepository;
+
 	}
 
 	// agregar o modificar un producto
 	public Producto agregarOModificarProducto(Producto producto) {
 		return productoRepository.save(producto);
 
-	}
-
-	// modificar stock de un producto cuando se compra o cuando se acepta un lote
-	public boolean restarStockProducto(Producto producto, int cantidad) {
-
-		producto.getStock().setCantidadActual(producto.getStock().getCantidadActual() - cantidad);
-		producto = this.agregarOModificarProducto(producto);
-		return true;
-	}
-
-	// sumarle determinada cantidad a la cantidad de stock de un producto
-	public boolean sumarStockProducto(Producto producto, int cantidad) {
-
-		producto.getStock().setCantidadActual(producto.getStock().getCantidadActual() + cantidad);
-		producto = this.agregarOModificarProducto(producto);
-		return true;
 	}
 
 	// eliminar producto

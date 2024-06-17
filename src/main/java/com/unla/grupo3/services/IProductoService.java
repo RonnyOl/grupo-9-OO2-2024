@@ -11,12 +11,6 @@ public interface IProductoService {
 	// agregar o modificar producto
 	public Producto agregarOModificarProducto(Producto producto);
 
-	// modificar stock de un producto cuando se compra o cuando se acepta un lote
-	public boolean restarStockProducto(Producto producto, int cantidad);
-
-	// sumarle determinada cantidad a la cantidad de stock de un producto
-	public boolean sumarStockProducto(Producto producto, int cantidad);
-
 	// eliminar producto
 	public boolean eliminarProducto(int id);
 

@@ -60,7 +60,8 @@ public class LoteController {
 		
 		Optional<Lote> lote = loteService.traerLote(id);
 		loteService.cambiarEstadoDeLote(lote,true);
-		productoService.sumarStockProducto(lote.get().getOrdenDeCompra().getStock().getProducto(), lote.get().getOrdenDeCompra().getCantidadAComprar());
+		
+		stockService.sumarStock(lote.get().getOrdenDeCompra().getStock(), lote.get().getOrdenDeCompra().getCantidadAComprar());
 		stockService.validarRabastecer(lote.get().getOrdenDeCompra().getStock().getIdStock());
 		
 		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual" + "/"+ id);

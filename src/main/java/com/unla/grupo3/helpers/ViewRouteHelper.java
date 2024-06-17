@@ -57,11 +57,12 @@ public class ViewRouteHelper {
 	public final static String ROUTE_ORDERS = "/pedido/pedidosrealizados";
 	
 	public final static String ROUTE_PROVEEDOR = "/proveedor";
-
-
-
 	
-	
+	//Errores 
+	public final static String ERROR_403 = "/errores/403";
+	public final static String ERROR_404 = "/errores/404";
+	public final static String ERROR_500 = "/errores/500";
+
 	
 	
 }

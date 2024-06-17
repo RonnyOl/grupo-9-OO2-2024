@@ -52,6 +52,30 @@ public class StockService implements IStockService {
 		}
 		return false;
 	}
+	
+	//Modificar y Sumar Stock 
+	public boolean sumarStock(Stock s, int cantidad) {
+		boolean sumado=false;
+		
+		if(s != null) {
+			s.setCantidadActual(s.getCantidadActual()+cantidad);
+			sumado = true;
+		}
+		
+		return sumado;
+	}
+	
+	//Modificar y Restar Stock 
+	public boolean restarStock(Stock s, int cantidad) {
+		boolean restado=false;
+		
+		if(s != null) {
+			s.setCantidadActual(s.getCantidadActual()-cantidad);
+			restado = true;
+		}
+		
+		return restado;
+	}
 
 	// Trae un Stock por su ID
 	public Optional<Stock> traerStock(int id) {

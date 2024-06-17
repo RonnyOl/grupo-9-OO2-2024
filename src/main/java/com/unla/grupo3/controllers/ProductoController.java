@@ -3,8 +3,7 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
-
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +24,7 @@ import com.unla.grupo3.services.IProductoService;
 
 @Controller
 @RequestMapping("/producto")
+
 public class ProductoController {
 
 	private IProductoService productService;
@@ -33,6 +33,8 @@ public class ProductoController {
 		this.productService = productService;
 	}
 
+	//Retorna la vista de todos los productos
+	
 	@GetMapping("/lista")
 	public ModelAndView productos() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PRODUCTS);
@@ -45,11 +47,17 @@ public class ProductoController {
 	
 	@GetMapping("/individual/{id}")	
 	public ModelAndView individual(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI);
-
 		
+		ModelAndView modelAndView;
 		Optional<Producto> objeto = productService.traerProducto(id);
-		modelAndView.addObject("producto", objeto.get());
+		
+		if(objeto.isPresent()) {
+			modelAndView = new ModelAndView(ViewRouteHelper.INDI);
+			modelAndView.addObject("producto", objeto.get());
+		}else {
+			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
+		}
+		
 		return modelAndView;
 	}
 	
@@ -65,14 +73,12 @@ public class ProductoController {
 	
 	@PostMapping("/crear")
 	public RedirectView create(@ModelAttribute("nuevoProducto")Producto producto,@RequestParam("puntoMinimo") int puntoMinimo) {
-		System.out.println(producto.getNombre());
-		System.out.println(puntoMinimo+"<----------");
-		/*int puntoMinimo = producto.getStock().getPuntoMinimoDeStock();
-		System.out.println("--->"+producto.getIdProducto());
-		System.out.println(puntoMinimo);*/
+
+
+		
 		producto.setStock(new Stock(puntoMinimo,0,true,producto));
 		producto = productService.agregarOModificarProducto(producto);
-		System.out.println("---............>"+producto.getIdProducto());
+
 		return new RedirectView(ViewRouteHelper.RUTA_PRODUCTS);
 	}
 	

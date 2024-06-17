@@ -14,6 +14,12 @@ public interface IStockService {
 
 	// Elimina un Stock
 	public boolean eliminarStock(int id);
+	
+	//Modificar y Sumar Stock 
+	public boolean sumarStock(Stock s, int cantidad);
+	
+	//Modificar y Restar Stock 
+	public boolean restarStock(Stock s, int cantidad);
 
 	// Trae un Stock por su ID
 	public Optional<Stock> traerStock(int id);
