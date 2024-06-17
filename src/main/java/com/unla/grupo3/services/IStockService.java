@@ -9,6 +9,11 @@ import com.unla.grupo3.entities.Stock;
 //Interfaz a implementar de StockService
 public interface IStockService {
 
+	//Getters
+	public IOrdenDeCompraService getOrdenDeCompraService();
+
+	public IProductoService getProductoService();
+	
 	// Agrega o Modifica un Stock
 	public boolean agregarOModificarStock(Stock stock);
 

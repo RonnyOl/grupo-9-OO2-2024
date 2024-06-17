@@ -20,13 +20,13 @@ import com.unla.grupo3.services.IStockService;
 public class StockController {
 	
 	private IStockService stockService;
-	private IProductoService productoService;
+
 	
 	
-	public StockController(IStockService stockService, IProductoService productoService) {
+	public StockController(IStockService stockService ) {
 		super();
 		this.stockService = stockService;
-		this.productoService = productoService;
+
 	}
 
 
@@ -55,7 +55,7 @@ public class StockController {
 	public ModelAndView stockPorProducto(@PathVariable("idProducto")int idProducto) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_STOCK);
 		
-		Optional<Producto> producto = productoService.traerProducto(idProducto);
+		Optional<Producto> producto = stockService.getProductoService().traerProducto(idProducto);
 		Optional<Stock> stock = stockService.traerStock(producto.get()); 
 		
 		modelAndView.addObject("stock", stock.get());

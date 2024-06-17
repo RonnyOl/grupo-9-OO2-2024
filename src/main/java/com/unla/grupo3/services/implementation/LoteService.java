@@ -30,6 +30,12 @@ public class LoteService implements ILoteService {
 		this.ordenDeCompraService = ordenDeCompraService;
 	}
 
+	
+	//Getters
+	public IOrdenDeCompraService getOrdenDeCompraService() {
+		return ordenDeCompraService;
+	}
+	
 	// Agrega o Modifica un Lote
 	public Lote agregarOModificarLote(Lote lote) {
 		return this.loteRepository.save(lote);

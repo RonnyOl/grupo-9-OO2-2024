@@ -11,30 +11,38 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.repositories.IStockRepository;
-import com.unla.grupo3.services.ILoteService;
 import com.unla.grupo3.services.IOrdenDeCompraService;
-import com.unla.grupo3.services.IProveedorService;
+import com.unla.grupo3.services.IProductoService;
 import com.unla.grupo3.services.IStockService;
 
 //Implementacion de la Interfaz IStockService 
 @Service("stockService")
 public class StockService implements IStockService {
 
+
+
 	// Vinculacion con el Repositorio
 	private IStockRepository stockRepository;
 
 	// Vinculacion con otros Servicios
 	private IOrdenDeCompraService ordenDeCompraService;
-	private IProveedorService proveedorService;
-	private ILoteService loteService;
+	private IProductoService productoService;
+
 
 	// Constructor de StockService
-	public StockService(IStockRepository StockRepository, IOrdenDeCompraService ordendDeCompraService,
-			IProveedorService proveedorService, ILoteService loteService) {
+	public StockService(IStockRepository StockRepository, IOrdenDeCompraService ordendDeCompraService,IProductoService productoService) {
 		this.stockRepository = StockRepository;
 		this.ordenDeCompraService = ordendDeCompraService;
-		this.proveedorService = proveedorService;
-		this.loteService = loteService;
+		this.productoService = productoService;
+	}
+	
+	//Getters
+	public IOrdenDeCompraService getOrdenDeCompraService() {
+		return ordenDeCompraService;
+	}
+
+	public IProductoService getProductoService() {
+		return productoService;
 	}
 
 	// Agrega o Modifica un Stock
@@ -147,7 +155,7 @@ public class StockService implements IStockService {
 			int cantidadAComprar = stockAReabastecer.get().getPuntoMinimoDeStock(); 
 
 			// Se asigna un Proveedor aleatorio a la Orden de Compra
-			List<Proveedor> lstProveedores = proveedorService.traerProveedores();
+			List<Proveedor> lstProveedores = ordenDeCompraService.getProveedorService().traerProveedores();
 			int nro = rand.nextInt(1, lstProveedores.size());
 			Proveedor proveedorAsignado = lstProveedores.get(nro);
 
@@ -157,7 +165,7 @@ public class StockService implements IStockService {
 			nuevaOrden = ordenDeCompraService.agregarOModificarOrdenDeCompra(nuevaOrden);
 
 			// Se llama al metodo para verificar si se debe generar un Lote
-			loteService.verificarYCrearLote();
+			ordenDeCompraService.getLoteService().verificarYCrearLote();
 
 			generada = true;
 		}

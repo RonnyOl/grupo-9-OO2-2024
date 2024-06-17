@@ -9,7 +9,11 @@ import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.repositories.IOrdenDeCompraRepository;
+import com.unla.grupo3.services.ILoteService;
 import com.unla.grupo3.services.IOrdenDeCompraService;
+import com.unla.grupo3.services.IProveedorService;
+import com.unla.grupo3.services.IStockService;
+
 
 //Implementacion de la Interfaz IOrdenDeCompraService
 @Service("ordenDeCompraService")
@@ -17,10 +21,37 @@ public class OrdenDeCompraService implements IOrdenDeCompraService {
 
 	// Vinculacion con Repositorio
 	private IOrdenDeCompraRepository OrdenDeCompraRepository;
+	
+	//Vinculacion de otros Servicios
+	private IStockService stockService;
+	private IProveedorService proveedorService;
+	private ILoteService loteService;
+	private UserService userService;
 
 	// Constructor del Servicio
-	public OrdenDeCompraService(IOrdenDeCompraRepository OrdenDeCompraRepository) {
+	public OrdenDeCompraService(IOrdenDeCompraRepository OrdenDeCompraRepository,IStockService stockService,IProveedorService proveedorService,ILoteService loteService, UserService userService) {
 		this.OrdenDeCompraRepository = OrdenDeCompraRepository;
+		this.stockService = stockService;
+		this.proveedorService= proveedorService;
+		this.loteService = loteService;
+		this.userService=userService;
+	}
+	
+	//Getter de los servicios
+	public IStockService getStockService() {
+		return stockService;
+	}
+
+	public IProveedorService getProveedorService() {
+		return proveedorService;
+	}
+
+	public ILoteService getLoteService() {
+		return loteService;
+	}
+
+	public UserService getUserService() {
+		return userService;
 	}
 
 	// Agrega o Modifica una Orden De Compra

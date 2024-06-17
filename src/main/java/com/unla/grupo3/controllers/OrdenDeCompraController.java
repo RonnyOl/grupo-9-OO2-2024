@@ -32,17 +32,10 @@ import com.unla.grupo3.services.implementation.UserService;
 public class OrdenDeCompraController {
 
 	private IOrdenDeCompraService ordenService;
-	private IStockService stockService;
-	private IProveedorService proveedorService;
-	private ILoteService loteService;
-	private UserService userService;
+
 	
-	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService,ILoteService loteService, UserService userService) {
+	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService) {
 		this.ordenService = ordenCompraService;
-		this.stockService = stockService;
-		this.proveedorService= proveedorService;
-		this.loteService = loteService;
-		this.userService=userService;
 	}
 	
 	// TODOS
@@ -98,7 +91,7 @@ public class OrdenDeCompraController {
 	public ModelAndView individualOrdenCompra(@PathVariable("stock") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
 		
-		Optional<Stock> p = this.stockService.traerStock(id);
+		Optional<Stock> p = this.ordenService.getStockService().traerStock(id);
 		List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(p.get());	
 		modelAndView.addObject("ordenCompra", lista);
 		return modelAndView;
@@ -108,13 +101,13 @@ public class OrdenDeCompraController {
 	public ModelAndView nuevaOrdenDeCompra(@PathVariable("idStock") int idStock ) {
 		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_ORDER);
-		Optional<Stock> stockReal = stockService.traerStock(idStock);
+		Optional<Stock> stockReal = this.ordenService.getStockService().traerStock(idStock);
 
 
 		if (stockReal.isPresent()) {
 			OrdenDeCompra orden = new OrdenDeCompra();
 			orden.setStock(stockReal.get());
-			List<Proveedor> lstProveedores = proveedorService.traerProveedores();
+			List<Proveedor> lstProveedores = this.ordenService.getProveedorService().traerProveedores();
 
 			modelAndView.addObject("orden",orden);
 			modelAndView.addObject("proveedores", lstProveedores);
@@ -126,13 +119,13 @@ public class OrdenDeCompraController {
     @PostMapping("/crear")
     public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra, @AuthenticationPrincipal UserDetails userDetails) {
     	
-    	Optional<Proveedor> nuevo = proveedorService.traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
-    	User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+    	Optional<Proveedor> nuevo = this.ordenService.getProveedorService().traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
+    	User user = this.ordenService.getUserService().findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
     	if (nuevo.isPresent() && userDetails.isAccountNonExpired()) {
     		ordenDeCompra.setProveedor(nuevo.get());
     		ordenDeCompra.setUser(user);
     		ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
-    		loteService.verificarYCrearLote();
+    		this.ordenService.getLoteService().verificarYCrearLote();
     		
     	}
 

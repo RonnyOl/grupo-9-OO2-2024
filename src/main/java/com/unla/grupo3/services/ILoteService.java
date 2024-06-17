@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.unla.grupo3.entities.Lote;
-import com.unla.grupo3.entities.OrdenDeCompra;
-import com.unla.grupo3.entities.Producto;
-
 
 //Interfaz de LoteService a implementar
 public interface ILoteService {
 
+	//Getters
+	public IOrdenDeCompraService getOrdenDeCompraService();
 	
     //Agregar o Modificar un Lote
 	public Lote agregarOModificarLote(Lote lote);

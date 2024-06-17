@@ -7,9 +7,17 @@ import java.util.Optional;
 import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
+import com.unla.grupo3.services.implementation.UserService;
 
 //Interfaz a implementar de OrdenDeCompraService
+
 public interface IOrdenDeCompraService {
+	
+	//Getters
+	public IStockService getStockService();
+	public IProveedorService getProveedorService();
+	public ILoteService getLoteService();
+	public UserService getUserService();
 
 	// Agrega o Modifica una Orden De Compra
 	public OrdenDeCompra agregarOModificarOrdenDeCompra(OrdenDeCompra ordenDeCompra);

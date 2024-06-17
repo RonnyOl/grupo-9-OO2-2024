@@ -16,8 +16,7 @@ import com.unla.grupo3.entities.Lote;
 
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.ILoteService;
-import com.unla.grupo3.services.IProductoService;
-import com.unla.grupo3.services.IStockService;
+
 
 
 @Controller
@@ -27,14 +26,11 @@ public class LoteController {
 	
 
 	private ILoteService loteService;
-	private IStockService stockService;
-	private IProductoService productoService;
-	
 
-	public LoteController(ILoteService loteService,IStockService stockService,IProductoService productoService) {
+
+	public LoteController(ILoteService loteService) {
 		this.loteService = loteService;
-		this.stockService=stockService;
-		this.productoService=productoService;
+
 	}
 
 	@GetMapping("/lista")
@@ -61,8 +57,8 @@ public class LoteController {
 		Optional<Lote> lote = loteService.traerLote(id);
 		loteService.cambiarEstadoDeLote(lote,true);
 		
-		stockService.sumarStock(lote.get().getOrdenDeCompra().getStock(), lote.get().getOrdenDeCompra().getCantidadAComprar());
-		stockService.validarRabastecer(lote.get().getOrdenDeCompra().getStock().getIdStock());
+		loteService.getOrdenDeCompraService().getStockService().sumarStock(lote.get().getOrdenDeCompra().getStock(), lote.get().getOrdenDeCompra().getCantidadAComprar());
+		loteService.getOrdenDeCompraService().getStockService().validarRabastecer(lote.get().getOrdenDeCompra().getStock().getIdStock());
 		
 		return new RedirectView(ViewRouteHelper.ROUTE_LOTE +"/individual" + "/"+ id);
 	}

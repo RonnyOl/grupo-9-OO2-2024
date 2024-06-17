@@ -19,30 +19,23 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IPedidoService;
-import com.unla.grupo3.services.IProductoService;
-import com.unla.grupo3.services.IStockService;
-import com.unla.grupo3.services.implementation.UserService;
 
 @Controller
 @RequestMapping("/pedido")
 public class PedidoController {
 
 	private IPedidoService pedidoService;
-	private IProductoService productoService;
-	private IStockService stockService;
-	private UserService userService;
+
 	
-	public PedidoController(IPedidoService pedidoService, IProductoService productoService, UserService userService, IStockService stockService) {
+	public PedidoController(IPedidoService pedidoService) {
 		this.pedidoService = pedidoService;
-		this.productoService=productoService;
-		this.stockService=stockService;
-		this.userService=userService;
+
 	}
 
 	@GetMapping("/pedidosrealizados")
 	public ModelAndView PedidosRealizados(@AuthenticationPrincipal UserDetails userDetails) {							 
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
-		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+		User user= pedidoService.getUserService().findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
 		modelAndView.addObject("lista", lista);
 		modelAndView.addObject("btnVer", true);
@@ -74,7 +67,7 @@ public class PedidoController {
 	public ModelAndView individualPorProducto(@PathVariable("idProducto")int idProducto){
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_PEDIDO);
 		
-		Optional<Producto> producto= productoService.traerProducto(idProducto);
+		Optional<Producto> producto= pedidoService.getProductoService().traerProducto(idProducto);
 		
 		if (producto.isPresent()) {
 			Optional<Pedido> pedido = pedidoService.traerPedido(producto.get());
@@ -90,16 +83,16 @@ public class PedidoController {
 	@PostMapping("/venta/{idProducto}")
  	public RedirectView nuevoPedido(@PathVariable("idProducto") int idProducto, @RequestParam int cantidadAComprar, @AuthenticationPrincipal UserDetails userDetails) {
 		
-		Optional<Producto> producto =productoService.traerProducto(idProducto);
+		Optional<Producto> producto =pedidoService.getProductoService().traerProducto(idProducto);
 
 		
-		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+		User user= pedidoService.getUserService().findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		
 		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
 			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
 			
-			stockService.restarStock(producto.get().getStock(), cantidadAComprar);
-			stockService.validarRabastecer(producto.get().getStock().getIdStock()); 
+			pedidoService.getProductoService().getStockService().restarStock(producto.get().getStock(), cantidadAComprar);
+			pedidoService.getProductoService().getStockService().validarRabastecer(producto.get().getStock().getIdStock()); 
 			
 		}
 		
