@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo3.entities.OrdenDeCompra;
-import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;

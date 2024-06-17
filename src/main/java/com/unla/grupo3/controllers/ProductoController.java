@@ -3,7 +3,7 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import javax.sound.midi.Soundbank;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IProductoService;
-import com.unla.grupo3.services.implementation.ProductoService;
+
 
 
 

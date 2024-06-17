@@ -1,9 +1,7 @@
 package com.unla.grupo3.services.implementation;
 
-
 import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.stereotype.Service;
 
@@ -11,9 +9,9 @@ import com.unla.grupo3.entities.Pedido;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.repositories.IPedidoRepository;
-import com.unla.grupo3.services.IOrdenDeCompraService;
 import com.unla.grupo3.services.IPedidoService;
 
+//Implementacion de la Interfaz IPedidoService
 @Service("pedidoService")
 public class PedidoService implements IPedidoService {
 
@@ -23,54 +21,45 @@ public class PedidoService implements IPedidoService {
 		this.pedidoRepository = pedidoRepository;
 	}
 
-	//IMPLEMENTAR ABM DE Pedido ADEMAS DE ALGUNOS TRAER BASICOS PARA LA LISTA DE Pedido 
-	
-	//AGREGAR O MODIFICAR Pedido
-	
+	// agregar o modificar pedido
 	public boolean agregarOModificarPedido(Pedido pedido) {
 		pedidoRepository.save(pedido);
 		return true;
 	}
-	
-	//ELIMINAR Pedido
-	
+
+	// eliminar pedido
 	public boolean eliminarPedido(int id) {
-		Optional<Pedido> p=pedidoRepository.findById(id);
-		if(p.isPresent()) {
+		Optional<Pedido> p = pedidoRepository.findById(id);
+		if (p.isPresent()) {
 			pedidoRepository.delete(p.get());
 			return true;
 		}
 		return false;
 	}
-	
-	//TRAER Pedido POR ID 
-	
+
+	// traer pedido por id
 	public Optional<Pedido> traerPedido(int id) {
 		return pedidoRepository.findById(id);
 	}
-	
-	//TRAER Pedido POR Producto
-	
+
+	// traer pedido por producto
 	public Optional<Pedido> traerPedido(Producto producto) {
-		return pedidoRepository.findByProducto(producto);	
+		return pedidoRepository.findByProducto(producto);
 	}
-	
-	//TRAER Pedido POR Usuario
-	
+
+	// traer Pedido por Usuario
 	public Optional<Pedido> traerPedido(User user) {
-		return pedidoRepository.findByUser(user);	
+		return pedidoRepository.findByUser(user);
 	}
-	
-	//TRAER LISTA DE Pedido 
-	public List<Pedido> traerPedido(){
+
+	// traer lista de todos los Pedidos
+	public List<Pedido> traerPedido() {
 		return pedidoRepository.findAll();
 	}
-	
-	//TRAER LISTA DE PEDIDOS POR SU USUARIO
-	public List<Pedido> traerListaPedidoPorUsuario(User user){
+
+	// traer lista de pedidos hechas por un usuario
+	public List<Pedido> traerListaPedidoPorUsuario(User user) {
 		return pedidoRepository.findAllByUser(user);
 	}
-	
 
-	
 }
