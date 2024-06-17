@@ -37,7 +37,7 @@
 
 			<div class="detalle">
 				<span>Generada por:</span>
-				<span class="valor" th:text="${ordenDeCompra.user.username}"></span>
+				<span class="valor" th:text="${ordenDeCompra.user != null ? ordenDeCompra.user.username : 'Se genero automaticamente'}"></span>
 			</div>
 
 			<div class="detalle">
