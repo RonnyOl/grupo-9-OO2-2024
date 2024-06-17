@@ -5,17 +5,10 @@ import java.util.Optional;
 import com.unla.grupo3.entities.Pedido;
 import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.User;
-import com.unla.grupo3.services.implementation.UserService;
 
 //Interfaz de PedidoService a implementar
 public interface IPedidoService {
 
-	//Getters
-	public IProductoService getProductoService();
-
-	public UserService getUserService();
-
-	
 	// agregar o mofidicar pedido
 	public boolean agregarOModificarPedido(Pedido pedido);
 

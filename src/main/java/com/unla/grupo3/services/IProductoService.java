@@ -8,9 +8,6 @@ import com.unla.grupo3.entities.Producto;
 //Interfaz de ProductoService a implementar
 public interface IProductoService {
 
-	//Getters
-	public IStockService getStockService();
-	
 	// agregar o modificar producto
 	public Producto agregarOModificarProducto(Producto producto);
 

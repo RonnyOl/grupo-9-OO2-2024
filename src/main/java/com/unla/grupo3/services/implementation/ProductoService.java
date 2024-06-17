@@ -14,23 +14,15 @@ import com.unla.grupo3.services.IStockService;
 @Service("productoService")
 public class ProductoService implements IProductoService {
 
-
 	//Vinculacion del Repositorio
 	private IProductoRepository productoRepository;
 
-	//Vinculacion con otros Servicios
-	private IStockService stockService;
+
 	
 	//Constructor del Service
-	public ProductoService(IProductoRepository productoRepository,IStockService stockService) {
+	public ProductoService(IProductoRepository productoRepository) {
 		this.productoRepository = productoRepository;
-		this.stockService=stockService;
-	}
-	
-	//Getters
 
-	public IStockService getStockService() {
-		return stockService;
 	}
 
 	// agregar o modificar un producto

@@ -10,34 +10,15 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.repositories.IPedidoRepository;
 import com.unla.grupo3.services.IPedidoService;
-import com.unla.grupo3.services.IProductoService;
 
 //Implementacion de la Interfaz IPedidoService
 @Service("pedidoService")
 public class PedidoService implements IPedidoService {
 
-
-	//Vinculacion con el Repositorio
 	private IPedidoRepository pedidoRepository;
-	
-	//Vinculacion con otros Servicios
-	private IProductoService productoService;
-	private UserService userService;
 
-	//Constructor de 
-	public PedidoService(IPedidoRepository pedidoRepository,UserService userService, IProductoService productoService) {
+	public PedidoService(IPedidoRepository pedidoRepository) {
 		this.pedidoRepository = pedidoRepository;
-		this.productoService=productoService;
-		this.userService=userService;
-	}
-	
-	//Getters
-	public IProductoService getProductoService() {
-		return productoService;
-	}
-
-	public UserService getUserService() {
-		return userService;
 	}
 
 	// agregar o modificar pedido

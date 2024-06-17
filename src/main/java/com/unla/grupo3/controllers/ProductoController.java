@@ -3,6 +3,7 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,7 +55,7 @@ public class ProductoController {
 			modelAndView = new ModelAndView(ViewRouteHelper.INDI);
 			modelAndView.addObject("producto", objeto.get());
 		}else {
-			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_403);
+			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
 		}
 		
 		return modelAndView;
