@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.unla.grupo3.entities.Producto;
 
 
+//Interfaz de Repositorio de Producto
 @Repository("productoRepository")
 public interface IProductoRepository extends JpaRepository<Producto, Serializable> {
 

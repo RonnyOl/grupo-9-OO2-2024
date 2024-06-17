@@ -16,15 +16,21 @@ import com.unla.grupo3.services.IOrdenDeCompraService;
 import com.unla.grupo3.services.IProveedorService;
 import com.unla.grupo3.services.IStockService;
 
+
+//Implementacion de la Interfaz IStockService 
 @Service("stockService")
 public class StockService implements IStockService {
 
+	
+	//Vinculacion con el Repositorio
 	private IStockRepository stockRepository;
+	
+	//Vinculacion con otros Servicios 
 	private IOrdenDeCompraService ordenDeCompraService;
 	private IProveedorService proveedorService;
 	private ILoteService loteService;
 
-
+	//Constructor de StockService
 	public StockService(IStockRepository StockRepository, IOrdenDeCompraService ordendDeCompraService,
 			IProveedorService proveedorService,ILoteService loteService) {
 		this.stockRepository = StockRepository;
@@ -33,8 +39,7 @@ public class StockService implements IStockService {
 		this.loteService=loteService;
 	}
 
-	// AGREGAR O MODIFICAR Stock
-
+	// AGREGAR O MODIFICAR Stoc
 	public boolean agregarOModificarStock(Stock stock) {
 		stockRepository.save(stock);
 		return true;

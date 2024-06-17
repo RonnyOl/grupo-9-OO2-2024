@@ -21,6 +21,7 @@ public interface ILoteRepositoy extends JpaRepository<Lote, Serializable> {
 	//Traer un orden de compra por su fecha
 	public abstract Optional<Lote> findByfechaRecepcion(LocalDate fecha);
 	
+	//Traer una Lista de Lotes que tengan el atributo aceptado en False
 	@Query("SELECT l FROM Lote l  WHERE l.aceptado = false")
 	public abstract List<Lote> findAllByAceptadoFalse();
 

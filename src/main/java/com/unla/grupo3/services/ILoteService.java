@@ -8,34 +8,32 @@ import com.unla.grupo3.entities.Lote;
 import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Producto;
 
+
+//Interfaz de LoteService a implementar
 public interface ILoteService {
 
 	
-    //MODIFICAR
-	
+    //Agregar o Modificar un Lote
 	public Lote agregarOModificarLote(Lote lote);
 	
-	//ELIMINAR ORDEN DE COMPORA
-	
+	//Eliminar un Lote
 	public boolean eliminarLote(int id) ;
 	
-	///TODOS
+	//Traer todos los Lotes de la BD
 	public List<Lote> traerLote();
 
-	///FECHA
-	
+	//Traer Lista de Lotes segun su Fecha de Generacion
 	public Optional<Lote> traerLote(LocalDate fecha);
 	
-	///ID
-	
+	//Traer un Lote por su ID
 	public Optional<Lote> traerLote(int id);
 	
-	//VERIFICA Y CREA UN LOTE DEPENDIENDO DE SI LA LISTA DE ORDENES DE COMPRA NO VIENE VACIA
+	//Verificar si existen Ordenes de compra sin Lotes asignados
 	public boolean verificarYCrearLote() ;
 	
-	//ACEPTAR O NO LOTE
-	
+	//Modificar el atributo Aceptado 
 	public boolean cambiarEstadoDeLote(Optional<Lote> l,boolean aceptado);
 	
+	//Traer una Lista de Lotes que tengan el atributo aceptado = False
 	public List<Lote> findAllByAceptadoFalse();
 }

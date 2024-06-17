@@ -1,10 +1,8 @@
 package com.unla.grupo3.services.implementation;
 
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.OrdenDeCompra;
@@ -13,73 +11,83 @@ import com.unla.grupo3.entities.User;
 import com.unla.grupo3.repositories.IOrdenDeCompraRepository;
 import com.unla.grupo3.services.IOrdenDeCompraService;
 
-
+//Implementacion de la Interfaz IOrdenDeCompraService
 @Service("ordenDeCompraService")
-public class OrdenDeCompraService  implements IOrdenDeCompraService {
+public class OrdenDeCompraService implements IOrdenDeCompraService {
 
+	// Vinculacion con Repositorio
 	private IOrdenDeCompraRepository OrdenDeCompraRepository;
 
+	// Constructor del Servicio
 	public OrdenDeCompraService(IOrdenDeCompraRepository OrdenDeCompraRepository) {
 		this.OrdenDeCompraRepository = OrdenDeCompraRepository;
 	}
-	
-	//AGREGAR O MODIFICAR ORDEN DE COMPRA
-	
+
+	// Agrega o Modifica una Orden De Compra
 	public OrdenDeCompra agregarOModificarOrdenDeCompra(OrdenDeCompra ordenDeCompra) {
 		return OrdenDeCompraRepository.save(ordenDeCompra);
 	}
-	
-	//ELIMINAR ORDEN DE COMPORA
-	
+
+	// Elimina una Orden De Compra
 	public boolean eliminarOrdenDeCompra(int id) {
-		Optional<OrdenDeCompra> p=OrdenDeCompraRepository.findById(id);
-		if(p.isPresent()) {
+
+		
+		Optional<OrdenDeCompra> p = OrdenDeCompraRepository.findById(id);
+		if (p.isPresent()) {
 			OrdenDeCompraRepository.delete(p.get());
 			return true;
 		}
 		return false;
 	}
+
+
+	//Modificar atributo tieneLote
+	public boolean cambiarEstadoTieneLote(Optional<OrdenDeCompra> orden, boolean nuevoEstado) {
+		boolean cambiado=false;
+		
+		if(orden.isPresent()) {
+			orden.get().setTieneLote(nuevoEstado);
+			this.agregarOModificarOrdenDeCompra(orden.get());
+			cambiado = true;
+		}
+		return cambiado;
+	}
 	
 	
-	
-	//TRAER ORDEN DE COMPRA POR ID CON SU STOCK
-	
+	// Traer Orden De Compra por ID
 	public Optional<OrdenDeCompra> traerOrdenDeCompra(int id) {
 		return OrdenDeCompraRepository.findById(id);
 	}
-	
-	//TRAER ORDEN DE COMPRA POR ATRIBUTOS CON SU STOCK
-	
+
+	// Treaer Orden de Compra por su Fecha de Emision
 	public Optional<OrdenDeCompra> traerOrdenDeCompra(LocalDate fecha) {
-		return OrdenDeCompraRepository.findByfechaEmision(fecha);	
+		return OrdenDeCompraRepository.findByfechaEmision(fecha);
 	}
-	
-	
+
+	// Traer Lista de Ordenes de Compra por su User
 	public List<OrdenDeCompra> traerOrdenDeCompra(User user) {
-		return OrdenDeCompraRepository.findByUser(user);	
+		return OrdenDeCompraRepository.findByUser(user);
 	}
-	
+
+	// Traer Lista de Ordenes de Compra por su Stock
 	public List<OrdenDeCompra> traerOrdenDeCompra(Stock stock) {
-		return OrdenDeCompraRepository.findByStock(stock);	
+		return OrdenDeCompraRepository.findByStock(stock);
 	}
-	
-	 //PROBABLEMENTE NO SE USE
+
+	// Traer Lista de Ordenes de Compra por su User y Stock
 	public List<OrdenDeCompra> traerOrdenDeCompra(User user, Stock stock) {
-		return OrdenDeCompraRepository.findByUserAndStock(user,stock);	
+		return OrdenDeCompraRepository.findByUserAndStock(user, stock);
 	}
-	
-	//TRAER LISTA DE ORDEN DE COMPRA  
-	public List<OrdenDeCompra> traerOrdenDeCompra(){
+
+	// Traer Lista de Ordenes de Compra
+	public List<OrdenDeCompra> traerOrdenDeCompra() {
 		return OrdenDeCompraRepository.findAll();
 	}
-	
-	//TRAER UNA ORDEN DE COMPRA CON EL ATRIBUTO tieneLote en false
-	
-	public Optional<OrdenDeCompra> traerOrdenDeCompraSinLote(){
+
+	// Traer una Orden de Compra con su atributo tieneLote = False
+	public Optional<OrdenDeCompra> traerOrdenDeCompraSinLote() {
 		return OrdenDeCompraRepository.findByTieneLote();
 	}
-	
-	
 	
 	
 
