@@ -6,37 +6,48 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesLote.css" rel="stylesheet" />
+	<link href="/css/stylesProveedor.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/85cce2a6a8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	
+
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
-	
+
 	<div class="lote-individual-body">
 
-		<div class="lote-individual-info d-flex flex-column border p-3">
-		    <div class="icon-container">
-		        <a href="/proveedor/lista">
-		            <i class="fa-solid fa-arrow-left"></i>
-		        </a>
-		    </div>
-		    <!-- Resto del contenido -->
-		    <div class="lote-individual-info-lote">
-		    	 <div class="individual-image">
-            <img width="400px" height="400px" th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
-        </div>
-		        <h1 class="text-center">Detalles del Proveedor</h1>
-		        <strong>Nombre de Empresa</strong> 
-		        <span th:text="${proveedor.nombreEmpresa}"></span>
-		        <strong>CUIL</strong> 
-		        <span th:text="${proveedor.cuil}"></span>
-		        <strong>Direccion</strong>
-		        <span th:text="${proveedor.direccion}"></span>
-		    </div>
+		<div class="lote-individual-info ">
+			<div class="icon-container">
+				<a href="/proveedor/lista">
+					<i class="fa-solid fa-arrow-left"></i>
+				</a>
+			</div>
+			<!-- Resto del contenido -->
+			<div class="lote-individual-info-lote d-flex flex-column justify-content-center gap-1">
+				<div class="individual-image d-flex justify-content-center align-items-center">
+					<img width="400px" height="400px"
+						th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
+				</div>
+				<div>
+					<h1 class="text-center">Detalles del Proveedor</h1>
+					<div>
+						<strong>Nombre de Empresa</strong>
+						<span th:text="${proveedor.nombreEmpresa}"></span>
+					</div>
+					<div>
+						<strong>CUIL</strong>
+						<span th:text="${proveedor.cuil}"></span>
+					</div>
+					<div>
+						<strong>Direccion</strong>
+						<span th:text="${proveedor.direccion}"></span>
+					</div>
+				</div>
+				<a th:href="@{/proveedor/administrar/{id}(id=${proveedor.idProveedor})}"
+					class="text-center btn btn-danger btn-administar portfolio-caption-subheading mt-3">Administrar</a>
+			</div>
 		</div>
-		<a th:href="@{/proveedor/administrar/{id}(id=${proveedor.idProveedor})}" class="btn btn-danger portfolio-caption-subheading">Administrar</a>
+
 	</div>
 
 </body>

@@ -40,7 +40,8 @@
 					</div>
 					
 					<div th:text="${orden.fechaEmision}" class="portfolio-caption-subheading fs-4"></div>
-					<div th:text="${orden.user.username}" class="portfolio-caption-subheading fs-4"></div>
+					
+					<div th:text="${orden.user != null ? orden.user.username : 'Esta orden se genero de forma automatica'}" class="portfolio-caption-subheading fs-4"></div>
 						
 							<a class="boton-ver" th:href="@{/ordendecompra/individual/{id}(id=${orden.idOrdenDeCompra})}"
 								style="text-decoration: none;">Ver</a>

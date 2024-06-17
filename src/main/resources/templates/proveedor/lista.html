@@ -16,7 +16,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesLote.css" rel="stylesheet" />
+	<link href="/css/stylesProveedor.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -26,12 +26,9 @@
 	</div>
 
 	<!-- Portfolio Grid-->
-	<section class="page-section seccion-entera-lista-lote" id="productos">
-
-		<span th:text="${test}"></span>
-
-
+	<section class="page-section seccion-entera-lista-proveedor" id="productos">
 		<div class="seccion-entera-title">
+			
 			<div class="text-center">
 
 				<h2 class="section-heading text-uppercase text-white fs-1">Proveedores</h2>
@@ -46,7 +43,6 @@
 
 					<div>
 
-						<div th:text="${proveedor.idProveedor}" class="portfolio-caption-heading fs-3"></div>
 						<img width="250px" height="250px"
 							th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
 						<div th:text="${proveedor.cuil}" class="portfolio-caption-heading fs-3"></div>
@@ -59,7 +55,7 @@
 				</div>
 					
 			</div>
-					<a class="btn btn-primary btn-xl text-uppercase" href="/proveedor/nuevo">Agregar Nuevo Proveedor</a>
+					<a class="btn btn-success btn-xl text-uppercase mt-3" href="/proveedor/nuevo">Agregar Nuevo Proveedor</a>
 		</div>
 
 	

@@ -1,0 +1,191 @@
+#mainNav {
+	background-color: rgb(61, 66, 75);
+	border-bottom: 1px solid rgb(128, 128, 128, 0.5);
+}
+
+
+/**CSS DEL PROVEEDOR INDIVIDUAL**/
+
+.lote-individual-body {
+	background-color: #373b44;
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.lote-individual-info {
+	width: 30%;
+	height: fit-content;
+	border-radius: 2rem;
+	background-color: #fff;
+	border: 2px solid #000;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: column;
+	position: relative;
+	box-shadow: 0 0 2rem rgb(0, 0, 0,0.4);
+}
+
+.lote-individual-info-lote {
+
+	font-size: 1.2rem;
+	height: fit-content;
+	border-radius: 2rem;
+	padding: 2rem;
+	background-color: aliceblue;
+}
+
+.lote-individual-info-orden {
+	border: 1px solid #000;
+	font-size: 1.2rem;
+	padding: 2rem;
+	background-color: aliceblue;
+}
+
+.lote-individual-info-orden h2 {
+	text-align: center;
+}
+
+
+.icon-container {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.icon-container a {
+	text-decoration: none;
+	color: #000;
+	/* Cambia esto al color que prefieras */
+}
+
+.icon-container i {
+	font-size: 24px;
+}
+
+.btn-administar{
+	box-shadow: 0 0 2rem rgb(128, 0, 0,0.5)
+}
+
+/*********************************************************************************************************/
+/**Lista Proveedor**/
+
+.seccion-entera-lista-proveedor {
+	background-color: #373b44;
+	min-height: 100vh;
+}
+
+.seccion-entera-title {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.lista-card {
+	min-width: 25%;
+	min-height: 35rem;
+	max-width: 25%;
+	max-height: 30rem;
+	background-color: #fff;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	gap: 2rem;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.lista-card-container {
+	display: flex;
+	justify-content: center;
+	gap: 6rem;
+	flex-wrap: wrap;
+}
+
+
+
+.section-botones {
+	width: 60%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 3rem;
+}
+
+.boton-verlote {
+	padding: 0.5rem 5rem;
+	background-color: #161917;
+	color: white;
+}
+
+
+/*********************************************************************************************************/
+/****** Nuevo proveedor *********/
+
+.nuevo-seccion {
+	background-color: #373b44;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.nuevo-container {
+	color: aliceblue;
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+/*********************************************************************************************************/
+/**Administrar Proveedoor**/
+.administrar-seccion {
+	background-color: #373b44;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.administrar-container {
+
+	color: rgb(255, 255, 255);
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+.formulario-administrar{
+	color:#161917;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	padding: 3rem 1rem;
+	gap: 2rem;
+	border-radius: 2rem;
+	justify-content: center;
+	background-color: rgb(255, 255, 255);
+}
+
+.administrar-seccion input {
+	border: 1px solid #000;
+	border-radius: 2rem;
+	padding: 0.5rem ;
+}
+
+.individual-image{
+	border: 1px double #000;
+}
+
+
+/*********************************************************************************************************/

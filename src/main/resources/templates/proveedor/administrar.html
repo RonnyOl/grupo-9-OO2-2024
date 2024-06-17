@@ -6,37 +6,44 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Modificar</title>
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+	<link href="/css/stylesProveedor.css" rel="stylesheet" />
 </head>
 
 <body>
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
-			
+
 	<div class="administrar-seccion">
 		<div class="administrar-container">
-		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/proveedor/modificar}"
-			th:object="${proveedor}" method="post">
+			<form class="formulario-administrar " action="#" th:action="@{/proveedor/modificar}"
+				th:object="${proveedor}" method="post">
 
-			
-			<input  type="hidden" th:field="${proveedor.idProveedor}" />
-			
-			<p>
-				Nombre de la Empresa: <input type="text" th:field="${proveedor.nombreEmpresa}" />
-			</p>
-			
-			<p>
-				CUIL: <input type="text" th:field="${proveedor.cuil}" />
-			</p>
-			
-			<p>
-				Direccion: <input type="text" th:field="${proveedor.direccion}" />
-			</p>
 
-			<input type="submit" value="Realizar cambios" />
-		</form>
-		
-		
+				<input type="hidden" th:field="${proveedor.idProveedor}" />
+
+				<div class="individual-image d-flex justify-content-center align-items-center">
+					<img width="300px" height="300px"
+						th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
+				</div>
+				
+				<div class="d-flex flex-column w-100">
+					<p class="fs-5 text-center">
+					Nombre de la Empresa: <input class="w-100" type="text" th:field="${proveedor.nombreEmpresa}" />
+				</p>
+
+					<p class="fs-5 text-center">
+					CUIL: <input class="w-100" type="text" th:field="${proveedor.cuil}" />
+					</p>
+
+				<p class="fs-5 text-center">
+					Direccion: <input class="w-100" type="text" th:field="${proveedor.direccion}" />
+				</p>
+
+				<input class="fs-5 btn btn-success" type="submit" value="Realizar cambios" />
+			</div>
+			</form>
+
+
 		</div>
 
 	</div>
