@@ -28,17 +28,16 @@
 	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
 			<div class="text-center">
-				<h2 th:if="${user.authorities[0].authority != 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">Aqui podras ver todos tus pedidos</h2>
-				<h2 th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">Aqui podras ver todos los pedidos</h2>
-				<h3 class="section-subheading text-white">Presionando "Mas info" podras acceder a la informacion que
-					necesites saber </h3>
+				<h2 th:if="${user.authorities[0].authority != 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">pedidos realizados</h2>
+				<h2 th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">pedidos realizados</h2>
+				<h3 class="section-subheading text-white">este es tu historial personal de pedidos, aqui todas tus compras seran almacenadas</h3>
 			</div>
 			<div class="lista-card-container">
 
-				<div th:if="${#lists.isEmpty(lista)}">
-					<h3>TODAVIA NO TIENES NINGUN PEDIDO REALIZADO PRESIONA AQUI PARA IR A NUESTRA SECCION DE PRODUCTOS
-						<a class="btn btn-primary btn-xl text-uppercase" href="/producto/lista">comprar</a>
+				<div class="d-flex flex-column justify-content-center" th:if="${#lists.isEmpty(lista)}">
+					<h3>no realizaste ninguna compra aun :(
 					</h3>
+					<a class="btn btn-primary btn-xl text-uppercase" href="/producto/lista">comprar</a>
 				</div>
 
 				<!-- Portfolio item 1-->
