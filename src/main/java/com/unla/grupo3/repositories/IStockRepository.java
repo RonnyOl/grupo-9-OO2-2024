@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo3.entities.Producto;
@@ -20,6 +21,6 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
 	public abstract Optional<Stock> findByProducto (Producto producto);
 	
 	//Devuelve un Stock donde su atributo reabastecer = estado enviado por parametro
-	@Query("SELECT s FROM Stock s  WHERE s.reabastecer = ( : estado)")
-	public abstract List<Stock> findAllByReabastecer(boolean estado);
+	@Query("SELECT s FROM Stock s  WHERE s.reabastecer = (:estado)")
+	public abstract List<Stock> findAllByReabastecer(@Param("estado") boolean estado);
 }

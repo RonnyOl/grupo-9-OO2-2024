@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo3.entities.OrdenDeCompra;
+import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
 
@@ -34,8 +35,11 @@ public interface IOrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, S
 	public abstract List<OrdenDeCompra> findByUserAndStock(User user, Stock stock);
 	
 	//Traer una Lista de ordenes de compra que tenga el atributo tiene_lote igual al atributo que se pasa por parametro 
-	@Query("SELECT o FROM OrdenDeCompra o  WHERE o.tieneLote = ( : estado)")
+	@Query("SELECT o FROM OrdenDeCompra o  WHERE o.tieneLote = (:estado)")
 	public abstract List<OrdenDeCompra> findAllByTieneLote(@Param("estado") boolean estado);
 	
+	//Devuelve una lista de Stock(asociado a un producto) utilizada para filtrar las ordenes de compra por producto
+    @Query("SELECT DISTINCT o.stock FROM OrdenDeCompra o GROUP BY o.stock")
+	public abstract List<Stock> findAllDistinctStock();
 }
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,7 @@ import com.unla.grupo3.services.ILoteService;
 import com.unla.grupo3.services.IOrdenDeCompraService;
 import com.unla.grupo3.services.IProveedorService;
 import com.unla.grupo3.services.IStockService;
+import com.unla.grupo3.services.implementation.OrdenDeCompraService;
 import com.unla.grupo3.services.implementation.UserService;
 
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -57,7 +59,11 @@ public class OrdenDeCompraController {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
 
 		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra();
+		List<Stock> lstStock = ordenService.findAllDistinctStock();
+		
 		modelAndView.addObject("lista", lista);
+		modelAndView.addObject("listaStock", lstStock);
+
 		return modelAndView;
 	}
 
@@ -79,8 +85,8 @@ public class OrdenDeCompraController {
 
 	/// Retorna la vista que muestra una lista de Ordenes de compra realizadas en la
 	/// fecha seleccionada
-	@GetMapping("/lista/{fecha}")
-	public ModelAndView ordenesDeCompra(@PathVariable("fecha") LocalDate fecha) {
+	@GetMapping("/listafecha/{fecha}")
+	public ModelAndView ordenesDeCompra(@PathVariable("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
 
 		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra(fecha);
 
@@ -105,7 +111,7 @@ public class OrdenDeCompraController {
 
 	/// Retorna la vista que muestra una lista de Ordenes de compra que tengan
 	/// asignado el stock seleccionado
-	@GetMapping("/listausuario/{stock}")
+	@GetMapping("/listastock/{stock}")
 	public ModelAndView ordenesDeCompra(@PathVariable("stock") int idStock) {
 
 		ModelAndView modelAndView;
@@ -113,9 +119,12 @@ public class OrdenDeCompraController {
 
 		if (stock.isPresent()) {
 
-			modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
+			modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
 			List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(stock.get());
-			modelAndView.addObject("ordenCompra", lista);
+			List<Stock> lstStock = ordenService.findAllDistinctStock();
+
+			modelAndView.addObject("listaStock", lstStock);
+			modelAndView.addObject("lista", lista);
 		} else {
 			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
 		}
@@ -125,19 +134,17 @@ public class OrdenDeCompraController {
 
 	/// Retorna la vista que muestra una lista de Ordenes de compra que tengan
 	/// asignado el stock seleccionado y el usuario logueado
-	@GetMapping("/lista/{stock}")
-	public ModelAndView ordenesDeCompra(@PathVariable("stock") int idStock,
-			@AuthenticationPrincipal UserDetails userDetails) {
+	@GetMapping("/listatienelote/{tienelote}")
+	public ModelAndView ordenesDeCompra(@PathVariable("tienelote") boolean tieneLote) {
 
 		ModelAndView modelAndView;
-		Optional<Stock> stock = this.stockService.traerStock(idStock);
-		User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+		List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(tieneLote);
 
-		if (stock.isPresent() && userDetails.isAccountNonExpired()) {
-
-			modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-			List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(user,stock.get());
-			modelAndView.addObject("ordenCompra", lista);
+		
+		if (lista != null) {
+			modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
+			modelAndView.addObject("lista", lista);
+			
 		} else {
 			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
 		}

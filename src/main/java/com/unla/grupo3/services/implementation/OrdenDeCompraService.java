@@ -89,6 +89,10 @@ public class OrdenDeCompraService implements IOrdenDeCompraService {
 		return OrdenDeCompraRepository.findAllByTieneLote(estado);
 	}
 	
+	//Devuelve una lista de Stock(asociado a un producto) utilizada para filtrar las ordenes de compra por producto
+	public  List<Stock> findAllDistinctStock(){
+		return OrdenDeCompraRepository.findAllDistinctStock();
+	};
 	
 
 }
