@@ -101,16 +101,25 @@ public class StockService implements IStockService {
 	public boolean validarRabastecer(int id) {
 
 		Optional<Stock> stock = this.traerStock(id);
+		boolean anteriorValor=stock.get().isReabastecer();
 		boolean reabastecer = false;
-
+		boolean cambio=false;
+		
 		if (stock.isPresent()) {
 			if ((stock.get().getCantidadActual() <= stock.get().getPuntoMinimoDeStock())) {
 				reabastecer = true;
 			} else {
 				reabastecer = false;
 			}
+			
+			if (anteriorValor != reabastecer) {
+				cambio= this.cambiarEstadoDeReabastecer(id, reabastecer);
+				
+			}
 		}
-		return this.cambiarEstadoDeReabastecer(id, reabastecer);
+		
+		
+		return cambio;
 
 	}
 
@@ -126,10 +135,11 @@ public class StockService implements IStockService {
 			cambio = true;
 		}
 
-		if (estado == true)
+		if (estado == true) {
 			//Se llama a funcion para verificar si ahora existe un Stock a reabastecer
 			this.verificarYGenerarOrdenDeCompra();
-
+		}
+		
 		return cambio;
 	}
 

@@ -95,12 +95,13 @@ public class LoteService implements ILoteService {
 			Lote nuevoLote = new Lote(LocalDate.now(), false, ordenSinLote.get());
 			// Lo guarda en la BD
 			nuevoLote = this.agregarOModificarLote(nuevoLote);
-
+			creado = true;
 			// Modifica el atributo tieneLote de ODC
 			OrdenDeCompra ordenConLote = ordenSinLote.get();
+			ordenConLote.setTieneLote(creado);
 			ordenConLote = ordenDeCompraService.agregarOModificarOrdenDeCompra(ordenConLote);
 
-			creado = true;
+			
 		}
 
 		return creado;

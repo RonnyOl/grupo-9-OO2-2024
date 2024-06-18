@@ -19,7 +19,6 @@ import com.unla.grupo3.services.IProveedorService;
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/proveedor")
-
 public class ProveedorController {
 
 	// Vinculacion con el service principal
@@ -37,14 +36,15 @@ public class ProveedorController {
 
 		List<Proveedor> lista = proveedorService.traerProveedores();
 		modelAndView.addObject("lista", lista);
+		
 		return modelAndView;
 	}
 
 	// Retorna una vista de un proveedor en particular
 	@GetMapping("/individual/{id}")
 	public ModelAndView traerProveedor(@PathVariable("id") int id) {
+		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
-
 		Optional<Proveedor> objeto = proveedorService.traerProveedor(id);
 
 		if (objeto.isPresent()) {

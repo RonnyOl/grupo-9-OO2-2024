@@ -40,15 +40,15 @@
 				<!-- Portfolio item 1-->
 				<div th:each="orden : ${lista}" class="portfolio-item lista-card">
 
-
+					<div th:text="'ODC-0'+${orden.idOrdenDeCompra}" class="portfolio-caption-subheading fs-4"></div>
 					<div>
 						<img width="250px" height="200px"
 							th:src="@{'/assets/img/proveedores/' + ${orden.proveedor.idProveedor} + '.jpg'}">
 					</div>
 
-					<div th:text="${orden.fechaEmision}" class="portfolio-caption-subheading fs-4"></div>
+					<div th:text="'Fecha de emision:'+ ${orden.fechaEmision}" class="portfolio-caption-subheading fs-5 w-100"></div>
 
-					<div th:text="${orden.user != null ? orden.user.username : 'Esta orden se genero de forma automatica'}"
+					<div th:text="${orden.user != null ? 'Generada por:'+ orden.user.username : 'Esta orden se genero de forma automatica'}"
 						class="portfolio-caption-subheading fs-4"></div>
 
 					<a class="boton-ver" th:href="@{/ordendecompra/individual/{id}(id=${orden.idOrdenDeCompra})}"

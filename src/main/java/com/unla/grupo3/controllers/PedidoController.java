@@ -38,11 +38,9 @@ public class PedidoController {
 		this.stockService=stockService;
 		this.userService=userService;
 	}
-	
-// 	PediosListaAdmin mostrará todos los pedidos
-//	realizados por los distintos usuarios inclusive del mismo admin
+
 	@GetMapping("/pedidosrealizados")
-	public ModelAndView pedidosListaAdmin(@AuthenticationPrincipal UserDetails userDetails) {	
+	public ModelAndView PedidosRealizados(@AuthenticationPrincipal UserDetails userDetails) {							 
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
@@ -50,11 +48,9 @@ public class PedidoController {
 		modelAndView.addObject("btnVer", true);
 		return modelAndView;
 	}
-	// pedidosLista mostrará todos los pedidos realizados por el usuario logeado.
-	// Al reutilizar la misma vista que pedidosListaAdmin, el btnVer lo que hace es que
-	// el botón que solo el admin pueda ver en pedidosListaAdmin no esté en este metodo.
+	
 	@GetMapping("/pedidos")
-	public ModelAndView pedidosLista() {							 
+	public ModelAndView Pedidos() {							 
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		List<Pedido> lista = pedidoService.traerPedido();
 		modelAndView.addObject("lista", lista);
@@ -62,62 +58,52 @@ public class PedidoController {
 		return modelAndView;
 	}
 	
-	// pedidosIndividual mostrará el pedido individual mediante la id
 	@GetMapping("/individual/{id}")													
-	public ModelAndView pedidosIndividual(@PathVariable("id") int id) {
-		ModelAndView modelAndView;
+	public ModelAndView individualPedidos(@PathVariable("id") int id) {
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_PEDIDO);
+		
+		
 		Optional<Pedido> objeto = pedidoService.traerPedido(id);
 		
-		if(objeto.isPresent()) {
-			modelAndView = new ModelAndView(ViewRouteHelper.INDI_PEDIDO);
-			modelAndView.addObject("pedido", objeto.get());
-		}else {
-			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
-		}
+		if(objeto.isPresent()) modelAndView.addObject("pedido", objeto.get());
 		
 		return modelAndView;
 	}
-	// Trae una lista segun el producto seleccionado
-	@GetMapping("/pedidosrealizados/{idProducto}")
-	public ModelAndView listaPorProducto(@PathVariable("idProducto")int idProducto){
-		ModelAndView modelAndView;
-		System.out.println(idProducto);
+	
+	@GetMapping("/{idProducto}")
+	public ModelAndView individualPorProducto(@PathVariable("idProducto")int idProducto){
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_PEDIDO);
+		
 		Optional<Producto> producto= productoService.traerProducto(idProducto);
-		System.out.println(producto.get().getDescripcion());
+		
 		if (producto.isPresent()) {
-			modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
-			List<Pedido> lista = pedidoService.traerListaPedidoPorProducto(producto.get());
-			modelAndView.addObject("lista ",lista);
-			modelAndView.addObject("btnVer", true);
-		}else {
-			System.out.println("holaaa");
-			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
+			Optional<Pedido> pedido = pedidoService.traerPedido(producto.get());
+			
+			if (pedido.isPresent()) {
+				modelAndView.addObject("pedido", pedido.get());
+			}
 		}
 		
 		return modelAndView;
 	}
-	// PedidoNuevo es el post para que cuando se realice una compra, se realice el pedido
+	
 	@PostMapping("/venta/{idProducto}")
- 	public RedirectView pedidoNuevo(@PathVariable("idProducto") int idProducto, @RequestParam int cantidadAComprar, @AuthenticationPrincipal UserDetails userDetails) {
+ 	public RedirectView nuevoPedido(@PathVariable("idProducto") int idProducto, @RequestParam int cantidadAComprar, @AuthenticationPrincipal UserDetails userDetails) {
 		
 		Optional<Producto> producto =productoService.traerProducto(idProducto);
 
-		RedirectView redirect;
-		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername()); // Se obtiene el Usuario para posteriormente setearlo al pedido
+		
+		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		
 		if (producto.isPresent() && userDetails.isAccountNonExpired()) {
-			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get())); //Se guarda el pedido en la bd
-			// Al comprar, se debe realizar un baja en el stock, por lo cuál se resta segun la cantidad que se haya comprado
-			stockService.restarStock(producto.get().getStock(), cantidadAComprar); 
-			//Al restar el stock, también se debe corroborar si ha alcanzado al punto minimo, por lo que se ejecuta
-			//reabastecer
+			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get()));
+			
+			stockService.restarStock(producto.get().getStock(), cantidadAComprar);
 			stockService.validarRabastecer(producto.get().getStock().getIdStock()); 
-			redirect = new RedirectView(ViewRouteHelper.ROUTE_ORDERS);
-		}else {
-			redirect = new RedirectView(ViewRouteHelper.ERROR_500);
+			
 		}
-
-		return redirect; 
+		
+		return new RedirectView (ViewRouteHelper.ROUTE_ORDERS);//DEBE REDIRECCIONAR A UNA LISTA QUE MUESTRE LOS PEDIDOS HECHOS POR ESTE USUARIO
 	}
 
 	
