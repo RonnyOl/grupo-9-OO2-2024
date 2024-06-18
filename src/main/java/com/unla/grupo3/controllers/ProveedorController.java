@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.unla.grupo3.entities.Proveedor;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.IProveedorService;
-
+@Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/proveedor")
 public class ProveedorController {
@@ -31,7 +31,7 @@ public class ProveedorController {
 
 	// Retorna una vista de la lista de todos los proveedores
 	@GetMapping("/lista")
-	public ModelAndView traerProveedor() {
+	public ModelAndView proveedorLista() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PROVEEDORES);
 
 		List<Proveedor> lista = proveedorService.traerProveedores();
