@@ -29,5 +29,5 @@ public interface IProductoService {
 
 	// traer lista de productos con su stock
 	public List<Producto> traerProductos();
-
+	
 }

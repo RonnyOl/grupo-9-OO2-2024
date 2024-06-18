@@ -52,6 +52,7 @@
 	border-radius: 5px;
 	cursor: pointer;
 	text-decoration: none;
+	
 }
 
 /*********************************************************************************************************/
@@ -70,6 +71,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 3rem;
+	justify-content: center;
+	align-items:center;
 }
 
 

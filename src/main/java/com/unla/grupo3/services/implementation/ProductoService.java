@@ -87,5 +87,4 @@ public class ProductoService implements IProductoService {
 	public List<Producto> traerProductos() {
 		return productoRepository.findAll();
 	}
-
 }

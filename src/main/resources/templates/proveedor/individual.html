@@ -14,16 +14,16 @@
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
-	<div class="lote-individual-body">
+	<div class="proveedor-individual-body">
 
-		<div class="lote-individual-info ">
+		<div class="proveedor-individual-info ">
 			<div class="icon-container">
 				<a href="/proveedor/lista">
 					<i class="fa-solid fa-arrow-left"></i>
 				</a>
 			</div>
 			<!-- Resto del contenido -->
-			<div class="lote-individual-info-lote d-flex flex-column justify-content-center gap-1">
+			<div class="proveedor-individual-info-lote d-flex flex-column justify-content-center gap-1">
 				<div class="individual-image d-flex justify-content-center align-items-center">
 					<img width="400px" height="400px"
 						th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">

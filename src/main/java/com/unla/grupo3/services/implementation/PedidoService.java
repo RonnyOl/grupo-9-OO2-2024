@@ -1,5 +1,6 @@
 package com.unla.grupo3.services.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,4 +66,29 @@ public class PedidoService implements IPedidoService {
 	public List<Pedido> traerListaPedidoPorProducto(Producto producto){
 		return pedidoRepository.findAllByProducto(producto);
 	}
+	
+	public List<Pedido> findAllGroupedByProducto() {
+	    List<Pedido> listPedidoMatchProductos = new ArrayList<>();
+	    List<Pedido> listaPedido = this.traerPedido();
+	    for (Pedido pedido : listaPedido) {
+	        int idProductoPedido = pedido.getProducto().getIdProducto();
+	        boolean encontrado = false; // Booleano para verificar si ya existe el producto en lestPedidoMatchProductos
+
+	        // Verificar si el producto ya está en lestPedidoMatchProductos
+	        for (Pedido pedidoExistente : listPedidoMatchProductos) {
+	            if (pedidoExistente.getProducto().getIdProducto() == idProductoPedido) {
+	                encontrado = true;
+	                break;
+	            }
+	        }
+
+	        // Si no se encontró el producto en lestPedidoMatchProductos, lo agregamos
+	        if (!encontrado) {
+	        	listPedidoMatchProductos.add(pedido);
+	        }
+	    }
+
+	    return listPedidoMatchProductos;
+	}
+	
 }

@@ -3,6 +3,14 @@
 	border-bottom:1px solid rgb(128, 128, 128, 0.5);
 }
 
+.header-filtros{
+	background-color: rgb(45, 49, 55);
+	height: 5rem;
+	display: flex;
+	align-items: center;
+	justify-content:space-around;
+	border-bottom:1px solid rgb(128, 128, 128, 0.5);
+}
 
 /**CSS DEL PEDIDO INDIVIDUAL**/
 

@@ -34,7 +34,7 @@ public interface IOrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, S
 	public abstract List<OrdenDeCompra> findByUserAndStock(User user, Stock stock);
 	
 	//Traer una Lista de ordenes de compra que tenga el atributo tiene_lote igual al atributo que se pasa por parametro 
-	@Query("SELECT o FROM OrdenDeCompra o  WHERE o.tieneLote = :(estado)")
+	@Query("SELECT o FROM OrdenDeCompra o  WHERE o.tieneLote = ( : estado)")
 	public abstract List<OrdenDeCompra> findAllByTieneLote(@Param("estado") boolean estado);
 	
 }

@@ -23,7 +23,7 @@ public interface ILoteRepositoy extends JpaRepository<Lote, Serializable> {
 	public abstract List<Lote> findAllByfechaRecepcion(LocalDate fecha);
 	
 	//Traer una Lista de Lotes que tengan el atributo aceptado = al estado que llega por parametro
-	@Query("SELECT l FROM Lote l  WHERE l.aceptado = :(estado)")
+	@Query("SELECT l FROM Lote l  WHERE l.aceptado = ( : estado)")
 	public abstract List<Lote> findAllByAceptado(@Param("estado") boolean estado);
 
 	

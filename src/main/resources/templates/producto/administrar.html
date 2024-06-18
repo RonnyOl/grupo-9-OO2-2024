@@ -15,7 +15,7 @@
 			
 	<div class="administrar-seccion">
 		<div class="administrar-container">
-		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/producto/modificar}"
+		<form class="formulario-administrar d-flex flex-column p-3" action="#" th:action="@{/producto/modificar}"
 			th:object="${producto}" method="post">
 
 			</p> 
@@ -23,16 +23,16 @@
 			<input  type="hidden" th:field="${producto.idProducto}" />
 			
 			<p>
-				Nombre: <input type="text" th:field="${producto.nombre}" />
+				Nombre: <input required  type="text" th:field="${producto.nombre}" />
 			</p>
 			<p>
-				Descripcion: <input type="text" th:field="${producto.descripcion}" />
+				Descripcion: <input required type="text" th:field="${producto.descripcion}" />
 			</p>
 			<p>
-				Precio de venta: <input type="number" th:field="${producto.precioDeVenta}" />
+				Precio de venta: <input required  type="number" th:field="${producto.precioDeVenta}" />
 			</p>
 			<p>
-				Costo: <input type="number" th:field="${producto.costo}" />
+				Costo: <input required type="number" th:field="${producto.costo}" />
 			</p>
 			
 			<p th:text="${producto.habilitado ? 'El producto se encuentra habilitado': 'El producto se encuentra inhabilitado'}">
@@ -42,13 +42,13 @@
 			<input type="submit" value="Realizar cambios" />
 		</form>
 		
-		<form class="formulario-administrar d-flex flex-column border p-3 justify-content-center" action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
-		    <button type="submit" th:text="${producto.habilitado ? 'Deshabilitar producto':'Habilitar producto'}" >
+		<form class="formulario-administrar d-flex flex-column p-3 justify-content-center" action="#" th:action="@{/producto/habilitacion/{id}(id=${producto.idProducto})}" method="post">
+		    <button class="btn" type="submit" th:classappend="${producto.habilitado} ? btn-danger: btn-success" th:text="${producto.habilitado ? 'Deshabilitar producto':'Habilitar producto'}" >
 				
 			</button>
 			</form>
 		
-			<form th:if="${producto.stock != null}" class="formulario-administrar d-flex flex-column border p-3 justify-content-center" action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
+			<form th:if="${producto.stock != null}" class="formulario-administrar d-flex flex-column p-3 justify-content-center" action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
 				<input  type="hidden" value="${producto.stock.idStock}" />
 					<p th:text="'Punto mínimo de stock  : ' + ${producto.stock.puntoMinimoDeStock}"></p>
 					<p th:text="'Cantidad actual : ' + ${producto.stock.cantidadActual}"></p>
@@ -56,7 +56,7 @@
 
 					<input type="submit" value="Generar una nueva Orden de Compra" />
 			</form>
-			<form th:if="${producto.stock == null}" class="formulario-administrar d-flex flex-column border p-3 justify-content-center"  action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
+			<form th:if="${producto.stock == null}" class="formulario-administrar d-flex flex-column justify-content-center"  action="#" th:action="@{/ordendecompra/nueva/{id}(id=${producto.stock.idStock})}" method="get">		
 								<p> No se cuenta con stock, se tiene que generar orden de compra</p>
 								
 

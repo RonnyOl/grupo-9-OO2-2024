@@ -15,62 +15,64 @@
 	<!-- Core theme CSS (includes Bootstrap) -->
 	<link href="/css/styles.css" rel="stylesheet" />
 	<link href="/css/stylesHome.css" rel="stylesheet" />
+
 </head>
 
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
-			            <div class="container">
-			                <a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"style="width: 80px; height: auto;" /></a>
-			                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-			                    Menu
-			                    <i class="fas fa-bars ms-1"></i>
-			                </button>
-			                <div class="collapse navbar-collapse" id="navbarResponsive">
-			                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-									
-			                        <li class="nav-item"><a class="nav-link" href="/index#info">Info</a></li>
-			                        <li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
-									<li class="nav-item"><a class="nav-link" href="/pedido/pedidosrealizados">Mis pedidos</a></li>
-			                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	<nav class="navbar navbar-expand-lg navbar-dark"
+		style="background-color: rgb(61, 66, 75);border-bottom:1px solid rgb(128, 128, 128, 0.5) ;" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="/index"><img src="/assets/img/logoPagina.png" alt="pageLogo"
+					style="width: 80px; height: auto;" /></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars ms-1"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 
-			                    </ul>
-			                </div>
-			            </div>
-	</nav>
-	<!--------------------- -->
-	<!-- Page Content -->
-	<div class="min-vh-100">
-		<!-- Page Heading/Breadcrumbs -->
-		<h1 class="mt-4 mb-3">500
-			<small>E</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item">
-				<a href="/">pagina inicial</a>
-			</li>
-			<li class="breadcrumb-item active">error: 500</li>
-		</ol>
-		<div class="jumbotron">
-			<img src="/assets/img/errorFoto.jpg" alt=":(" width="300" height="200">
-			
+					<li class="nav-item"><a class="nav-link" href="/index#info">Info</a></li>
+					<li class="nav-item"><a class="nav-link" href="/producto/lista">Productos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pedido/pedidosrealizados">Mis pedidos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+
+				</ul>
+			</div>
 		</div>
+	</nav>
+
+	<div class="min-vh-100 error-404 d-flex justify-content-center flex-column align-items-center text-light gap-2">
+
+		<h1 class="">ERROR 505</h1>
+		<div class="text-center">
+			<h3>Error en el servidor</h3>
+			<div class="d-flex flex-row gap-3">
+				<a href="javascript:history.back()" class="fs-5 text-dark btn btn-light">Volver atrás</a>
+				<a href="/" class="fs-5 text-dark btn btn-light">Volver al menú principal</a>
+			</div>
+		</div>
+		<img src="/assets/img/errorFoto.jpg" alt=":(" width="300" height="200">
+
+	</div>
 
 	</div>
 
 
 	<!-- /.container -->
 	<footer class="footer d-flex justify-content-center align-items-center fs-4">
-		    <div class="footer-content w-100 ">
-		        <p>&copy; 2024 Todos los derechos reservados</p>
-				<div >
-					<a href="https://github.com/RonnyOl/grupo-9-OO2-2024" class="github-icon" target="_blank"><i class="fab fa-github"></i></a>
-					
-					
-				</div>
-		    </div>
-			
-		</footer>
+		<div class="footer-content w-100 ">
+			<p>&copy; 2024 Todos los derechos reservados</p>
+			<div>
+				<a href="https://github.com/RonnyOl/grupo-9-OO2-2024" class="github-icon" target="_blank"><i
+						class="fab fa-github"></i></a>
+
+
+			</div>
+		</div>
+
+	</footer>
 	<!-- Bootstrap core JavaScript -->
 	<script src="/vendor/jquery/jquery.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

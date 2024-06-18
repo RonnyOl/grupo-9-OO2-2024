@@ -32,4 +32,5 @@ public interface IPedidoService {
 	// traer lista de los pedidos por un producto
 	public List<Pedido> traerListaPedidoPorProducto(Producto producto);
 
+	public List<Pedido> findAllGroupedByProducto();
 }

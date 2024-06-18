@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo3.entities.Pedido;
@@ -31,4 +31,5 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	public abstract List<Pedido> findAllByUser (User user);
 	
 	public abstract List<Pedido> findAllByProducto (Producto producto);
+	
 }

@@ -23,25 +23,46 @@
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
+	<header class="header-filtros w-100">
+
+		<select name="idProducto" id="idProducto" class="btn btn-light fst-normal">
+		    <option disabled selected>Seleccione un producto para filtrar</option>
+		    <option th:each="pedido : ${listaP}" 
+		            th:value="${pedido.producto.idProducto}"
+		            th:text="${pedido.producto.nombre}">
+		    </option>
+		</select>
+
+		<!-- Placeholder para el enlace dinámico -->
+		<a id="linkPedidos" class="btn btn-primary" href="#">Ver pedidos realizados</a>
+
+
+
+
+
+	</header>
 
 	<!-- Portfolio Grid-->
 	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
 			<div class="text-center">
-				
-				
-				<div class="d-flex flex-column" th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN' && btnVer==false}">
+
+
+				<div class="d-flex flex-column" th:each="authority : ${user.authorities}"
+					th:if="${authority.authority == 'ROLE_ADMIN' && btnVer==false}">
 					<h2 class="text-light">Aqui se muestran todos los pedidos realizados en la tienda</h2>
-					<h3 class="section-subheading text-white">Este es el historial total de pedidos, aqui todas las compras seran almacenadas</h3>
+					<h3 class="section-subheading text-white">Este es el historial total de pedidos, aqui todas las
+						compras seran almacenadas</h3>
 
 				</div>
-				
-				<div class="d-flex flex-column"  th:if="${btnVer==true}">
-						<h2 class="section-subheading text-white"> Tus Pedidos Realizados</h2>
-						<h3 class="section-subheading text-white">Este es tu historial personal de pedidos, aqui todas tus compras seran almacenadas</h3>
+
+				<div class="d-flex flex-column" th:if="${btnVer==true}">
+					<h2 class="section-subheading text-white"> Tus Pedidos Realizados</h2>
+					<h3 class="section-subheading text-white">Este es tu historial personal de pedidos, aqui todas tus
+						compras seran almacenadas</h3>
 
 				</div>
-					
+
 
 			</div>
 			<div class="lista-card-container">
@@ -57,13 +78,13 @@
 
 
 					<div th:text="'ORDER-0'+${pedido.idPedido}" class="portfolio-caption-subheading fs-4"></div>
-						<div th:text="${pedido.producto.nombre}" class="portfolio-caption-heading fs-3"></div>
-					
+					<div th:text="${pedido.producto.nombre}" class="portfolio-caption-heading fs-3"></div>
+
 					<img width="250px" height="250px"
 						th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}">
 					<div>
 						<span th:text="'Total: ' + ${pedido.total}"></span></br>
-						<span  th:text="'Realizado por el cliente: ' + ${pedido.user.username}"></span>
+						<span th:text="'Realizado por el cliente: ' + ${pedido.user.username}"></span>
 						<div class="mt-3">
 							<a class="boton-compra " th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
 								style="text-decoration: none;">Mas info</a>
@@ -73,22 +94,33 @@
 
 
 				</div>
-				<div class="d-flex flex-column" th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN' && btnVer==true}">
+				<div class="d-flex flex-column" th:each="authority : ${user.authorities}"
+					th:if="${authority.authority == 'ROLE_ADMIN' && btnVer==true}">
 					<h3 class="text-light">Presiona aqui para ver todos los pedidos realizados en la tienda</h3>
 					<a class="btn btn-primary btn-xl text-uppercase" href="/pedido/pedidos">Ver pedidos</a>
 				</div>
 			</div>
-			</section>
-			<div th:include="/footer/footer.html::footerGeneral"></div>
-			<!-- Bootstrap core JS-->
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-			<!-- Core theme JS-->
-			<script src="js/scripts.js"></script>
-			<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-			<!-- * *                               SB Forms JS                               * *-->
-			<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-			<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-			<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+	</section>
+	<div th:include="/footer/footer.html::footerGeneral"></div>
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<!-- * *                               SB Forms JS                               * *-->
+	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<script>
+	    // Capturar el cambio en el select
+	    document.getElementById('idProducto').addEventListener('change', function() {
+	        var idProducto = this.value; // Obtener el valor del idProducto seleccionado
+	        // Construir la URL dinámica
+	        var url = '/pedido/pedidosrealizados/' + idProducto;
+	        // Actualizar el atributo href del enlace
+	        document.getElementById('linkPedidos').setAttribute('href', url);
+	    });
+	</script>
+	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 
 </html>

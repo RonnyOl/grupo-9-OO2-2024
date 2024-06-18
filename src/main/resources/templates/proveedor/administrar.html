@@ -28,15 +28,15 @@
 				
 				<div class="d-flex flex-column w-100">
 					<p class="fs-5 text-center">
-					Nombre de la Empresa: <input class="w-100" type="text" th:field="${proveedor.nombreEmpresa}" />
+					Nombre de la Empresa: <input required class="w-100" type="text" th:field="${proveedor.nombreEmpresa}" />
 				</p>
 
 					<p class="fs-5 text-center">
-					CUIL: <input class="w-100" type="text" th:field="${proveedor.cuil}" />
+					CUIL: <input required class="w-100" type="text" th:field="${proveedor.cuil}" />
 					</p>
 
 				<p class="fs-5 text-center">
-					Direccion: <input class="w-100" type="text" th:field="${proveedor.direccion}" />
+					Direccion: <input required class="w-100" type="text" th:field="${proveedor.direccion}" />
 				</p>
 
 				<input class="fs-5 btn btn-success" type="submit" value="Realizar cambios" />

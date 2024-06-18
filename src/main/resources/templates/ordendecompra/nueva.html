@@ -9,50 +9,53 @@
 	<link href="/css/stylesOdc.css" rel="stylesheet" />
 </head>
 
-<body style="">
+<body>
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
 	<div class="nueva-odc-body">
-		<div class="nueva-odc-container" >
-	
-		<h3>Formulario para generar una nueva orden de compra:</h3>	
-		<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/ordendecompra/crear}"
-			th:object="${orden}" method="post">
+		<div class="nueva-odc-container">
 
-				<input  type="hidden" th:field="*{idOrdenDeCompra}" />
-				<input  type="hidden" th:field="*{stock.idStock}" />
-				<input  type="hidden" th:field="*{stock.cantidadActual}" />
-				<input  type="hidden" th:field="*{stock.puntoMinimoDeStock}" />
-				<input  type="hidden" th:field="*{stock.reabastecer}" />
-				
+			<h3 class="text-light">Formulario para generar una nueva orden de compra:</h3>
+			<form class="formulario-administrar d-flex flex-column border p-3" action="#"
+				th:action="@{/ordendecompra/crear}" th:object="${orden}" method="post">
+
+				<input type="hidden" th:field="*{idOrdenDeCompra}" />
+				<input type="hidden" th:field="*{stock.idStock}" />
+				<input type="hidden" th:field="*{stock.cantidadActual}" />
+				<input type="hidden" th:field="*{stock.puntoMinimoDeStock}" />
+				<input type="hidden" th:field="*{stock.reabastecer}" />
+
 				<!--Atributos de orden de compra-->
-				
-				Producto a comprar: <input type="text" th:field="*{stock.producto.nombre} " />
-			</p>
-			<p>
-				Cantidad a comprar: <input type="number" th:field="*{cantidadAComprar}" />
-			</p>
-			
-			<p th:text="'Usuario asignado: ' + ${user.username}">
-			</p>
-			
-			<input  type="hidden" th:field="${orden.tieneLote}" value="false"/>
 
-			<p>
-				    Proveedor:
-				    <select th:field="${orden.proveedor}">
-				        <option value="" disabled selected>Seleccione un proveedor</option>
-				        <option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}" th:text="${proveedor.nombreEmpresa}">
-				        </option>
-				    </select>
+				Producto a comprar: <input required type="text" th:field="*{stock.producto.nombre} " />
+				</p>
+				<p>
+					Cantidad a comprar: <input required type="number" th:field="*{cantidadAComprar}" />
+				</p>
+
+				<p th:text="'Usuario asignado: ' + ${user.username}">
+				</p>
+
+				<input required type="hidden" th:field="${orden.tieneLote}" value="false" />
+
+				<p>
+					Proveedor:
+					<select th:field="${orden.proveedor}">
+						<option value="" disabled selected>Seleccione un proveedor</option>
+						<option th:each="proveedor : ${proveedores}" th:value="${proveedor.idProveedor}"
+							th:text="${proveedor.nombreEmpresa}">
+						</option>
+					</select>
 				</p>
 
 
-			<input type="submit" value="Generar Orden de Compra" />
-		</form>
-		
-		<div th:include="/footer/footer.html::footerGeneral"></div>
+				<input type="submit" value="Generar Orden de Compra" />
+			</form>
+		</div>
+	</div>
+
+	<div th:include="/footer/footer.html::footerGeneral"></div>
 </body>
 
 </html>

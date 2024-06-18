@@ -46,8 +46,10 @@ public class PedidoController {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
+		List<Pedido> listaProductos = pedidoService.findAllGroupedByProducto();
 		modelAndView.addObject("lista", lista);
 		modelAndView.addObject("btnVer", true);
+		modelAndView.addObject("listaP", listaProductos);
 		return modelAndView;
 	}
 	// pedidosLista mostrará todos los pedidos realizados por el usuario logeado.
@@ -80,17 +82,17 @@ public class PedidoController {
 	// Trae una lista segun el producto seleccionado
 	@GetMapping("/pedidosrealizados/{idProducto}")
 	public ModelAndView listaPorProducto(@PathVariable("idProducto")int idProducto){
-		ModelAndView modelAndView;
-		System.out.println(idProducto);
+		ModelAndView modelAndView;	
 		Optional<Producto> producto= productoService.traerProducto(idProducto);
-		System.out.println(producto.get().getDescripcion());
+
 		if (producto.isPresent()) {
 			modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 			List<Pedido> lista = pedidoService.traerListaPedidoPorProducto(producto.get());
-			modelAndView.addObject("lista ",lista);
+			List<Pedido> listaProductos = pedidoService.findAllGroupedByProducto();
+			modelAndView.addObject("lista",lista);
+			modelAndView.addObject("listaP", listaProductos);
 			modelAndView.addObject("btnVer", true);
 		}else {
-			System.out.println("holaaa");
 			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
 		}
 		

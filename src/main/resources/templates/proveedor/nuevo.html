@@ -18,31 +18,33 @@
         <div class="nuevo-container">
             <h3>Formulario para generar un nuevo proveedor:</h3>
 
-            <form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/proveedor/crear}"
+            <form class="formulario-nuevo d-flex flex-column border " action="#" th:action="@{/proveedor/crear}"
                 th:object="${nuevoProveedor}" method="post">
                 <div class="back-button">
                     <a class="text-dark fs-4" href="javascript:history.back()">
                         <i class="fa-solid fa-arrow-left"></i>
                     </a>
                 </div>
-                <p>
-                    <input type="hidden" th:field="${nuevoProveedor.idProveedor}" />
+				<div class="d-flex flex-column w-100">
+                <p class="fs-5 text-center">
+                    <input class="w-100 " type="hidden" th:field="${nuevoProveedor.idProveedor}" />
                 </p>
 
-                <p>
+                <p class="fs-5 text-center">
                     Nombre de la Empresa:
-                    <input type="text" th:field="*{nombreEmpresa}" />
+                    <input required class="w-100" type="text" th:field="*{nombreEmpresa}" />
                 </p>
-                <p>
+                <p class="fs-5 text-center">
                     CUIL de la Empresa:
-                    <input type="text" th:field="*{cuil}" />
+                   <input required class="w-100"  th:field="*{cuil}" />
                 </p>
-                <p>
+                <p class="fs-5 text-center">
                     Dirección de la Empresa:
-                    <input type="text" th:field="*{direccion}" />
+                   <input required class="w-100"  th:field="*{direccion}" />
                 </p>
 
-                <input type="submit" value="Generar nuevo proveedor" />
+                <input class="btn btn-success" type="submit" value="Generar nuevo proveedor" />
+				</div>
             </form>
         </div>
     </div>

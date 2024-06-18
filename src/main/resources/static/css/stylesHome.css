@@ -68,6 +68,7 @@
     gap: 3rem;
 }
 
+
 .administrar-btn {
     padding: 1rem 5rem;
     background-color: #161917;
@@ -101,4 +102,18 @@
 
 .administar-boton4 {
     background-color: #ff9934;
+}
+
+/**Errores**/
+
+.error-404{
+	background-color: #373b44;
+}
+.error-404 img{
+	margin-top: 5rem;
+	width: 25%;
+	height: 25%;
+border-radius: 50%;
+filter: drop-shadow(5px 10px 4px #000);
+border: 25px double #fff;
 }

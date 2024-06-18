@@ -29,15 +29,15 @@
 				<span>Cantidad solicitada:</span>
 				<span class="valor" th:text="${ordenDeCompra.cantidadAComprar}"></span>
 			</div>
-			
+
 			<div class="detalle">
-					<span>Costo individual:</span>
-					<span class="valor" th:text="${ordenDeCompra.stock.producto.costo}"></span>
+				<span>Costo individual:</span>
+				<span class="valor" th:text="${ordenDeCompra.stock.producto.costo}"></span>
 			</div>
-			
+
 			<div class="detalle">
-					<span>Total a pagar:</span>
-					<span class="valor" th:text="${ordenDeCompra.calcularTotal()}"></span>
+				<span>Total a pagar:</span>
+				<span class="valor" th:text="${ordenDeCompra.calcularTotal()}"></span>
 			</div>
 
 			<div class="detalle">
@@ -47,7 +47,8 @@
 
 			<div class="detalle">
 				<span>Generada por:</span>
-				<span class="valor" th:text="${ordenDeCompra.user != null ? ordenDeCompra.user.username : 'Se genero automaticamente'}"></span>
+				<span class="valor"
+					th:text="${ordenDeCompra.user != null ? ordenDeCompra.user.username : 'Se genero automaticamente'}"></span>
 			</div>
 
 			<div class="detalle">
@@ -55,9 +56,9 @@
 				<span class="valor" th:text="${ordenDeCompra.proveedor.nombreEmpresa}"></span>
 
 			</div>
-
-			<a href="/ordendecompra/lista" class="btn-continuar">Volver</a>
-
+			<div class="w-100 d-flex justify-content-center">
+				<a href="/ordendecompra/lista" class="btn-continuar">Volver</a>
+			</div>
 		</div>
 	</div>
 
