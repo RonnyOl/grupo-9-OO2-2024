@@ -58,6 +58,16 @@
 		</div>
 		</div>
 		<div th:include="/footer/footer.html::footerGeneral"></div>
+		<script>
+			    // Capturar el cambio en el select
+			    document.getElementById('idProducto').addEventListener('change', function() {
+			        var idProducto = this.value; // Obtener el valor del idProducto seleccionado
+			        // Construir la URL dinámica
+			        var url = '/pedido/pedidosrealizados/' + idProducto;
+			        // Actualizar el atributo href del enlace
+			        document.getElementById('linkPedidos').setAttribute('href', url);
+			    });
+			</script>
 </body>
 
 </html>

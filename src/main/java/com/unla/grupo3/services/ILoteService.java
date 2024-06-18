@@ -21,7 +21,7 @@ public interface ILoteService {
 	public List<Lote> traerLote();
 
 	// Traer Lista de Lotes segun su Fecha de Generacion
-	public List<Lote> traerLote(LocalDate fecha);
+	public List<Lote> findAllByfechaRecepcion(LocalDate fecha);
 
 	// Traer un Lote por su ID
 	public Optional<Lote> traerLote(int id);

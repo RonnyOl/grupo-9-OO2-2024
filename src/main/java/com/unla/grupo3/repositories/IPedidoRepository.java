@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo3.entities.Pedido;
@@ -32,4 +33,13 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	
 	public abstract List<Pedido> findAllByProducto (Producto producto);
 	
+	//Devuelve una lista de Pedido(asociado a un producto) utilizada para filtrar los pedidos por producto
+    @Query("SELECT DISTINCT p.producto FROM Pedido p GROUP BY p.producto")
+    public abstract List<Producto> findAllDistinctPedido();
+    
+ // Devuelve una lista de productos distintos asociados a un pedido y filtrados por usuario
+    @Query("SELECT DISTINCT p.producto FROM Pedido p WHERE p.user = (:user)")
+    public abstract List<Producto> findAllDistinctPedidoByUser(@Param("user") User usuario);
+
 }
+

@@ -12,9 +12,22 @@
             border-radius: 10px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
+		.fs-5{
+			font-size: 1.3rem;
+			background-color: azure;
+			padding: 0.5rem;
+			border-radius: 2rem;
+			border:3px solid #000;
+		}
+		input {
+			
+			border:3px solid #000!important;
+			width: 15rem!important;
+			padding: 0.5rem!important;
+		}
     </style>
 </head>
 <body style="background-image:url('https://i.imgur.com/aRtvc4V.png');background-position: center;">
@@ -24,16 +37,16 @@
             <div class="card-body">
                 <h1 class="card-title text-center mb-4 text-white">Login</h1>
                 <form th:action="@{/loginprocess}" method="post">
-                    <div class="form-group mb-3">
-                        <label for="username" class="form-label text-dark"><b>Nombre de usuario</b></label>
+                    <div class="form-group mb-3 d-flex flex-column justify-content-center text-center align-items-center">
+                        <label for="username" class="form-label text-dark fs-5 w-100"><b class="text-dark">Nombre de usuario</b></label>
                         <input type="text" class="form-control " name="username" id="username" placeholder="Username" required>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="password" class="form-label text-dark"><b>Contraseña</b></label>
+                    <div class="form-group mb-3 d-flex flex-column justify-content-center text-center align-items-center">
+                        <label for="username" class="form-label text-dark fs-5 w-100"><b class="text-dark">Contraseña</b></label>
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-dark btn-block">Login</button>
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
                     </div>
                 </form>
                 <div th:if="${error != null}" class="alert alert-danger mt-3">

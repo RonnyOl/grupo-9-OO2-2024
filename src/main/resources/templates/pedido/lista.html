@@ -27,9 +27,9 @@
 
 		<select name="idProducto" id="idProducto" class="btn btn-light fst-normal">
 		    <option disabled selected>Seleccione un producto para filtrar</option>
-		    <option th:each="pedido : ${listaP}" 
-		            th:value="${pedido.producto.idProducto}"
-		            th:text="${pedido.producto.nombre}">
+		    <option th:each="producto : ${listaP}" 
+		            th:value="${producto.idProducto}"
+		            th:text="${producto.nombre}">
 		    </option>
 		</select>
 

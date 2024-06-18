@@ -3,6 +3,7 @@ package com.unla.grupo3.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -38,27 +39,29 @@ public class PedidoController {
 		this.stockService=stockService;
 		this.userService=userService;
 	}
-	
-// 	PediosListaAdmin mostrará todos los pedidos
-//	realizados por los distintos usuarios inclusive del mismo admin
+	// pedidosLista mostrará todos los pedidos realizados por el usuario logeado.
+		// Al reutilizar la misma vista que pedidosListaAdmin, el btnVer lo que hace es que
+		// el botón que solo el admin pueda ver en pedidosListaAdmin no esté en este metodo.
 	@GetMapping("/pedidosrealizados")
-	public ModelAndView pedidosListaAdmin(@AuthenticationPrincipal UserDetails userDetails) {	
+	public ModelAndView pedidosLista(@AuthenticationPrincipal UserDetails userDetails) {	
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		User user= userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
 		List<Pedido> lista = pedidoService.traerListaPedidoPorUsuario(user);
-		List<Pedido> listaProductos = pedidoService.findAllGroupedByProducto();
+		List<Producto> listaProductos = pedidoService.findAllDistinctPedidoByUser(user);
 		modelAndView.addObject("lista", lista);
 		modelAndView.addObject("btnVer", true);
 		modelAndView.addObject("listaP", listaProductos);
 		return modelAndView;
 	}
-	// pedidosLista mostrará todos los pedidos realizados por el usuario logeado.
-	// Al reutilizar la misma vista que pedidosListaAdmin, el btnVer lo que hace es que
-	// el botón que solo el admin pueda ver en pedidosListaAdmin no esté en este metodo.
+// 	PediosListaAdmin mostrará todos los pedidos
+//	realizados por los distintos usuarios inclusive del mismo admin
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/pedidos")
-	public ModelAndView pedidosLista() {							 
+	public ModelAndView pedidosListaAdmin() {							 
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 		List<Pedido> lista = pedidoService.traerPedido();
+		List<Producto> listaProductos = pedidoService.findAllDistinctPedido();
+		modelAndView.addObject("listaP", listaProductos);
 		modelAndView.addObject("lista", lista);
 		modelAndView.addObject("btnVer", false);
 		return modelAndView;
@@ -88,7 +91,7 @@ public class PedidoController {
 		if (producto.isPresent()) {
 			modelAndView = new ModelAndView(ViewRouteHelper.PEDIDOS);
 			List<Pedido> lista = pedidoService.traerListaPedidoPorProducto(producto.get());
-			List<Pedido> listaProductos = pedidoService.findAllGroupedByProducto();
+			List<Producto> listaProductos = pedidoService.findAllDistinctPedido();
 			modelAndView.addObject("lista",lista);
 			modelAndView.addObject("listaP", listaProductos);
 			modelAndView.addObject("btnVer", true);
