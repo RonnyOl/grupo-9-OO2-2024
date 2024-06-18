@@ -31,8 +31,8 @@
 			
 			<div class="text-center">
 
-				<h2 class="section-heading text-uppercase text-white fs-1">Proveedores</h2>
-				<h3 class="section-subheading text-white">Proveedores generados</h3>
+				<h2 class="section-heading text-uppercase text-white fs-1">Visualiza y Administra los Proveedores de la Tienda</h2>
+				<h3 class="section-subheading text-white">Aqui se encuentran nuestros proveedores</h3>
 
 			</div>
 
@@ -42,11 +42,10 @@
 				<div th:each="proveedor : ${lista}" class="portfolio-item lista-card">
 
 					<div>
-
 						<img width="250px" height="250px"
 							th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
-						<div th:text="${proveedor.cuil}" class="portfolio-caption-heading fs-3"></div>
-						<div th:text="${proveedor.direccion}" class="portfolio-caption-heading fs-3"></div>
+						<div th:text="'Cuil: '+ ${proveedor.cuil}" class="portfolio-caption-heading fs-3"></div>
+						<div th:text="'Direccion: '+ ${proveedor.direccion}" class="portfolio-caption-heading fs-3"></div>
 					</div>
 
 					<a class="boton-verlote" th:href="@{/proveedor/individual/{id}(id=${proveedor.idProveedor})}"

@@ -77,44 +77,76 @@ public class OrdenDeCompraController {
 		return modelAndView;
 	}
 
-	/// Retorna la vista que muestra una lista de Ordenes de compra realizadas en la fecha seleccionada
+	/// Retorna la vista que muestra una lista de Ordenes de compra realizadas en la
+	/// fecha seleccionada
 	@GetMapping("/lista/{fecha}")
-	public ModelAndView individualOrden(@PathVariable("fecha") LocalDate fecha) {
+	public ModelAndView ordenesDeCompra(@PathVariable("fecha") LocalDate fecha) {
 
 		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra(fecha);
-		
-	
-			ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
-			modelAndView.addObject("lista", lista);
-		
-		return modelAndView;
-	}
-	
-	
-	/// POR USER
-	/// la estructura esta armada, hay que cambiar varias cosas
 
-	/*
-	 * @GetMapping("/particular/{id}") public ModelAndView
-	 * individualStock(@PathVariable("producto") int id) { ModelAndView modelAndView
-	 * = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-	 * 
-	 * Optional<Stock> objeto = stockService.traerStock(p.get());
-	 * modelAndView.addObject("stock", objeto.get()); return modelAndView; }
-	 */
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
+		modelAndView.addObject("lista", lista);
 
-	/// POR STOCK
-
-	@GetMapping("/individual/stock/{id}")
-	public ModelAndView individualOrdenCompra(@PathVariable("stock") int id) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-
-		Optional<Stock> p = this.stockService.traerStock(id);
-		List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(p.get());
-		modelAndView.addObject("ordenCompra", lista);
 		return modelAndView;
 	}
 
+	/// Retorna la vista que muestra una lista de Ordenes de compra realizadas por
+	/// el usuario logueado
+	@GetMapping("/listausuario/")
+	public ModelAndView ordenesDeCompra(@AuthenticationPrincipal UserDetails userDetails) {
+
+		User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra(user);
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
+		modelAndView.addObject("lista", lista);
+
+		return modelAndView;
+	}
+
+	/// Retorna la vista que muestra una lista de Ordenes de compra que tengan
+	/// asignado el stock seleccionado
+	@GetMapping("/listausuario/{stock}")
+	public ModelAndView ordenesDeCompra(@PathVariable("stock") int idStock) {
+
+		ModelAndView modelAndView;
+		Optional<Stock> stock = this.stockService.traerStock(idStock);
+
+		if (stock.isPresent()) {
+
+			modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
+			List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(stock.get());
+			modelAndView.addObject("ordenCompra", lista);
+		} else {
+			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
+		}
+
+		return modelAndView;
+	}
+
+	/// Retorna la vista que muestra una lista de Ordenes de compra que tengan
+	/// asignado el stock seleccionado y el usuario logueado
+	@GetMapping("/lista/{stock}")
+	public ModelAndView ordenesDeCompra(@PathVariable("stock") int idStock,
+			@AuthenticationPrincipal UserDetails userDetails) {
+
+		ModelAndView modelAndView;
+		Optional<Stock> stock = this.stockService.traerStock(idStock);
+		User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+
+		if (stock.isPresent() && userDetails.isAccountNonExpired()) {
+
+			modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
+			List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(user,stock.get());
+			modelAndView.addObject("ordenCompra", lista);
+		} else {
+			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
+		}
+
+		return modelAndView;
+	}
+
+	// Retorna una vista para generar una Orden de compra que se vincula con el
+	// Stock enviado por parametro
 	@GetMapping("/nueva/{idStock}")
 	public ModelAndView nuevaOrdenDeCompra(@PathVariable("idStock") int idStock) {
 
@@ -133,6 +165,8 @@ public class OrdenDeCompraController {
 		return modelAndView;
 	}
 
+	// Redirecciona a la vista individual de la orden de compra que se crea y se
+	// guarda en la BD
 	@PostMapping("/crear")
 	public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra,
 			@AuthenticationPrincipal UserDetails userDetails) {

@@ -14,9 +14,11 @@
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
 	<div class="nuevo-seccion">
-		<div class="nuevo-container">
-
+		
+		<div class="nuevo-container ">
+		   
 			<h3>Formulario para generar un nuevo proveedor:</h3>
+			
 			<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/proveedor/crear}"
 				th:object="${nuevoProveedor}" method="post">
 

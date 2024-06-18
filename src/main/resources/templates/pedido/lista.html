@@ -28,9 +28,21 @@
 	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
 			<div class="text-center">
-				<h2 th:if="${user.authorities[0].authority != 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">pedidos realizados</h2>
-				<h2 th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" class="section-heading text-uppercase text-white fs-1">pedidos realizados</h2>
-				<h3 class="section-subheading text-white">este es tu historial personal de pedidos, aqui todas tus compras seran almacenadas</h3>
+				
+				
+				<div class="d-flex flex-column" th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN' && btnVer==false}">
+					<h2 class="text-light">Aqui se muestran todos los pedidos realizados en la tienda</h2>
+					<h3 class="section-subheading text-white">Este es el historial total de pedidos, aqui todas las compras seran almacenadas</h3>
+
+				</div>
+				
+				<div class="d-flex flex-column"  th:if="${btnVer==true}">
+						<h2 class="section-subheading text-white"> Tus Pedidos Realizados</h2>
+						<h3 class="section-subheading text-white">Este es tu historial personal de pedidos, aqui todas tus compras seran almacenadas</h3>
+
+				</div>
+					
+
 			</div>
 			<div class="lista-card-container">
 
@@ -50,7 +62,7 @@
 					<img width="250px" height="250px"
 						th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}">
 					<div>
-						<span th:text="'Total: ' + ${pedido.total}"></span>
+						<span th:text="'Total: ' + ${pedido.total}"></span></br>
 						<span  th:text="'Realizado por el cliente: ' + ${pedido.user.username}"></span>
 						<div class="mt-3">
 							<a class="boton-compra " th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
@@ -61,10 +73,8 @@
 
 
 				</div>
-				<div class="d-flex flex-column" th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}">
-					<h3 class="text-light">TOCA AQUI PARA VER TODAS LOS PEDIDOS REALIZADOS EN LA TIENDA
-
-					</h3>
+				<div class="d-flex flex-column" th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN' && btnVer==true}">
+					<h3 class="text-light">Presiona aqui para ver todos los pedidos realizados en la tienda</h3>
 					<a class="btn btn-primary btn-xl text-uppercase" href="/pedido/pedidos">Ver pedidos</a>
 				</div>
 			</div>

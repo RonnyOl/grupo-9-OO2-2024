@@ -55,6 +55,10 @@ public class OrdenDeCompra {
 		this.tieneLote = tieneLote;
 	}
 	
+	public float calcularTotal() {
+		return this.stock.getProducto().getCosto()*this.cantidadAComprar;
+	}
+	
 	
 
 	

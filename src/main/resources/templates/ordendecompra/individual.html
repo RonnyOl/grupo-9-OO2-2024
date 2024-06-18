@@ -29,6 +29,16 @@
 				<span>Cantidad solicitada:</span>
 				<span class="valor" th:text="${ordenDeCompra.cantidadAComprar}"></span>
 			</div>
+			
+			<div class="detalle">
+					<span>Costo individual:</span>
+					<span class="valor" th:text="${ordenDeCompra.stock.producto.costo}"></span>
+			</div>
+			
+			<div class="detalle">
+					<span>Total a pagar:</span>
+					<span class="valor" th:text="${ordenDeCompra.calcularTotal()}"></span>
+			</div>
 
 			<div class="detalle">
 				<span>Fecha de emisión:</span>
@@ -46,7 +56,7 @@
 
 			</div>
 
-			<a href="/producto/lista" class="btn-continuar">Volver</a>
+			<a href="/ordendecompra/lista" class="btn-continuar">Volver</a>
 
 		</div>
 	</div>
