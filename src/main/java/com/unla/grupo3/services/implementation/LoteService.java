@@ -58,9 +58,9 @@ public class LoteService implements ILoteService {
 	}
 
 	/// Traer un Lote por su Fecha de Recepcion
-	public Optional<Lote> traerLote(LocalDate fecha) {
+	public List<Lote> traerLote(LocalDate fecha) {
 
-		return this.loteRepository.findByfechaRecepcion(fecha);
+		return this.loteRepository.findAllByfechaRecepcion(fecha);
 	}
 
 	/// Traer un Lote por ID
