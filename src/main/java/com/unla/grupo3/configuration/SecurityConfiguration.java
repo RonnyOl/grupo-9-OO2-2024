@@ -49,7 +49,7 @@ public class SecurityConfiguration {
 					logout.logoutUrl("/logout");
 					logout.logoutSuccessUrl("/login");
 					logout.permitAll();
-				})
+				})	
 				.build();
 	}
 

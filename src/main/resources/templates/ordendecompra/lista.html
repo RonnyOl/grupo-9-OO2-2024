@@ -36,33 +36,35 @@
 
 
 					<div>
-						<div th:text="${orden.idOrdenDeCompra}" class="portfolio-caption-heading fs-3"></div>
+						<img width="250px" height="200px"
+							th:src="@{'/assets/img/proveedores/' + ${orden.proveedor.idProveedor} + '.jpg'}">
 					</div>
-					
+
 					<div th:text="${orden.fechaEmision}" class="portfolio-caption-subheading fs-4"></div>
-					
-					<div th:text="${orden.user != null ? orden.user.username : 'Esta orden se genero de forma automatica'}" class="portfolio-caption-subheading fs-4"></div>
-						
-							<a class="boton-ver" th:href="@{/ordendecompra/individual/{id}(id=${orden.idOrdenDeCompra})}"
-								style="text-decoration: none;">Ver</a>
-						
-					</div>
+
+					<div th:text="${orden.user != null ? orden.user.username : 'Esta orden se genero de forma automatica'}"
+						class="portfolio-caption-subheading fs-4"></div>
+
+					<a class="boton-ver" th:href="@{/ordendecompra/individual/{id}(id=${orden.idOrdenDeCompra})}"
+						style="text-decoration: none;">Ver</a>
 
 				</div>
+
 			</div>
+		</div>
 
 
-			<div th:include="/footer/footer.html::footerGeneral"></div>
-
-			<!-- Bootstrap core JS-->
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-			<!-- Core theme JS-->
-			<script src="js/scripts.js"></script>
-			<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-			<!-- * *                               SB Forms JS                               * *-->
-			<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-			<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-			<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+	</section>
+	<div th:include="/footer/footer.html::footerGeneral"></div>
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<!-- * *                               SB Forms JS                               * *-->
+	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 
 </html>

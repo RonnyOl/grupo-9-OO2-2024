@@ -3,6 +3,7 @@ package com.unla.grupo3.controllers;
 
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class HomeController {
 		return mV;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/administrar")
 	public ModelAndView administracion() {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.ADM);

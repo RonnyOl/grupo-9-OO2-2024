@@ -35,7 +35,7 @@ public class GlobalControllerAdvice {
 	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	        if (authentication != null && authentication.isAuthenticated() && 
 	                !authentication.getName().equals("anonymousUser")) {
-	         	
+	         	System.out.println(authentication.getPrincipal());
 	            return (UserDetails) authentication.getPrincipal();
 	        }
 	        return null;

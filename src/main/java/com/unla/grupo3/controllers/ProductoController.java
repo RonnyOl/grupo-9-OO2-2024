@@ -36,17 +36,16 @@ public class ProductoController {
 	//Retorna la vista de todos los productos
 	
 	@GetMapping("/lista")
-	public ModelAndView productos() {
+	public ModelAndView productoLista() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PRODUCTS);
 
-		
 		List<Producto> lista = productService.traerProductos();
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
 	
 	@GetMapping("/individual/{id}")	
-	public ModelAndView individual(@PathVariable("id") int id) {
+	public ModelAndView productoIndividual(@PathVariable("id") int id) {
 		
 		ModelAndView modelAndView;
 		Optional<Producto> objeto = productService.traerProducto(id);
@@ -63,7 +62,7 @@ public class ProductoController {
 	
 	
 	@GetMapping("/nuevo")
-	public ModelAndView nuevoProducto() {
+	public ModelAndView productoNuevo() {
 		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_PRODUCTO);
 		modelAndView.addObject("nuevoProducto", new Producto());
@@ -72,43 +71,55 @@ public class ProductoController {
 	
 	
 	@PostMapping("/crear")
-	public RedirectView create(@ModelAttribute("nuevoProducto")Producto producto,@RequestParam("puntoMinimo") int puntoMinimo) {
-
-
+	public RedirectView productoCrear(@ModelAttribute("nuevoProducto")Producto producto,@RequestParam("puntoMinimo") int puntoMinimo) {
 		
 		producto.setStock(new Stock(puntoMinimo,0,true,producto));
 		producto = productService.agregarOModificarProducto(producto);
-
+		
 		return new RedirectView(ViewRouteHelper.RUTA_PRODUCTS);
 	}
 	
 
 	@GetMapping("/administrar/{id}")
-	public ModelAndView administrarProducto(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ADMIN_PRODUCTO);
+	public ModelAndView productoAdministrar(@PathVariable("id") int id) {
+		ModelAndView modelAndView;
 		Optional<Producto> objeto = productService.traerProducto(id);
-		modelAndView.addObject("producto", objeto.get());
+		if (objeto.isPresent()) {
+			modelAndView = new ModelAndView(ViewRouteHelper.ADMIN_PRODUCTO);
+			modelAndView.addObject("producto", objeto.get());
+		}else {
+			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
+		}
 		return modelAndView;
 	}
 	
 	@PostMapping("/habilitacion/{id}")
-	public RedirectView cambiarEstadoDeProducto(@PathVariable("id") int id) {
+	public RedirectView productoCambiarEstadoDeProducto(@PathVariable("id") int id) {
+		RedirectView redirect;
 		
 		Optional<Producto> objeto = productService.traerProducto(id);
+		if (objeto.isPresent()) {
 		productService.cambiarEstadoDeProducto(objeto, !objeto.get().isHabilitado());
-		return new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ id);
+		 redirect = new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ id);
+		}else {
+			redirect = new RedirectView(ViewRouteHelper.ERROR_500);
+		}
+		
+		return redirect;
 	}
 	
 	@PostMapping("/modificar")
-	public RedirectView cambiarEstadoDeProducto(@ModelAttribute("producto") Producto producto) {
+	public RedirectView productoModificar(@ModelAttribute("producto") Producto producto) {
+		RedirectView redirect;
 		
 		Optional<Producto> p = productService.traerProducto(producto.getIdProducto());
 		if (p.isPresent()) {
 			productService.agregarOModificarProducto(producto);
+			redirect = new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ p.get().getIdProducto());
+		}else {
+			redirect = new RedirectView(ViewRouteHelper.ERROR_500);
 		}
-		
-		
-		return new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ p.get().getIdProducto());
+		return redirect;
 	}
 	
 }

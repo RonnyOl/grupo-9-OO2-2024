@@ -27,36 +27,37 @@
 
 				<p>
 					Nombre del producto:
-					<input type="text" th:field="*{nombre}" />
+					<input required type="text" th:field="*{nombre}" />
 				</p>
 				<p>
 					Costo del producto
-					<input type="number" th:field="*{costo}" />
+					<input required type="number" th:field="*{costo}" />
 				</p>
 				<p>
 					Precio de venta del producto
-					<input type="number" th:field="*{precioDeVenta}" />
+					<input required type="number" th:field="*{precioDeVenta}" />
 				</p>
 				<p>
 					Descripción del producto:
-					<input type="text" th:field="*{descripcion}" />
+					<input required type="text" th:field="*{descripcion}" />
 				</p>
 				<p>
 
-					<input type="hidden" th:field="*{habilitado}" th:value="false" />
+					<input required type="hidden" th:field="*{habilitado}" th:value="false" />
 				</p>
-	
+
 
 				<p>
 					Punto mínimo de stock:
-					<input type="number" name="puntoMinimo" />
+					<input type="number" required-min="1" name="puntoMinimo" />
 				</p>
 
 
 				<input type="submit" value="Generar nuevo producto" />
 			</form>
-
-			<div th:include="/footer/footer.html::footerGeneral"></div>
+		</div>
+		</div>
+		<div th:include="/footer/footer.html::footerGeneral"></div>
 </body>
 
 </html>
