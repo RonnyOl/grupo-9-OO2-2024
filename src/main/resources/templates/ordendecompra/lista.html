@@ -22,6 +22,39 @@
 <body id="page-top">
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
+	
+	<header class="header-filtros w-100">
+		<!-- Filtro por producto-->
+		<select name="idStock" id="idStock" class="btn btn-light fst-normal">
+		    <option disabled selected>Seleccione un producto para filtrar</option>
+		    <option th:each="stock : ${listaStock}" 
+		            th:value="${stock.producto.idProducto}"
+		            th:text="${stock.producto.nombre}">
+		    </option>
+		</select>	
+		<a id="linkStock" class="btn btn-primary" href="#">Ver ordenes de compra asignadas a este producto</a>
+		
+		<!-- Filtro por Fecha-->
+
+		<div id="idFecha">
+		    <p>Ingrese una fecha para filtrar</p>
+		    <input type="date" id="fechaInput">
+		    <a id="linkFecha" class="btn btn-primary" href="#">Ver ordenes de compra asignadas a esta fecha</a>
+		</div>
+		
+		<!-- Filtro por tiene o no lote-->
+		
+		<div >
+		    <a  class="btn btn-primary" th:href="'/ordendecompra/listatienelote/'+${false}">Ver ordenes de compra sin lote asignado</a>
+		</div>
+		
+		<div >
+		    <a  class="btn btn-primary" th:href="'/ordendecompra/listatienelote/'+${true}">Ver ordenes de compra con lote asignado</a>
+		</div>
+		
+	</header>
+	
+		
 	<!-- Portfolio Grid-->
 	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
@@ -41,8 +74,10 @@
 				<div th:each="orden : ${lista}" class="portfolio-item lista-card">
 
 					<div th:text="'ODC-0'+${orden.idOrdenDeCompra}" class="portfolio-caption-subheading fs-4"></div>
+					<div  class="portfolio-caption-subheading fs-5">Proveedor:</div>
+
 					<div>
-						<img width="250px" height="200px"
+						<img width="200px" height="200px"
 							th:src="@{'/assets/img/proveedores/' + ${orden.proveedor.idProveedor} + '.jpg'}">
 					</div>
 
@@ -70,6 +105,30 @@
 	<!-- * *                               SB Forms JS                               * *-->
 	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	
+	<!--SCRIPT FILTRO POR STOCK-->
+	<script>
+	    // Capturar el cambio en el select
+	    document.getElementById('idStock').addEventListener('change', function() {
+	        var idStock = this.value; // Obtener el valor del idProducto seleccionado
+	        // Construir la URL dinámica
+	        var url = '/ordendecompra/listastock/' + idStock;
+	        // Actualizar el atributo href del enlace
+	        document.getElementById('linkStock').setAttribute('href', url);
+	    });
+	</script>
+	<!--SCRIPT FILTRO POR FECHA-->
+	<script>
+	        // Capturar el cambio en el input de fecha
+	        document.getElementById('fechaInput').addEventListener('change', function() {
+	            var fecha = this.value; // Obtener el valor de la fecha seleccionada
+	            // Construir la URL dinámica
+	            var url = '/ordendecompra/listafecha/' + fecha;
+	            // Actualizar el atributo href del enlace
+	            document.getElementById('linkFecha').setAttribute('href', url);
+	        });
+	    </script>
+	
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 

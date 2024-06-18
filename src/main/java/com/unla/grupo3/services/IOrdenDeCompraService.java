@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.unla.grupo3.entities.OrdenDeCompra;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
@@ -41,4 +43,6 @@ public interface IOrdenDeCompraService {
 	// Traer una Lista de Ordenes de Compra con su atributo tieneLote = estado
 	public List<OrdenDeCompra> traerOrdenDeCompra(boolean estado);
 
+	//Devuelve una lista de Stock(asociado a un producto) utilizada para filtrar las ordenes de compra por producto
+	public  List<Stock> findAllDistinctStock();
 }
