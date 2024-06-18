@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,6 @@ import com.unla.grupo3.services.IProveedorService;
 
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/proveedor")
-
 public class ProveedorController {
 
 	// Vinculacion con el service principal
@@ -36,14 +36,15 @@ public class ProveedorController {
 
 		List<Proveedor> lista = proveedorService.traerProveedores();
 		modelAndView.addObject("lista", lista);
+		
 		return modelAndView;
 	}
 
 	// Retorna una vista de un proveedor en particular
 	@GetMapping("/individual/{id}")
 	public ModelAndView traerProveedor(@PathVariable("id") int id) {
+		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
-
 		Optional<Proveedor> objeto = proveedorService.traerProveedor(id);
 
 		if (objeto.isPresent()) {

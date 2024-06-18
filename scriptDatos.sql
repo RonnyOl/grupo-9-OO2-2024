@@ -37,7 +37,6 @@ VALUES
 (50, 15, false, 9),		-- BIROME 
 (30, 10, false, 10);	-- CUADERNO 
 
-
 -- Insercion de User cliente y admin
 
 INSERT INTO `db_sistema_stock`.`user`

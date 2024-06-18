@@ -16,7 +16,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProduct.css" rel="stylesheet" />
+	<link href="/css/stylesPedido.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -56,9 +56,9 @@
 				<div th:each="pedido : ${lista}" class="portfolio-item lista-card">
 
 
-					<div>
+					<div th:text="'ORDER-0'+${pedido.idPedido}" class="portfolio-caption-subheading fs-4"></div>
 						<div th:text="${pedido.producto.nombre}" class="portfolio-caption-heading fs-3"></div>
-					</div>
+					
 					<img width="250px" height="250px"
 						th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}">
 					<div>
