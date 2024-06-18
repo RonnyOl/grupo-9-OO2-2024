@@ -23,14 +23,26 @@
 
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 	<header class="header-filtros w-100">
+		<div>
+			<input class="input-date" type="date" id="fechaSeleccionada"></input>
 
-			<select name="idProducto" id="idProducto" class="btn btn-light fst-normal">
-			  
-				<input type="date" id="fechaSeleccionada"></input>
 
-			</select>
-			<a id="linkPedidos" class="btn btn-primary" href="#">Ver pedidos realizados</a>
-		</header>
+			<a id="linkPedidos" class="btn btn-success" href="#">Ver pedidos realizados</a>
+		</div>
+		<!-- Filtro por tiene o no lote-->
+
+		<div class="d-flex gap-3">
+			<div>
+				<a class="btn btn-success" th:href="'/lote/lista/aceptado/'+${false}">Ver ordenes de compra sin lote
+					asignado</a>
+			</div>
+
+			<div>
+				<a class="btn btn-success" th:href="'/lote/lista/aceptado/'+${true}">Ver ordenes de compra con lote
+					asignado</a>
+			</div>
+		</div>
+	</header>
 
 	</div>
 
@@ -61,20 +73,22 @@
 							th:src="@{'/assets/img/productos/' + ${lote.ordenDeCompra.stock.producto.idProducto} + '.jpg'}">
 						<div th:text="${lote.fechaRecepcion}" class="portfolio-caption-heading fs-3"></div>
 
-						<div th:if="${lote.ordenDeCompra.user != null}" th:text="${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
-						<div th:if="${lote.ordenDeCompra.user == null}"  class="portfolio-caption-heading fs-3 w-100 flex">
+						<div th:if="${lote.ordenDeCompra.user != null}" th:text="${lote.ordenDeCompra.user.username}"
+							class="portfolio-caption-heading fs-3"></div>
+						<div th:if="${lote.ordenDeCompra.user == null}"
+							class="portfolio-caption-heading fs-3 w-100 flex">
 							<p class="">Este lote se genero de forma automatica</p>
 						</div>
-						
+
 					</div>
 
 					<a class="boton-verlote" th:href="@{/lote/individual/{id}(id=${lote.idLote})}"
 						style="text-decoration: none;">Ver</a>
-					
+
 					<form action="#" th:action="@{/lote/aceptacion/{id}(id=${lote.idLote})}" method="post">
-					<button th:if="${lote.aceptado == false}" class="btn btn-success"
-						style="text-decoration: none;">Aceptar lote</button>
-					</button>
+						<button th:if="${lote.aceptado == false}" class="btn btn-success"
+							style="text-decoration: none;">Aceptar lote</button>
+						</button>
 					</form>
 				</div>
 
@@ -84,18 +98,18 @@
 		</div>
 	</section>
 	<script>
-	    // Capturar el cambio en el input de fecha
-	    document.getElementById('fechaSeleccionada').addEventListener('input', function() {
-	        var fechaSeleccionada = this.value; // Obtener el valor de la fecha seleccionada
+		// Capturar el cambio en el input de fecha
+		document.getElementById('fechaSeleccionada').addEventListener('input', function () {
+			var fechaSeleccionada = this.value; // Obtener el valor de la fecha seleccionada
 
-	        // Construir la URL dinámica
-	        var url = '/lote/lista/filtro/' + fechaSeleccionada; // Modificar según tu estructura de URL
+			// Construir la URL dinámica
+			var url = '/lote/lista/filtro/' + fechaSeleccionada; // Modificar según tu estructura de URL
 
-	        // Actualizar el atributo href del enlace
-	        document.getElementById('linkPedidos').setAttribute('href', url);
-	    });
+			// Actualizar el atributo href del enlace
+			document.getElementById('linkPedidos').setAttribute('href', url);
+		});
 	</script>
-		
+
 	<div th:include="/footer/footer.html::footerGeneral"></div>
 	<!-- Bootstrap core JS-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

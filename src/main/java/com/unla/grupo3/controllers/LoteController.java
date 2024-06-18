@@ -74,10 +74,10 @@ public class LoteController {
 	}
 	
 	// Retorna una vista de una lista de lotes que no fueron aceptados
-	@GetMapping("/lista/{estado}")
+	@GetMapping("/lista/aceptado/{estado}")
 	public ModelAndView traerLote(@PathVariable("estado") boolean estado) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_LOTE);
-
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.LOTES);
+		
 		List<Lote> lista = loteService.traerLote(estado);
 		modelAndView.addObject("lista", lista);
 		return modelAndView;

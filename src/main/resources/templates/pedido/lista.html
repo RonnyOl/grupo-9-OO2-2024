@@ -24,7 +24,7 @@
 	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
 	<header class="header-filtros w-100">
-
+	<div>
 		<select name="idProducto" id="idProducto" class="btn btn-light fst-normal">
 		    <option disabled selected>Seleccione un producto para filtrar</option>
 		    <option th:each="producto : ${listaP}" 
@@ -34,8 +34,8 @@
 		</select>
 
 		<!-- Placeholder para el enlace dinámico -->
-		<a id="linkPedidos" class="btn btn-primary" href="#">Ver pedidos realizados</a>
-
+		<a id="linkPedidos" class="btn btn-success" href="#">Ver pedidos realizados</a>
+</div>
 	</header>
 
 	<!-- Portfolio Grid-->
