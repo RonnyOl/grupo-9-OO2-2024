@@ -109,7 +109,7 @@ public class PedidoController {
 			pedidoService.agregarOModificarPedido(new Pedido(user,cantidadAComprar,producto.get())); //Se guarda el pedido en la bd
 			// Al comprar, se debe realizar un baja en el stock, por lo cuál se resta segun la cantidad que se haya comprado
 			stockService.restarStock(producto.get().getStock(), cantidadAComprar); 
-			//productoService.validarCantidad(producto)
+			productoService.validarCantidad(producto);
 			//Al restar el stock, también se debe corroborar si ha alcanzado al punto minimo, por lo que se ejecuta
 			//reabastecer
 			stockService.validarRabastecer(producto.get().getStock().getIdStock()); 
@@ -119,7 +119,7 @@ public class PedidoController {
 		}
 
 		return redirect; 
-	}	
+	}
 
 	
 }
