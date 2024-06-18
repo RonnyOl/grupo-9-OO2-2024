@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo3.entities.OrdenDeCompra;
@@ -32,9 +33,9 @@ public interface IOrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, S
 	////Traer un orden de compra creadas por un mismo usuario y un stock en particular
 	public abstract List<OrdenDeCompra> findByUserAndStock(User user, Stock stock);
 	
-	//Traer una orden de compra que tenga el atributo tiene_lote en false
-	@Query("SELECT o FROM OrdenDeCompra o  WHERE o.tieneLote = false")
-	public abstract Optional<OrdenDeCompra> findByTieneLote();
+	//Traer una Lista de ordenes de compra que tenga el atributo tiene_lote igual al atributo que se pasa por parametro 
+	@Query("SELECT o FROM OrdenDeCompra o  WHERE o.tieneLote = :(estado)")
+	public abstract List<OrdenDeCompra> findAllByTieneLote(@Param("estado") boolean estado);
 	
 }
 

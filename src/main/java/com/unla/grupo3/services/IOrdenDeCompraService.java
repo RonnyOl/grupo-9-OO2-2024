@@ -38,7 +38,7 @@ public interface IOrdenDeCompraService {
 	// Traer Lista de Ordenes de Compra
 	public List<OrdenDeCompra> traerOrdenDeCompra();
 
-	// Traer una Orden de Compra con su atributo tieneLote = False
-	public Optional<OrdenDeCompra> traerOrdenDeCompraSinLote();
+	// Traer una Lista de Ordenes de Compra con su atributo tieneLote = estado
+	public List<OrdenDeCompra> traerOrdenDeCompra(boolean estado);
 
 }

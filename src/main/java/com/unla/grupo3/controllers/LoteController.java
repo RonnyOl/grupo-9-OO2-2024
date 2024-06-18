@@ -65,7 +65,7 @@ public class LoteController {
 	}
 
 	// Retorna una vista de una lista de lotes filtrado por una fecha especifica
-	@GetMapping("/Lista")
+	@GetMapping("/lista/{fecha}")
 	public ModelAndView traerLote(@PathVariable("fecha") LocalDate fecha) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_LOTE);
 
@@ -73,6 +73,17 @@ public class LoteController {
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
+	
+	// Retorna una vista de una lista de lotes que no fueron aceptados
+	@GetMapping("/lista/{estado}")
+	public ModelAndView traerLote(@PathVariable("estado") boolean estado) {
+		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_LOTE);
+
+		List<Lote> lista = loteService.traerLote(estado);
+		modelAndView.addObject("lista", lista);
+		return modelAndView;
+	}
+	
 
 	// Cambia el estado del lote a aceptado
 	@PostMapping("/aceptacion/{id}")

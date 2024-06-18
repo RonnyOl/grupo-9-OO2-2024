@@ -69,6 +69,11 @@ public class LoteService implements ILoteService {
 		return loteRepository.findById(id);
 	}
 
+	// Traer una Lista de Lotes que tengan el atributo aceptado = estado
+	public List<Lote> traerLote(boolean estado){
+		return loteRepository.findAllByAceptado(estado);
+	}
+	
 	// Modificar el estado del atributo de un Lote
 	public boolean cambiarEstadoDeLote(Optional<Lote> l, boolean nuevoEstado) {
 		boolean cambiado = false;
@@ -88,28 +93,27 @@ public class LoteService implements ILoteService {
 	public boolean verificarYCrearLote() {
 		boolean creado = false;
 
-		Optional<OrdenDeCompra> ordenSinLote = ordenDeCompraService.traerOrdenDeCompraSinLote();
+		List<OrdenDeCompra> ordenesSinLote = ordenDeCompraService.traerOrdenDeCompra(false);
 
-		if (ordenSinLote.isPresent()) {
+		//Mientras que la lista no esta vacia, se trabaja con el primer elemento de la lista
+		while (!ordenesSinLote.isEmpty()) {
 			// Genera un nuevo
-			Lote nuevoLote = new Lote(LocalDate.now(), false, ordenSinLote.get());
+			Lote nuevoLote = new Lote(LocalDate.now(), false, ordenesSinLote.get(0));
 			// Lo guarda en la BD
 			nuevoLote = this.agregarOModificarLote(nuevoLote);
 			creado = true;
 			// Modifica el atributo tieneLote de ODC
-			OrdenDeCompra ordenConLote = ordenSinLote.get();
+			OrdenDeCompra ordenConLote = ordenesSinLote.get(0);
 			ordenConLote.setTieneLote(creado);
 			ordenConLote = ordenDeCompraService.agregarOModificarOrdenDeCompra(ordenConLote);
 
-			
+			//Remueve de la lista la orden de compra que ya tiene lote asignado
+			ordenesSinLote.remove(ordenConLote);
 		}
 
 		return creado;
 	}
 
-	// Devuelve una vista
-	public List<Lote> findAllByAceptadoFalse() {
-		return loteRepository.findAllByAceptadoFalse();
-	}
+
 
 }

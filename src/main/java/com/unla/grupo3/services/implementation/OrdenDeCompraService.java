@@ -84,9 +84,9 @@ public class OrdenDeCompraService implements IOrdenDeCompraService {
 		return OrdenDeCompraRepository.findAll();
 	}
 
-	// Traer una Orden de Compra con su atributo tieneLote = False
-	public Optional<OrdenDeCompra> traerOrdenDeCompraSinLote() {
-		return OrdenDeCompraRepository.findByTieneLote();
+	// Traer una Lista de Ordenes de Compra con su atributo tieneLote = estado
+	public List<OrdenDeCompra> traerOrdenDeCompra(boolean estado) {
+		return OrdenDeCompraRepository.findAllByTieneLote(estado);
 	}
 	
 	

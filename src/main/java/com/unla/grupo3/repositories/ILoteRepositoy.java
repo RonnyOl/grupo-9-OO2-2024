@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.unla.grupo3.entities.Lote;
@@ -18,12 +19,12 @@ import com.unla.grupo3.entities.Lote;
 public interface ILoteRepositoy extends JpaRepository<Lote, Serializable> {
 
 	
-	//Traer un orden de compra por su fecha
+	//Traer Lista de Lotes  por su fecha
 	public abstract List<Lote> findAllByfechaRecepcion(LocalDate fecha);
 	
-	//Traer una Lista de Lotes que tengan el atributo aceptado en False
-	@Query("SELECT l FROM Lote l  WHERE l.aceptado = false")
-	public abstract List<Lote> findAllByAceptadoFalse();
+	//Traer una Lista de Lotes que tengan el atributo aceptado = al estado que llega por parametro
+	@Query("SELECT l FROM Lote l  WHERE l.aceptado = :(estado)")
+	public abstract List<Lote> findAllByAceptado(@Param("estado") boolean estado);
 
 	
 }

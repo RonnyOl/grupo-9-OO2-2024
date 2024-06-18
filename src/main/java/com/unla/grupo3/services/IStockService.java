@@ -30,8 +30,8 @@ public interface IStockService {
 	// Trae Lista de todos los Stock
 	public List<Stock> traerStock();
 
-	// Trae un Stock con su atributo reabastecer=True
-	public Optional<Stock> findByReabastecerTrue();
+	// Trae una Lista de Stocks con su atributo reabastecer = estado
+	public List<Stock> traerStock(boolean estado );
 
 	// Valida si el Stock asociado al ID enviado tiene CantidadActual <= PuntoMinimo
 	public boolean validarRabastecer(int id);

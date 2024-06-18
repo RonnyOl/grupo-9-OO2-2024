@@ -19,7 +19,7 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
 	//Devuelve un Stock filtrado por su Producto
 	public abstract Optional<Stock> findByProducto (Producto producto);
 	
-	//Devuelve un Stock donde su atributo reabastecer = true
-	@Query("SELECT s FROM Stock s  WHERE s.reabastecer = true")
-	public abstract Optional<Stock> findByReabastecerTrue();
+	//Devuelve un Stock donde su atributo reabastecer = estado enviado por parametro
+	@Query("SELECT s FROM Stock s  WHERE s.reabastecer = :(estado)")
+	public abstract List<Stock> findAllByReabastecer(boolean estado);
 }

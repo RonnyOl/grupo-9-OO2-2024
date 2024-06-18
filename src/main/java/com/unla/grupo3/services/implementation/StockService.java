@@ -92,9 +92,9 @@ public class StockService implements IStockService {
 		return stockRepository.findAll();
 	}
 
-	// Trae un Stock con su atributo reabastecer=True
-	public Optional<Stock> findByReabastecerTrue() {
-		return stockRepository.findByReabastecerTrue();
+	// Trae una Lista de Stocks con su atributo reabastecer=estado<
+	public List<Stock> traerStock(boolean estado) {
+		return stockRepository.findAllByReabastecer( estado);
 	};
 
 	// Valida si el Stock asociado al ID enviado tiene CantidadActual <= PuntoMinimo
@@ -150,11 +150,12 @@ public class StockService implements IStockService {
 		Random rand = new Random();
 		boolean generada = false;
 
-		Optional<Stock> stockAReabastecer = this.findByReabastecerTrue();
+		List<Stock> stocksAReabastecer = this.traerStock(true);
 
-		if (stockAReabastecer.isPresent()) {
+		//Mientras que la lista no este vacia, se trabaja con el primer elemento
+		while (stocksAReabastecer.isEmpty()) {
 			//Se asigna automaticamente la cantidad a comprar a partir del Punto Minimo
-			int cantidadAComprar = stockAReabastecer.get().getPuntoMinimoDeStock(); 
+			int cantidadAComprar = stocksAReabastecer.get(0).getPuntoMinimoDeStock(); 
 
 			// Se asigna un Proveedor aleatorio a la Orden de Compra
 			List<Proveedor> lstProveedores = proveedorService.traerProveedores();
@@ -162,16 +163,23 @@ public class StockService implements IStockService {
 			Proveedor proveedorAsignado = lstProveedores.get(nro);
 
 			// Se genera una nueva Orden que se guarda en la BD
-			OrdenDeCompra nuevaOrden = new OrdenDeCompra(cantidadAComprar, stockAReabastecer.get(), null,
+			OrdenDeCompra nuevaOrden = new OrdenDeCompra(cantidadAComprar, stocksAReabastecer.get(0), null,
 					proveedorAsignado, false);
 			nuevaOrden = ordenDeCompraService.agregarOModificarOrdenDeCompra(nuevaOrden);
 
 			// Se llama al metodo para verificar si se debe generar un Lote
 			loteService.verificarYCrearLote();
 
+			//Se elimina el stock de la lista  
+			stocksAReabastecer.remove(0);
+			
 			generada = true;
 		}
+		
+		
 		return generada;
 	}
+
+
 
 }

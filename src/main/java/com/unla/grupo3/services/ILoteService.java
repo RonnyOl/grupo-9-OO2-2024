@@ -26,12 +26,14 @@ public interface ILoteService {
 	// Traer un Lote por su ID
 	public Optional<Lote> traerLote(int id);
 
+	// Traer una Lista de Lotes que tengan el atributo aceptado = estado
+	public List<Lote> traerLote(boolean estado);
+	
 	// Verificar si existen Ordenes de compra sin Lotes asignados
 	public boolean verificarYCrearLote();
 
 	// Modificar el atributo Aceptado
 	public boolean cambiarEstadoDeLote(Optional<Lote> l, boolean aceptado);
 
-	// Traer una Lista de Lotes que tengan el atributo aceptado = False
-	public List<Lote> findAllByAceptadoFalse();
+
 }
