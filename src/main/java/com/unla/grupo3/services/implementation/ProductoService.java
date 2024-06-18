@@ -43,18 +43,18 @@ public class ProductoService implements IProductoService {
 	// Habilita o deshabilita automaticamente el producto segun el caso
 	public boolean validarCantidad(Optional<Producto> p) {
 		boolean habilitar = true;
+		
 
 		if (p.isPresent()) {
 			boolean valorPrevio = p.get().isHabilitado();
-			
-			System.out.println(p.get().getStock().getCantidadActual());
-			
+				
 			if (p.get().getStock().getCantidadActual() <= 1) {
 				habilitar = false;
 			}
-			System.out.println("hola ->"+valorPrevio+ "chau->"+habilitar);
+			
+			
 			if (valorPrevio != habilitar) {
-				System.out.println("2hola ->"+valorPrevio+ "chau->"+habilitar);
+				
 				this.cambiarEstadoDeProducto(p, habilitar);
 			}
 		}
