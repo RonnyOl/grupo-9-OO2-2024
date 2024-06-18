@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.unla</groupId>
-	<artifactId>grupo3</artifactId>
+	<artifactId>grupo9</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>grupo22</name>
-	<description>TPI OO2 Grupo 3</description>
+	<name>grupo9</name>
+	<description>TPI OO2 Grupo 9</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
