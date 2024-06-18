@@ -41,12 +41,12 @@
 				<!-- Portfolio item 1-->
 				<div th:each="proveedor : ${lista}" class="portfolio-item lista-card">
 
-					<div>
+					
 						<img width="250px" height="250px"
 							th:src="@{'/assets/img/proveedores/' + ${proveedor.idProveedor} + '.jpg'}">
 						<div th:text="'Cuil: '+ ${proveedor.cuil}" class="portfolio-caption-heading fs-3"></div>
 						<div th:text="'Direccion: '+ ${proveedor.direccion}" class="portfolio-caption-heading fs-3"></div>
-					</div>
+					
 
 					<a class="boton-verlote" th:href="@{/proveedor/individual/{id}(id=${proveedor.idProveedor})}"
 						style="text-decoration: none;">Ver</a>

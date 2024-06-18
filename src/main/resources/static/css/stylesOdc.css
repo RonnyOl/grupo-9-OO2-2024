@@ -86,29 +86,26 @@
 	width: 100%;display: flex; flex-direction: column;justify-content: center;align-items: center;
 	
 }
-
-.lista-card{
-	min-width: 25%;
-	min-height: 30rem;
-	max-width: 25%;
-	max-height: 30rem;
-	
-	
-	background-color: #fff;
-	flex-direction: column;
-	justify-content: center;
-	align-items:center;
-	display: flex;
-	gap: 2rem;
-	text-align: center;
-	border-radius: 5px;
+.lista-card {
+    width: 25%; /* Tamaño fijo para cada card */
+    min-width: 250px; /* Asegura que tenga un mínimo de ancho */
+    min-height: 35rem;
+    max-height: 30rem;
+    background-color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 2rem;
+    text-align: center;
+    border-radius: 5px;
 }
 
-.lista-card-container{
-	display: flex;
-	justify-content: center;
-	gap: 6rem;
-	flex-wrap: wrap;
+.lista-card-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem; /* Espacio entre las cards */
+    flex-wrap: wrap; /* Envolver las cards cuando el espacio es insuficiente */
 }
 
 

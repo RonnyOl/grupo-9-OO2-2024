@@ -204,10 +204,9 @@
 .lista-card{
 	min-width: 25%;
 	min-height: 30rem;
-	max-width: 25%;
 	max-height: 30rem;
 	
-	
+		
 	background-color: #fff;
 	flex-direction: column;
 	justify-content: center;
