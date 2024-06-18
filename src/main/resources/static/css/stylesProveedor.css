@@ -16,7 +16,7 @@
 }
 
 .lote-individual-info {
-	width: 30%;
+	min-width: 30%;
 	height: fit-content;
 	border-radius: 2rem;
 	background-color: #fff;
@@ -27,6 +27,7 @@
 	flex-direction: column;
 	position: relative;
 	box-shadow: 0 0 2rem rgb(0, 0, 0,0.4);
+	padding: 2rem 0;
 }
 
 .lote-individual-info-lote {
@@ -186,6 +187,16 @@
 .individual-image{
 	border: 1px double #000;
 }
+
+.back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .formulario-administrar {
+            position: relative;
+        }
 
 
 /*********************************************************************************************************/

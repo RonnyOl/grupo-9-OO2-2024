@@ -2,49 +2,52 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Crear proveedor</title>
-	<link href="/css/styles.css" rel="stylesheet" />
-	<link href="/css/stylesProveedor.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear proveedor</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/stylesProveedor.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/85cce2a6a8.js" crossorigin="anonymous"></script>
 </head>
 
 <body style="margin:0;padding: 0;">
 
-	<div th:include="/navbar/navbar.html::navbarGeneral"></div>
+    <div th:include="/navbar/navbar.html::navbarGeneral"></div>
 
-	<div class="nuevo-seccion">
-		
-		<div class="nuevo-container ">
-		   
-			<h3>Formulario para generar un nuevo proveedor:</h3>
-			
-			<form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/proveedor/crear}"
-				th:object="${nuevoProveedor}" method="post">
+    <div class="nuevo-seccion">
+        <div class="nuevo-container">
+            <h3>Formulario para generar un nuevo proveedor:</h3>
 
-				<p>
+            <form class="formulario-administrar d-flex flex-column border p-3" action="#" th:action="@{/proveedor/crear}"
+                th:object="${nuevoProveedor}" method="post">
+                <div class="back-button">
+                    <a class="text-dark fs-4" href="javascript:history.back()">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+                <p>
+                    <input type="hidden" th:field="${nuevoProveedor.idProveedor}" />
+                </p>
 
-					<input type="hidden" th:field="${nuevoProveedor.idProveedor}" />
-				</p>
+                <p>
+                    Nombre de la Empresa:
+                    <input type="text" th:field="*{nombreEmpresa}" />
+                </p>
+                <p>
+                    CUIL de la Empresa:
+                    <input type="text" th:field="*{cuil}" />
+                </p>
+                <p>
+                    Dirección de la Empresa:
+                    <input type="text" th:field="*{direccion}" />
+                </p>
 
-				<p>
-					Nombre de la Empresa:
-					<input type="text" th:field="*{nombreEmpresa}" />
-				</p>
-				<p>
-					CUIL de la Empresa:
-					<input type="text" th:field="*{cuil}" />
-				</p>
-				<p>
-					Direccion de la Empresa:
-					<input type="text" th:field="*{direccion}" />
-				</p>
+                <input type="submit" value="Generar nuevo proveedor" />
+            </form>
+        </div>
+    </div>
+    <div th:include="/footer/footer.html::footerGeneral"></div>
 
-				<input type="submit" value="Generar nuevo proveedor" />
-			</form>
-		</div>
-	</div>
-	<div th:include="/footer/footer.html::footerGeneral"></div>
 </body>
 
 </html>
