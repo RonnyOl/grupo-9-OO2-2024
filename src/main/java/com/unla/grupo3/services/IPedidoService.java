@@ -29,5 +29,7 @@ public interface IPedidoService {
 
 	// traer lista de los pedidos de un solo usuario
 	public List<Pedido> traerListaPedidoPorUsuario(User user);
+	// traer lista de los pedidos por un producto
+	public List<Pedido> traerListaPedidoPorProducto(Producto producto);
 
 }
