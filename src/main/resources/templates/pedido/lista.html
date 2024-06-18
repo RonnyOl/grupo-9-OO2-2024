@@ -51,7 +51,7 @@
 						th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}">
 					<div>
 						<span th:text="'Total: ' + ${pedido.total}"></span>
-						<span th:if="${user.authorities[0].authority == 'ROLE_ADMIN'}" th:text="'Hecho por: ' + ${pedido.user.username}"></span>
+						<span  th:text="'Realizado por el cliente: ' + ${pedido.user.username}"></span>
 						<div class="mt-3">
 							<a class="boton-compra " th:href="@{/pedido/individual/{id}(id=${pedido.idPedido})}"
 								style="text-decoration: none;">Mas info</a>

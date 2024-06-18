@@ -26,11 +26,17 @@
 	<section class="page-section seccion-entera" id="productos">
 		<div class="container">
 			<div class="text-center">
-				<h2 class="section-heading text-uppercase text-white fs-1">Productos</h2>
-				<h3 class="section-subheading text-white">Elije que producto deseas comprar</h3>
+				<h2 class="section-heading text-uppercase text-white fs-1">Ordenes de compra</h2>
+				<h3 class="section-subheading text-white">Visualiza y Administra las Ordenes de Compra generadas</h3>
 			</div>
 			<div class="lista-card-container">
 
+				<div class="d-flex flex-column justify-content-center" th:if="${#lists.isEmpty(lista)}">
+					<h3 class="text-light my-3">No se encontraron Ordenes de compra que cumplan los requisitos
+					</h3>
+					<a class="btn btn-primary btn-xl text-uppercase" href="/ordendecompra/lista">Volver atras</a>
+				</div>
+				
 				<!-- Portfolio item 1-->
 				<div th:each="orden : ${lista}" class="portfolio-item lista-card">
 

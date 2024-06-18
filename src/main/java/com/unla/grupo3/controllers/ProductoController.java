@@ -21,29 +21,30 @@ import com.unla.grupo3.services.IProductoService;
 
 
 
-
+//Controlador que gestiona a la entidad Producto
 @Controller
 @RequestMapping("/producto")
-
 public class ProductoController {
 
+	//Vinculacion de Servicio
 	private IProductoService productService;
 	
+	//Constructor del controlador
 	public ProductoController(IProductoService productService) {
 		this.productService = productService;
 	}
 
-	//Retorna la vista de todos los productos
-	
+	//Retorna la vista de todos los Productos
 	@GetMapping("/lista")
 	public ModelAndView productoLista() {
+		
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.PRODUCTS);
-
 		List<Producto> lista = productService.traerProductos();
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
 	
+	//Retorna la vista de un Producto individual accediendo por su id
 	@GetMapping("/individual/{id}")	
 	public ModelAndView productoIndividual(@PathVariable("id") int id) {
 		
@@ -60,7 +61,8 @@ public class ProductoController {
 		return modelAndView;
 	}
 	
-	
+	//Retorna la vista para añadir un Producto
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/nuevo")
 	public ModelAndView productoNuevo() {
 		
@@ -69,7 +71,8 @@ public class ProductoController {
 		return modelAndView;
 	}
 	
-	
+	//Recibe el producto creado, lo carga a la BD y redirecciona a la lista de Producto
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/crear")
 	public RedirectView productoCrear(@ModelAttribute("nuevoProducto")Producto producto,@RequestParam("puntoMinimo") int puntoMinimo) {
 		
@@ -79,7 +82,8 @@ public class ProductoController {
 		return new RedirectView(ViewRouteHelper.RUTA_PRODUCTS);
 	}
 	
-
+	//Retorna la vista para administrar un Producto	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/administrar/{id}")
 	public ModelAndView productoAdministrar(@PathVariable("id") int id) {
 		ModelAndView modelAndView;
@@ -93,6 +97,8 @@ public class ProductoController {
 		return modelAndView;
 	}
 	
+	//Recibe el id del Producto al que se le va a cambiar el estado y redirecciona a la vista individual de ese Producto
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/habilitacion/{id}")
 	public RedirectView productoCambiarEstadoDeProducto(@PathVariable("id") int id) {
 		RedirectView redirect;
@@ -108,6 +114,8 @@ public class ProductoController {
 		return redirect;
 	}
 	
+	//Recibe el Producto modificado, lo actualiza y redirecciona a la vista individual de ese Producto
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/modificar")
 	public RedirectView productoModificar(@ModelAttribute("producto") Producto producto) {
 		RedirectView redirect;

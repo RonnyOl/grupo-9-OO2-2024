@@ -18,8 +18,8 @@ import com.unla.grupo3.entities.User;
 public interface IOrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, Serializable> {
 
 	
-	//Traer un orden de compra por su fecha
-	public abstract Optional<OrdenDeCompra> findByfechaEmision(LocalDate nombre);
+	//Traer una lista de ordenes de compra por su fecha
+	public abstract List<OrdenDeCompra> findAllByfechaEmision(LocalDate nombre);
 	
 	//Traer un orden de compra creadas por un mismo usuario
 	public abstract List<OrdenDeCompra> findByUser(User user);

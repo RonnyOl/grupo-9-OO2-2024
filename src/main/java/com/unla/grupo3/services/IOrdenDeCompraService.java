@@ -23,8 +23,8 @@ public interface IOrdenDeCompraService {
 	// Traer Orden De Compra por ID
 	public Optional<OrdenDeCompra> traerOrdenDeCompra(int id);
 
-	// Treaer Orden de Compra por su Fecha de Emision
-	public Optional<OrdenDeCompra> traerOrdenDeCompra(LocalDate fecha);
+	// Treaer Lista de Ordenes de Compra por su Fecha de Emision
+	public List<OrdenDeCompra> traerOrdenDeCompra(LocalDate fecha);
 
 	// Traer Lista de Ordenes de Compra por su User
 	public List<OrdenDeCompra> traerOrdenDeCompra(User user);

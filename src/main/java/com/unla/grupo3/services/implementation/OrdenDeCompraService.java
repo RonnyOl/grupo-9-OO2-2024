@@ -59,9 +59,9 @@ public class OrdenDeCompraService implements IOrdenDeCompraService {
 		return OrdenDeCompraRepository.findById(id);
 	}
 
-	// Treaer Orden de Compra por su Fecha de Emision
-	public Optional<OrdenDeCompra> traerOrdenDeCompra(LocalDate fecha) {
-		return OrdenDeCompraRepository.findByfechaEmision(fecha);
+	// Traer Lista de Ordenes de Compra por su Fecha de Emision
+	public List<OrdenDeCompra> traerOrdenDeCompra(LocalDate fecha) {
+		return OrdenDeCompraRepository.findAllByfechaEmision(fecha);
 	}
 
 	// Traer Lista de Ordenes de Compra por su User

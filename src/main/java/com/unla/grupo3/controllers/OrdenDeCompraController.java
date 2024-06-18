@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -26,119 +27,127 @@ import com.unla.grupo3.services.IProveedorService;
 import com.unla.grupo3.services.IStockService;
 import com.unla.grupo3.services.implementation.UserService;
 
-
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @Controller
 @RequestMapping("/ordendecompra")
 public class OrdenDeCompraController {
 
+	// Vinculacion con el Service Principal
 	private IOrdenDeCompraService ordenService;
+
+	// Vinculacion con otros Service
 	private IStockService stockService;
 	private IProveedorService proveedorService;
 	private ILoteService loteService;
 	private UserService userService;
-	
-	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService,IStockService stockService,IProveedorService proveedorService,ILoteService loteService, UserService userService) {
+
+	// Constructor del Controlador
+	public OrdenDeCompraController(IOrdenDeCompraService ordenCompraService, IStockService stockService,
+			IProveedorService proveedorService, ILoteService loteService, UserService userService) {
 		this.ordenService = ordenCompraService;
 		this.stockService = stockService;
-		this.proveedorService= proveedorService;
+		this.proveedorService = proveedorService;
 		this.loteService = loteService;
-		this.userService=userService;
+		this.userService = userService;
 	}
-	
-	// TODOS
 
+	// Retorna la vista de una lista de todas las Ordenes de Compra
 	@GetMapping("/lista")
-	public ModelAndView ordenesDeCompra() {							 
+	public ModelAndView ordenesDeCompra() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
-		
+
 		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra();
 		modelAndView.addObject("lista", lista);
 		return modelAndView;
 	}
-	
-	//POR ID	
-	@GetMapping("/individual/{id}")														
+
+	// Retorna la vista individual de la orden de compra seleccionada por su id
+	@GetMapping("/individual/{id}")
 	public ModelAndView individualOrden(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+		ModelAndView modelAndView;
 		Optional<OrdenDeCompra> objeto = ordenService.traerOrdenDeCompra(id);
-		modelAndView.addObject("ordenDeCompra", objeto.get());
+
+		if (objeto.isPresent()) {
+			modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
+			modelAndView.addObject("ordenDeCompra", objeto.get());
+		} else {
+			modelAndView = new ModelAndView(ViewRouteHelper.ERROR_500);
+
+		}
 		return modelAndView;
 	}
 
-	
-	/// POR FECHA
-	@GetMapping("/individualPorFecha/{id}")	
-	public ModelAndView individualOrden(@PathVariable("f") LocalDate f) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	/// Retorna la vista que muestra una lista de Ordenes de compra realizadas en la fecha seleccionada
+	@GetMapping("/lista/{fecha}")
+	public ModelAndView individualOrden(@PathVariable("fecha") LocalDate fecha) {
+
+		List<OrdenDeCompra> lista = ordenService.traerOrdenDeCompra(fecha);
 		
-		Optional<OrdenDeCompra> objeto = ordenService.traerOrdenDeCompra(f);
-		modelAndView.addObject("ordenDeCompra", objeto.get());
+	
+			ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.ORDERS);
+			modelAndView.addObject("lista", lista);
+		
 		return modelAndView;
 	}
+	
+	
 	/// POR USER
 	/// la estructura esta armada, hay que cambiar varias cosas
-	
-	 /*
-	 @GetMapping("/particular/{id}")				
-	 	public ModelAndView individualStock(@PathVariable("producto") int id) {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-		
-		Optional<Stock> objeto = stockService.traerStock(p.get());
-		modelAndView.addObject("stock", objeto.get());
-		return modelAndView;
-	}
-	*/
-	
+
+	/*
+	 * @GetMapping("/particular/{id}") public ModelAndView
+	 * individualStock(@PathVariable("producto") int id) { ModelAndView modelAndView
+	 * = new ModelAndView(ViewRouteHelper.INDI_ORDER);
+	 * 
+	 * Optional<Stock> objeto = stockService.traerStock(p.get());
+	 * modelAndView.addObject("stock", objeto.get()); return modelAndView; }
+	 */
+
 	/// POR STOCK
-	
-	@GetMapping("/individual/stock/{id}")				
+
+	@GetMapping("/individual/stock/{id}")
 	public ModelAndView individualOrdenCompra(@PathVariable("stock") int id) {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDI_ORDER);
-		
+
 		Optional<Stock> p = this.stockService.traerStock(id);
-		List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(p.get());	
+		List<OrdenDeCompra> lista = this.ordenService.traerOrdenDeCompra(p.get());
 		modelAndView.addObject("ordenCompra", lista);
 		return modelAndView;
 	}
-	
+
 	@GetMapping("/nueva/{idStock}")
-	public ModelAndView nuevaOrdenDeCompra(@PathVariable("idStock") int idStock ) {
-		
+	public ModelAndView nuevaOrdenDeCompra(@PathVariable("idStock") int idStock) {
+
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.NEW_ORDER);
 		Optional<Stock> stockReal = stockService.traerStock(idStock);
-
 
 		if (stockReal.isPresent()) {
 			OrdenDeCompra orden = new OrdenDeCompra();
 			orden.setStock(stockReal.get());
 			List<Proveedor> lstProveedores = proveedorService.traerProveedores();
 
-			modelAndView.addObject("orden",orden);
+			modelAndView.addObject("orden", orden);
 			modelAndView.addObject("proveedores", lstProveedores);
 		}
-		
+
 		return modelAndView;
 	}
-	
-    @PostMapping("/crear")
-    public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra, @AuthenticationPrincipal UserDetails userDetails) {
-    	
-    	Optional<Proveedor> nuevo = proveedorService.traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
-    	User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
-    	if (nuevo.isPresent() && userDetails.isAccountNonExpired()) {
-    		ordenDeCompra.setProveedor(nuevo.get());
-    		ordenDeCompra.setUser(user);
-    		ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
-    		loteService.verificarYCrearLote();
-    		
-    	}
 
+	@PostMapping("/crear")
+	public RedirectView agregarOrdenDeCompra(@ModelAttribute("orden") OrdenDeCompra ordenDeCompra,
+			@AuthenticationPrincipal UserDetails userDetails) {
 
-        return new RedirectView(ViewRouteHelper.ROUTE_INDI_ODC+"/individual/"+ordenDeCompra.getIdOrdenDeCompra()); 
-    }
+		Optional<Proveedor> nuevo = proveedorService.traerProveedor(ordenDeCompra.getProveedor().getIdProveedor());
+		User user = userService.findByUsernameAndFetchUserRolesEagerly(userDetails.getUsername());
+		if (nuevo.isPresent() && userDetails.isAccountNonExpired()) {
+			ordenDeCompra.setProveedor(nuevo.get());
+			ordenDeCompra.setUser(user);
+			ordenDeCompra = ordenService.agregarOModificarOrdenDeCompra(ordenDeCompra);
+			loteService.verificarYCrearLote();
 
-	
+		}
+
+		return new RedirectView(ViewRouteHelper.ROUTE_INDI_ODC + "/individual/" + ordenDeCompra.getIdOrdenDeCompra());
+	}
+
 }
