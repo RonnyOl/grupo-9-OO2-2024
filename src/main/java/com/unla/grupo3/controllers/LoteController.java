@@ -17,6 +17,7 @@ import com.unla.grupo3.entities.Lote;
 
 import com.unla.grupo3.helpers.ViewRouteHelper;
 import com.unla.grupo3.services.ILoteService;
+import com.unla.grupo3.services.IProductoService;
 import com.unla.grupo3.services.IStockService;
 
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -30,11 +31,13 @@ public class LoteController {
 
 	// Vinculacion con otros services
 	private IStockService stockService;
+	private IProductoService productoService;
 
 	// Constructor de controlador
-	public LoteController(ILoteService loteService, IStockService stockService) {
+	public LoteController(ILoteService loteService, IStockService stockService,IProductoService productoService) {
 		this.loteService = loteService;
 		this.stockService = stockService;
+		this.productoService=productoService;
 
 	}
 
@@ -80,11 +83,20 @@ public class LoteController {
 		RedirectView redirect = new RedirectView(ViewRouteHelper.ERROR_500);
 
 		if (lote.isPresent()) {
-
+			//Se cambia el estado de lote a aceptado
 			loteService.cambiarEstadoDeLote(lote, true);
+			
+			//Se suma al stock asignado a la orden de compra del lote la cantidad que ingreso
 			stockService.sumarStock(lote.get().getOrdenDeCompra().getStock(),
 					lote.get().getOrdenDeCompra().getCantidadAComprar());
+			
+			//Se verifica que el producto pueda dejar de estar deshabilitado si es que lo estaba antes de recibir la mercaderia
+			productoService.validarCantidad( Optional.of(lote.get().getOrdenDeCompra().getStock().getProducto()) );
+			
+			//Se valida si se necesita reabastecer nuevamente el stock
 			stockService.validarRabastecer(lote.get().getOrdenDeCompra().getStock().getIdStock());
+			
+			
 
 			redirect = new RedirectView(ViewRouteHelper.ROUTE_LOTE + "/individual" + "/" + id);
 

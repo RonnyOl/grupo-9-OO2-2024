@@ -14,12 +14,10 @@ import com.unla.grupo3.services.IStockService;
 @Service("productoService")
 public class ProductoService implements IProductoService {
 
-	//Vinculacion del Repositorio
+	// Vinculacion del Repositorio
 	private IProductoRepository productoRepository;
 
-
-	
-	//Constructor del Service
+	// Constructor del Service
 	public ProductoService(IProductoRepository productoRepository) {
 		this.productoRepository = productoRepository;
 
@@ -41,7 +39,30 @@ public class ProductoService implements IProductoService {
 		return false;
 	}
 
-	// habilitar o des habilitar producto
+	// Valida si el stock asociado tiene la cantidad necesaria para vender
+	// Habilita o deshabilita automaticamente el producto segun el caso
+	public boolean validarCantidad(Optional<Producto> p) {
+		boolean habilitar = true;
+
+		if (p.isPresent()) {
+			boolean valorPrevio = p.get().isHabilitado();
+			
+			System.out.println(p.get().getStock().getCantidadActual());
+			
+			if (p.get().getStock().getCantidadActual() <= 1) {
+				habilitar = false;
+			}
+			System.out.println("hola ->"+valorPrevio+ "chau->"+habilitar);
+			if (valorPrevio != habilitar) {
+				System.out.println("2hola ->"+valorPrevio+ "chau->"+habilitar);
+				this.cambiarEstadoDeProducto(p, habilitar);
+			}
+		}
+
+		return habilitar;
+	};
+
+	// habilitar o deshabilitar producto
 	public boolean cambiarEstadoDeProducto(Optional<Producto> p, boolean nuevoEstado) {
 
 		if (p.isPresent()) {

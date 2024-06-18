@@ -42,9 +42,9 @@
 						<form class="d-flex flex-column gap-2 justify-content-center align-items-center" action="#"
 							th:action="@{/pedido/venta/{idproducto}(idproducto=${producto.idProducto})}"
 							th:object="${producto}" method="post">
-							<div class="d-flex justify-content-center align-items-center gap-3">
+							<div th:if="${producto.stock.cantidadActual>1}" class="d-flex justify-content-center align-items-center gap-3">
 								<input class="input-quantity" type="number" name="cantidadAComprar" required min="1"
-									th:max="${producto.stock.cantidadActual - 1}" id="cantidadAComprar"
+									th:max="${producto.stock.cantidadActual-1}" id="cantidadAComprar"
 									oninput="actualizarTotal(); validarCantidad();" />
 								<p class="mt-2 fs-3 d-flex justify-content-center align-items-center"><strong
 										class="fs-3">Total: </strong><span id="totalPrecio">0</span>$</p>
@@ -78,7 +78,6 @@
 			const inputCantidad = document.getElementById('cantidadAComprar');
 			const maximo = inputCantidad.max;
 			const valorActual = inputCantidad.value;
-			console.log("hola")
 			if (parseInt(valorActual) > parseInt(maximo)) {
 				inputCantidad.value = '';
 				alert('La cantidad no puede exceder el máximo permitido: ' + maximo);

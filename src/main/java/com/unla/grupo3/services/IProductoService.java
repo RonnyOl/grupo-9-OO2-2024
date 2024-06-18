@@ -14,6 +14,10 @@ public interface IProductoService {
 	// eliminar producto
 	public boolean eliminarProducto(int id);
 
+	//Valida si el stock asociado tiene la cantidad necesaria para vender
+	//Habilita o deshabilita automaticamente el producto segun el caso
+	public boolean validarCantidad(Optional<Producto> p);
+	
 	// habilitar o deshabilitar producto
 	public boolean cambiarEstadoDeProducto(Optional<Producto> p, boolean nuevoEstado);
 
