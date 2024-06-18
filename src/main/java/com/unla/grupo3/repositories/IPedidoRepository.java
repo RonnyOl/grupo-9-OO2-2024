@@ -29,5 +29,6 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	//Traer una lista de pedidos hecha por un usuario particular
 	
 	public abstract List<Pedido> findAllByUser (User user);
-
+	
+	public abstract List<Pedido> findAllByProducto (Producto producto);
 }

@@ -62,4 +62,7 @@ public class PedidoService implements IPedidoService {
 		return pedidoRepository.findAllByUser(user);
 	}
 
+	public List<Pedido> traerListaPedidoPorProducto(Producto producto){
+		return pedidoRepository.findAllByProducto(producto);
+	}
 }
