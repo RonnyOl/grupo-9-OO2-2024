@@ -89,7 +89,7 @@ public class PedidoController {
 		}
 
 		return modelAndView;
-	}
+	} 
 
 	// Trae una lista segun el producto seleccionado
 	@GetMapping("/pedidosrealizados/{idProducto}")

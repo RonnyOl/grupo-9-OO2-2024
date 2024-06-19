@@ -18,17 +18,13 @@ import com.unla.grupo9.entities.User;
 public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 
 	
-	//Traer un pedido por su producto
-	
+	//Traer un pedido por su producto	
 	public abstract Optional<Pedido> findByProducto (Producto producto);
 	
-	
 	//Traer un pedido por su Usuario 
-	
 	public abstract Optional<Pedido> findByUser (User user);
 	
 	//Traer una lista de pedidos hecha por un usuario particular
-	
 	public abstract List<Pedido> findAllByUser (User user);
 	
 	public abstract List<Pedido> findAllByProducto (Producto producto);

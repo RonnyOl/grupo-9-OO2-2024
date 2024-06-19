@@ -59,6 +59,7 @@ public class StockService implements IStockService {
 		
 		if(s != null) {
 			s.setCantidadActual(s.getCantidadActual()+cantidad);
+			this.agregarOModificarStock(s);
 			sumado = true;
 		}
 		
@@ -71,6 +72,8 @@ public class StockService implements IStockService {
 		
 		if(s != null) {
 			s.setCantidadActual(s.getCantidadActual()-cantidad);
+			this.agregarOModificarStock(s);
+
 			restado = true;
 		}
 		
@@ -102,7 +105,7 @@ public class StockService implements IStockService {
 
 		Optional<Stock> stock = this.traerStock(id);
 		boolean anteriorValor=stock.get().isReabastecer();
-		boolean reabastecer = false;
+		boolean reabastecer;
 		boolean cambio=false;
 		
 		if (stock.isPresent()) {
@@ -117,7 +120,6 @@ public class StockService implements IStockService {
 				
 			}
 		}
-		
 		
 		return cambio;
 

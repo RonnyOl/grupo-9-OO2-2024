@@ -23,4 +23,5 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
 	//Devuelve un Stock donde su atributo reabastecer = estado enviado por parametro
 	@Query("SELECT s FROM Stock s  WHERE s.reabastecer = (:estado)")
 	public abstract List<Stock> findAllByReabastecer(@Param("estado") boolean estado);
+
 }
