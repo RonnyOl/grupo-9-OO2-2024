@@ -51,11 +51,14 @@
 
 
 							</div>
+							
 							<button th:disabled="${producto.habilitado != true}"
 								th:text="${producto.habilitado} ? 'Comprar':'Sin stock'"
 								class="boton-compra portfolio-caption-subheading"></button>
-							<a th:href="@{/producto/administrar/{id}(id=${producto.idProducto})}"
+								<div th:each="authority : ${user.authorities}" th:if="${authority.authority == 'ROLE_ADMIN'}">
+									<a th:href="@{/producto/administrar/{id}(id=${producto.idProducto})}"
 								class="btn btn-danger portfolio-caption-subheading">Administrar</a>
+								</div>
 						</form>
 					</div>
 

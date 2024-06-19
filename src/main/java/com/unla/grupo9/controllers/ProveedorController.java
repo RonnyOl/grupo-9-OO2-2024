@@ -70,7 +70,7 @@ public class ProveedorController {
 	public RedirectView crearProveedor(@ModelAttribute("nuevoProveedor") Proveedor proveedor) {
 
 		proveedor = proveedorService.agregarModificarProveedor(proveedor);
-		return new RedirectView(ViewRouteHelper.ROUTE_PROVEEDOR);
+		return new RedirectView(ViewRouteHelper.ROUTE_PROVEEDOR_LST);
 	}
 
 	// Retorna una vista para administrar un proveedor

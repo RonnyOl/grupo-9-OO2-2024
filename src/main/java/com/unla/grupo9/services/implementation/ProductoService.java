@@ -25,6 +25,8 @@ public class ProductoService implements IProductoService {
 
 	// agregar o modificar un producto
 	public Producto agregarOModificarProducto(Producto producto) {
+		System.out.println("service "+ producto.isHabilitado() );
+
 		return productoRepository.save(producto);
 
 	}

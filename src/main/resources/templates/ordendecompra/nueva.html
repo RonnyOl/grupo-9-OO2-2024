@@ -7,6 +7,7 @@
 	<title>Orden de Compra</title>
 	<link href="/css/styles.css" rel="stylesheet" />
 	<link href="/css/stylesOdc.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/85cce2a6a8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -17,9 +18,15 @@
 		<div class="nueva-odc-container">
 
 			<h3 class="text-light">Formulario para generar una nueva orden de compra:</h3>
-			<form class="formulario-administrar d-flex flex-column border p-3" action="#"
+			<form class="formulario-administrar d-flex flex-column border p-3 position-relative" action="#"
 				th:action="@{/ordendecompra/crear}" th:object="${orden}" method="post">
-
+				
+				<div class="back-icon">
+				    <a class="text-dark fs-4" href="javascript:history.back()">
+				        <i class="fa-solid fa-arrow-left"></i>
+				    </a>
+				</div>
+				
 				<input type="hidden" th:field="*{idOrdenDeCompra}" />
 				<input type="hidden" th:field="*{stock.idStock}" />
 				<input type="hidden" th:field="*{stock.cantidadActual}" />

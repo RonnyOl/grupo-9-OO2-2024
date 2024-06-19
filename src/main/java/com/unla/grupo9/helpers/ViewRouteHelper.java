@@ -56,7 +56,8 @@ public class ViewRouteHelper {
 	
 	public final static String ROUTE_ORDERS = "/pedido/pedidosrealizados";
 	
-	public final static String ROUTE_PROVEEDOR = "/proveedor";
+	public final static String ROUTE_PROVEEDOR_LST = "lista";
+	public final static String ROUTE_PROVEEDOR= "/proveedor";
 	
 	//Errores 
 	public final static String ERROR_403 = "/errores/403";

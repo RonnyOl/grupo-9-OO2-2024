@@ -103,6 +103,7 @@ public class ProductoController {
 	public RedirectView productoCambiarEstadoDeProducto(@PathVariable("id") int id) {
 		RedirectView redirect;
 		
+		
 		Optional<Producto> objeto = productService.traerProducto(id);
 		if (objeto.isPresent()) {
 		productService.cambiarEstadoDeProducto(objeto, !objeto.get().isHabilitado());
@@ -120,10 +121,13 @@ public class ProductoController {
 	public RedirectView productoModificar(@ModelAttribute("producto") Producto producto) {
 		RedirectView redirect;
 		
-		Optional<Producto> p = productService.traerProducto(producto.getIdProducto());
-		if (p.isPresent()) {
-			productService.agregarOModificarProducto(producto);
-			redirect = new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ p.get().getIdProducto());
+
+		if (producto != null) {
+
+			Producto prod=productService.agregarOModificarProducto(producto);
+			
+
+			redirect = new RedirectView(ViewRouteHelper.ROUTE_INDI +"/individual" + "/"+ prod.getIdProducto());
 		}else {
 			redirect = new RedirectView(ViewRouteHelper.ERROR_500);
 		}

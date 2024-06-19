@@ -7,6 +7,7 @@
 	<title>Document</title>
 	<link href="/css/styles.css" rel="stylesheet" />
 	<link href="/css/stylesProduct.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/85cce2a6a8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -15,9 +16,13 @@
 			
 	<div class="administrar-seccion">
 		<div class="administrar-container">
-		<form class="formulario-administrar d-flex flex-column p-3" action="#" th:action="@{/producto/modificar}"
+		<form class="formulario-administrar d-flex flex-column p-3 position-relative" action="#" th:action="@{/producto/modificar}"
 			th:object="${producto}" method="post">
-
+			<div class="back-icon">
+			    <a class="text-dark fs-4" href="javascript:history.back()">
+			        <i class="fa-solid fa-arrow-left"></i>
+			    </a>
+			</div>
 			</p> 
 			
 			<input  type="hidden" th:field="${producto.idProducto}" />
@@ -35,10 +40,11 @@
 				Costo: <input required type="number" th:field="${producto.costo}" />
 			</p>
 			
-			<p th:text="${producto.habilitado ? 'El producto se encuentra habilitado': 'El producto se encuentra inhabilitado'}">
-				
-			</p>
+			<p  th:text="${producto.habilitado ? 'El producto se encuentra habilitado': 'El producto se encuentra inhabilitado'}">
 
+			</p>
+				<input  type="hidden" th:field="${producto.habilitado}"/>
+				
 			<input type="submit" value="Realizar cambios" />
 		</form>
 		
