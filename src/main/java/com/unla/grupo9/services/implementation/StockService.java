@@ -155,7 +155,7 @@ public class StockService implements IStockService {
 		List<Stock> stocksAReabastecer = this.traerStock(true);
 
 		//Mientras que la lista no este vacia, se trabaja con el primer elemento
-		while (stocksAReabastecer.isEmpty()) {
+		while (!stocksAReabastecer.isEmpty()) {
 			//Se asigna automaticamente la cantidad a comprar a partir del Punto Minimo
 			int cantidadAComprar = stocksAReabastecer.get(0).getPuntoMinimoDeStock(); 
 

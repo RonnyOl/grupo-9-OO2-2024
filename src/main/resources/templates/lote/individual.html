@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>VIBRAS - Compras Online</title>
 	<link href="/css/styles.css" rel="stylesheet" />
 	<link href="/css/stylesLote.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/85cce2a6a8.js" crossorigin="anonymous"></script>
@@ -25,20 +25,22 @@
 		    <!-- Resto del contenido -->
 		    <div class="lote-individual-info-lote">
 		        <h1 class="text-center">Detalles del Lote</h1>
+				<div th:text="'LOT-0'+${lote.idLote}" class="portfolio-caption-heading fs-3"></div>
 		        <strong>Aceptado:</strong>
 		        <span th:text="${lote.aceptado} ? 'Si' : 'No'"></span>
-		        <p><strong>Fecha de recepcion:</strong> <span th:text="${lote.fechaRecepcion}"></span></p>
+		        <p><strong>Fecha de Recepcion:</strong> <span th:text="${lote.fechaRecepcion}"></span></p>
 		    </div>
 		    <div class="lote-individual-info-orden">
 		        <h2>Orden de Compra</h2>
+				<p><strong>Producto:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.nombre}"></span></p>
 		        <p><strong>Cantidad:</strong> <span th:text="${lote.ordenDeCompra.cantidadAComprar}"></span></p>
-		        <p><strong>Producto:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.nombre}"></span></p>
-		        <p><strong>Costo:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.costo}"></span></p>
-		        <p><strong>Fecha de la orden:</strong> <span th:text="${lote.ordenDeCompra.fechaEmision}"></span></p>
+		        <p><strong>Costo Individual:</strong> <span th:text="${lote.ordenDeCompra.stock.producto.costo}"></span></p>
+				<p><strong>Total a pagar:</strong> <span th:text="${lote.ordenDeCompra.calcularTotal()}"></span></p>
+		        <p><strong>Fecha de Emision:</strong> <span th:text="${lote.ordenDeCompra.fechaEmision}"></span></p>
 				
-				<div th:if="${lote.ordenDeCompra.user != null}" th:text="${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
+				<div th:if="${lote.ordenDeCompra.user != null}" th:text="'Solicitado por: '+${lote.ordenDeCompra.user.username}" class="portfolio-caption-heading fs-3"></div>
 				<div th:if="${lote.ordenDeCompra.user == null}"  class="portfolio-caption-heading fs-3">
-					<p>Este lote se genero de forma automatica</p>
+					<p>Lote solicitado automaticamente por valores de Stock minimo detectados</p>
 				</div>		   
 			</div>
 		</div>

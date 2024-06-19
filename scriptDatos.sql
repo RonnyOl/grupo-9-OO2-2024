@@ -3,21 +3,21 @@
 INSERT INTO `db_sistema_stock`.`proveedor`
 (`cuil`,`direccion`,`nombre_empresa`) VALUES
 ('20-12345678-9', 'Calle Falsa 123, Buenos Aires', 'Relojeando S.A.'),
-('27-87654321-0', 'Avenida Siempre Viva 742, Cordoba', 'Inspeccionando Billeteras SRL'),
+('27-87654321-0', 'Avenida Siempre Viva 742, Springfield', 'Inspeccionando Billeteras SRL'),
 ('30-11223344-5', 'Boulevard de los Sueños Rotos 456, Mendoza', 'TecnoGalpon SA');
 
 -- Insercion de PRODUCTOS (10)
 INSERT INTO `db_sistema_stock`.`producto`
 (`costo`,`descripcion`,`habilitado`,`nombre`,`precio_de_venta`)
 VALUES
-(500, 'Gafas reforzadas para el sol de la marca RayBand', true, 'Gafas de Sol', 1200),
+(500, 'Gafas reforzadas estilo oblicuo ideales para el protegerte del sol y llevar tu estilo a otro nivel', true, 'Gafas de Sol', 1200),
 (300, 'Billetera de cuero negro con cierre magnetico, bolsillos internos y tarjetero', true, 'Billetera', 800),
-(650, 'Moño con patron cuadrille gris y blanco, tamaño regulable ', true, 'Moño de vestir', 1500),
-(1200, 'Auriculares tipo vincha color negro con supresion de ruido y microfono incluido ', true, 'Auriculares Bluetooth', 2500),
-(750, 'Corbata de seda negra talla M', true, 'Corbata de vestir', 1650),
+(650, 'Moño de seda negra de primera calidad, tamaño regulable ', true, 'Moño de vestir', 1500),
+(1200, 'Auriculares Ear-In color negro, con estuche inteligente para cargar su bateria', true, 'Auriculares Bluetooth', 2500),
+(750, 'Corbata de algodon con patron cuadrille sutil roja y blanca talla M', true, 'Corbata de vestir', 1650),
 (400, 'Tarjetero de cuero marron, 8 compartimentos, cierre con boton y cuerda', true, 'Tarjetero de bolsillo', 900),
-(250, 'Pluma de tinta negra con tapa integrada, color negro en el exterior', true, 'Pluma Estilografica', 750),
-(900, 'Reloj Analogico de muñeca, correa de cuero color negro, estilo minimalista', true, 'Reloj Analogico', 2000),
+(250, 'Pluma de tinta negra con tapa integrada, color madera en el exterior y punta dorada', true, 'Pluma Estilografica', 750),
+(900, 'Reloj Analogico de muñeca, 4 en 1,  color plateado correa de metal, estilo clasico', true, 'Reloj Analogico', 2000),
 (120, 'Birome de escritorio de tinta azul con tapa', true, 'Birome Basica', 300),
 (550, 'Cuaderno reciclable tipo libreta anillado hojas blancas', true, 'Cuaderno de Bamboo', 1100);
 

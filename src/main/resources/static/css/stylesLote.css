@@ -85,7 +85,7 @@
 .lista-card {
     width: 25%; /* Tamaño fijo para cada card */
     min-width: 250px; /* Asegura que tenga un mínimo de ancho */
-    min-height: 35rem;
+    min-height: 38rem;
     max-height: 30rem;
     background-color: #fff;
     flex-direction: column;

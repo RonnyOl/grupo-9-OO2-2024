@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedido</title>
+	<title>VIBRAS - Compras Online</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <link href="/css/stylesPedido.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
     <div class="individual-pedido pedido-container">
 
         <div class="pedido-card">
-            <a href="/pedido/pedidos"><i class="fas fa-arrow-left back-icon"></i></a>
+            <a href="/pedido/pedidosrealizados"><i class="fas fa-arrow-left back-icon"></i></a>
          	<div class="pedido-card-image">
             <img class="text-center" th:src="@{'/assets/img/productos/' + ${pedido.producto.idProducto} + '.jpg'}" width="700px" alt="Producto">
 			</div>
@@ -40,7 +40,7 @@
 			        <span class="value" th:text="'$' + ${pedido.total}"></span>
 			    </div>
 			    <div class="pedido-detail">
-			        <span class="label">Realizado por el cliente:</span>
+			        <span class="label">Realizado por:</span>
 			        <span class="value" th:text="${pedido.user.username}"></span>
 			    </div>
 			</div>
