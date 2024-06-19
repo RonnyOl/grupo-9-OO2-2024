@@ -32,8 +32,12 @@ public interface IPedidoService {
 	public List<Pedido> traerListaPedidoPorUsuario(User user);
 	// traer lista de los pedidos por un producto
 	public List<Pedido> traerListaPedidoPorProducto(Producto producto);
+	
+	public List<Pedido> traerListaPedidoPorUsuarioYProducto(Producto producto, User user);
+	
 	// Trae una lista de productos no repetidos de los distintos pedidos
 	 public List<Producto> findAllDistinctPedido();
 	 
 	 public List<Producto> findAllDistinctPedidoByUser(User user);
+	 
 }

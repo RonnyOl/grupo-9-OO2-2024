@@ -117,7 +117,8 @@ public class PedidoController {
 				lista=pedidoService.traerListaPedidoPorProducto(producto.get());
 				listaProductos = pedidoService.findAllDistinctPedido();
 			} else {
-				lista=pedidoService.traerListaPedidoPorUsuario(user);
+				lista=pedidoService.traerListaPedidoPorUsuarioYProducto(producto.get(), user);
+				
 				listaProductos = pedidoService.findAllDistinctPedidoByUser(user);
 			}
 

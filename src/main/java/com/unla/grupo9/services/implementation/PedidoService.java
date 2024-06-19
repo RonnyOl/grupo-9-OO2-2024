@@ -73,6 +73,12 @@ public class PedidoService implements IPedidoService {
 	 public List<Producto> findAllDistinctPedidoByUser(User user){
 		 return pedidoRepository.findAllDistinctPedidoByUser(user);
 	 }
+
+
+	public List<Pedido> traerListaPedidoPorUsuarioYProducto(Producto producto,User user) {
+
+		return pedidoRepository.findAllByProductoAndUser(producto, user);
+	}
 	 
 	
 }

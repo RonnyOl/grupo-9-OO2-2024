@@ -28,6 +28,8 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Serializable> {
 	public abstract List<Pedido> findAllByUser (User user);
 	
 	public abstract List<Pedido> findAllByProducto (Producto producto);
+
+	public abstract List<Pedido> findAllByProductoAndUser (Producto producto, User user);
 	
 	//Devuelve una lista de Pedido(asociado a un producto) utilizada para filtrar los pedidos por producto
     @Query("SELECT DISTINCT p.producto FROM Pedido p GROUP BY p.producto")
